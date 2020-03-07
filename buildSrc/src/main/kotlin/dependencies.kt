@@ -4,7 +4,12 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.kotlin
 import studio.forface.easygradle.dsl.*
 
+// Kotlin
 val DependencyHandler.`kotlin-test-annotations` get() = kotlin("test-annotations-common")
+
+// Others
+val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic version`
+
 
 object Deps {
 

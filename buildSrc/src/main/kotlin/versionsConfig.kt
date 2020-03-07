@@ -1,3 +1,5 @@
+@file:Suppress("ObjectPropertyName")
+
 import studio.forface.easygradle.dsl.*
 import studio.forface.easygradle.dsl.android.*
 
@@ -17,3 +19,5 @@ fun initVersions() {
     `ktx version` =                         "1.2.0"         // Updated: Feb 05, 2020
     `material version` =                    "1.2.0-alpha05" // Updated: Feb 21, 2020
 }
+
+const val `picnic version` =                "0.3.0"         // Updated: Feb 18, 2020

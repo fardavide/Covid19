@@ -1,4 +1,4 @@
-@file:Suppress("LocalVariableName")
+@file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import studio.forface.easygradle.dsl.*
@@ -21,7 +21,9 @@ kotlin {
                         project(Module.domain),
 
                         `kotlin-jdk8`,
-                        `coroutines-core`
+                        `coroutines-core`,
+
+                        `picnic`
                     )
                 }
             }
