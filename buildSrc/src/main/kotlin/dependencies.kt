@@ -1,4 +1,4 @@
-@file:Suppress("ClassName", "ObjectPropertyName")
+@file:Suppress("ClassName", "ObjectPropertyName", "RemoveRedundantBackticks")
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.kotlin
@@ -48,9 +48,11 @@ object PluginsDeps {
         const val spotlessVersion = "3.24.2"
     }
 
-    const val kotlinSerializationPlugin = "kotlinx-serialization"
+    const val kotlinSerialization = "kotlinx-serialization"
     const val multiplatform = "multiplatform"
     const val jvm = "jvm"
+    const val detekt = "io.gitlab.arturbosch.detekt"
+
     const val mavenPublish = "maven-publish"
     const val signing = "signing"
     const val dokka = "org.jetbrains.dokka"

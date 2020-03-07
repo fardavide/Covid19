@@ -5,7 +5,7 @@ import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
-    id(PluginsDeps.kotlinSerializationPlugin)
+    id(PluginsDeps.kotlinSerialization)
 }
 
 kotlin {
