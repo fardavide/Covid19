@@ -216,7 +216,7 @@ formatting:
     active: false
     autoCorrect: true
   Filename:
-    active: true
+    active: false
   FinalNewline:
     active: true
     autoCorrect: true
@@ -274,6 +274,7 @@ formatting:
     autoCorrect: true
   NoWildcardImports:
     active: true
+    excludes: "**/buildSrc/**"
   PackageName:
     active: true
     autoCorrect: true
@@ -606,5 +607,5 @@ style:
     active: false
   WildcardImport:
     active: true
-    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    excludes: "**/buildSrc/**,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     excludeImports: 'java.util.*,kotlinx.android.synthetic.*'

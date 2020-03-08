@@ -1,4 +1,4 @@
-@file:Suppress("LocalVariableName")
+@file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import studio.forface.easygradle.dsl.*
@@ -21,7 +21,8 @@ kotlin {
                     implementation(
                         `kotlin-common`,
                         `coroutines-core-common`,
-                        `serialization-common`
+                        `serialization-common`,
+                        `klock`
                     )
                 }
             }

@@ -8,7 +8,13 @@ import studio.forface.easygradle.dsl.*
 val DependencyHandler.`kotlin-test-annotations` get() = kotlin("test-annotations-common")
 
 // Others
+val DependencyHandler.`klock` get() = korlibs("klock") version `klock version`
 val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic version`
+
+
+// Accessors
+fun DependencyHandler.korlibs(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
+    dependency("com.soywiz.korlibs", groupName, module, moduleSuffix, version)
 
 
 object Deps {
