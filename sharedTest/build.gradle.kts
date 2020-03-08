@@ -5,7 +5,7 @@ import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
-    id(PluginsDeps.kotlinSerialization)
+//    id(PluginsDeps.kotlinSerialization)
 }
 
 kotlin {
@@ -20,44 +20,36 @@ kotlin {
             ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
         }
 
-        jvm()
-
         with(dependencyHandler) {
 
             val commonMain by getting {
                 dependencies {
-                    api(
+
+                    // Base Dependencies
+                    implementation(
                         `kotlin-common`,
-                        `coroutines-core-common`,
-                        `koinMP`
+                        `coroutines-core-common`
+//                        `serialization-common`,
+//                        `klock`
                     )
 
-                    implementation(
-                        `serialization-common`,
-                        `klock`
+                    // Test Dependencies
+                    api(
+                        `kotlin-test-common`,
+                        `kotlin-test-annotations`,
+                        `coroutines-test`
                     )
-                }
-            }
-            val commonTest by getting {
-                dependencies {
-                    implementation(project(Module.sharedTest))
                 }
             }
 
             jvm().compilations["main"].defaultSourceSet {
                 dependencies {
                     api(
-                        `kotlin-jdk8`,
-                        `coroutines-core`
+                        `kotlin-test`,
+                        `kotlin-test-junit`
                     )
                 }
             }
-            jvm().compilations["test"].defaultSourceSet {
-                dependencies {
-                    implementation(project(Module.sharedTest))
-                }
-            }
-
         }
     }
 }

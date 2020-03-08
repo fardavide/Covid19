@@ -39,9 +39,11 @@ subprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
-            freeCompilerArgs = freeCompilerArgs +
-                    "-XXLanguage:+NewInference" +
-                    "-Xuse-experimental=kotlin.Experimental"
+            freeCompilerArgs = freeCompilerArgs + arrayOf(
+                    "-XXLanguage:+NewInference",
+                    "-Xuse-experimental=kotlin.Experimental",
+                    "-Xuse-experimental=kotlin.time.ExperimentalTime"
+            )
         }
     }
 

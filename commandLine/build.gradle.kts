@@ -29,11 +29,7 @@ kotlin {
             }
             val test by getting {
                 dependencies {
-                    implementation(
-                        `kotlin-test`,
-                        `kotlin-test-junit5`,
-                        `coroutines-test`
-                    )
+                    implementation(project(Module.sharedTest))
                 }
             }
         }

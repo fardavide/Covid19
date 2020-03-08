@@ -1,8 +1,10 @@
 package studio.forface.covid.domain.entity
 
+import com.soywiz.klock.DateTime
+
 data class Stat(
-    val total: Int,
     val confirmed: Int,
     val deaths: Int,
-    val recovered: Int
+    val recovered: Int,
+    val timestamp: DateTime
 )

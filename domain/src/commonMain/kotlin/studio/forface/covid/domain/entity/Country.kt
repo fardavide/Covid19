@@ -1,7 +1,5 @@
 package studio.forface.covid.domain.entity
 
-import com.soywiz.klock.DateTime
-
 data class Country(
     val id: Id,
     val name: Name,
@@ -10,25 +8,22 @@ data class Country(
 
 /**
  * Small stat for a [Country].
- * It includes the [Country] and the last [Stat] with relative timestamp.
+ * It includes the [Country] and the last [Stat]
  *
  * This is analogue to [ProvinceStat]
  */
 data class CountrySmallStat(
     val country: Country,
-    val stat: Stat,
-    val lastUpdate: DateTime
+    val stat: Stat
 )
 
 /**
  * Medium stat for a [Country].
- * It includes the [Country], the last [Stat] with relative timestamp, a List of other [Stat] and a List of
- * [ProvinceStat], if any
+ * It includes the [Country], the last [Stat], a List of other [Stat] and a List of [ProvinceStat], if any
  */
 data class CountryStat(
     val country: Country,
     val lastStat: Stat,
-    val lastUpdate: DateTime,
     val otherStats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceStat> = emptyMap()
 )
@@ -41,7 +36,6 @@ data class CountryStat(
 data class CountryFullStat(
     val country: Country,
     val lastStat: Stat,
-    val lastUpdate: DateTime,
     val otherStats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceFullStat> = emptyMap()
 )

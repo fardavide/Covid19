@@ -8,6 +8,7 @@ import studio.forface.easygradle.dsl.*
 val DependencyHandler.`kotlin-test-annotations` get() = kotlin("test-annotations-common")
 
 // Others
+val DependencyHandler.`koinMP` get() = touchLab("koin-core") version `koinMP version`
 val DependencyHandler.`klock` get() = korlibs("klock") version `klock version`
 val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic version`
 
@@ -15,6 +16,9 @@ val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic ver
 // Accessors
 fun DependencyHandler.korlibs(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
     dependency("com.soywiz.korlibs", groupName, module, moduleSuffix, version)
+
+fun DependencyHandler.touchLab(module: String? = null, moduleSuffix: String? = null, version: String? = null) =
+    dependency("co.touchlab", null, module, moduleSuffix, version)
 
 
 object Deps {

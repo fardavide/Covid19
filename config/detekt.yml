@@ -1,5 +1,5 @@
 build:
-  maxIssues: 0
+  maxIssues: 10
   excludeCorrectable: false
   weights:
   # complexity: 2
@@ -239,8 +239,8 @@ formatting:
     active: true
     autoCorrect: true
   NoBlankLineBeforeRbrace:
-    active: true
-    autoCorrect: true
+    active: false
+    autoCorrect: false
   NoConsecutiveBlankLines:
     active: false
     autoCorrect: false
@@ -264,8 +264,8 @@ formatting:
     active: true
     autoCorrect: true
   NoTrailingSpaces:
-    active: true
-    autoCorrect: true
+    active: false
+    autoCorrect: false
   NoUnitReturn:
     active: true
     autoCorrect: true
@@ -273,7 +273,7 @@ formatting:
     active: true
     autoCorrect: true
   NoWildcardImports:
-    active: true
+    active: false
     excludes: "**/buildSrc/**"
   PackageName:
     active: true
@@ -304,8 +304,8 @@ formatting:
     active: true
     autoCorrect: true
   SpacingAroundRangeOperator:
-    active: true
-    autoCorrect: true
+    active: false
+    autoCorrect: false
   StringTemplate:
     active: true
     autoCorrect: true
@@ -501,11 +501,11 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    excludes: "**/test/**,**/*Test/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     ignoreNumbers: '-1,0,1,2'
     ignoreHashCodeFunction: true
-    ignorePropertyDeclaration: false
-    ignoreLocalVariableDeclaration: false
+    ignorePropertyDeclaration: true
+    ignoreLocalVariableDeclaration: true
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreAnnotation: false
@@ -608,4 +608,4 @@ style:
   WildcardImport:
     active: true
     excludes: "**/buildSrc/**,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
-    excludeImports: 'java.util.*,kotlinx.android.synthetic.*'
+    excludeImports: 'studio.forface.easygradle.dsl.*,studio.forface.easygradle.dsl.android.*,studio.forface.covid.domain.entity.*,java.util.*,kotlinx.android.synthetic.*'

@@ -21,7 +21,9 @@ fun initVersions() {
     // Others
     `detekt version` =                      "1.6.0"         // Updated: Feb 26, 2020
     `mockK version` =                       "1.9.3"         // Updated:
+    `sqlDelight version` =                  "1.2.2"         // Updated: Jan 23, 2020
 }
 
 const val `klock version` =                 "1.8.9"         // Updated: Feb 18, 2020
+const val `koinMP version` =                "3.0.2-khan"    // Updated: Dec 31, 2019
 const val `picnic version` =                "0.3.0"         // Updated: Feb 18, 2020

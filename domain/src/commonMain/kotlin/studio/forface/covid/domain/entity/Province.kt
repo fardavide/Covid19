@@ -1,7 +1,5 @@
 package studio.forface.covid.domain.entity
 
-import com.soywiz.klock.DateTime
-
 data class Province(
     val id: Id,
     val name: Name,
@@ -10,12 +8,11 @@ data class Province(
 
 /**
  * Small stat for a [Province].
- * It includes the [Province] and the last [Stat] with relative timestamp
+ * It includes the [Province] and the last [Stat]
  */
 data class ProvinceStat(
     val province: Province,
-    val stat: Stat,
-    val lastUpdate: DateTime
+    val stat: Stat
 )
 
 /**
