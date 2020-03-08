@@ -23,6 +23,6 @@ interface Api {
     suspend fun getCountrySmallStat(id: CountryId): CountrySmallStat
     suspend fun getCountryStat(id: CountryId): CountryStat
     suspend fun getCountryFullStat(id: CountryId): CountryFullStat
-    suspend fun getProvinceStat(id: ProvinceId): ProvinceStat
-    suspend fun getProvinceFullStat(id: ProvinceId): ProvinceFullStat
+    suspend fun getProvinceStat(countryId: CountryId, id: ProvinceId): ProvinceStat
+    suspend fun getProvinceFullStat(countryId: CountryId, id: ProvinceId): ProvinceFullStat
 }

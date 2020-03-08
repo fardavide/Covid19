@@ -23,7 +23,7 @@ data class CountrySmallStat(
  */
 data class CountryStat(
     val country: Country,
-    val lastStat: Stat,
+    val stat: Stat,
     val otherStats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceStat> = emptyMap()
 )
@@ -35,7 +35,7 @@ data class CountryStat(
  */
 data class CountryFullStat(
     val country: Country,
-    val lastStat: Stat,
+    val stat: Stat,
     val otherStats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceFullStat> = emptyMap()
 )

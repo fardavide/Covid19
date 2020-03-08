@@ -6,9 +6,9 @@ import studio.forface.easygradle.dsl.android.*
 fun initVersions() {
 
     // Kotlin
-    `kotlin version` =                      "1.3.70"        // Updated: Mar 03, 2020
+    `kotlin version` =                      "1.3.61"        // Updated: Mar 03, 2020 // TODO 1.3.70 needs Ktor update
     `coroutines version` =                  "1.3.4"         // Updated: Mar 06, 2020
-    `serialization version` =               "0.20.0"        // Updated: Mar 04, 2020
+    `serialization version` =               "0.14.0"        // Updated: Mar 04, 2020 // TODO 0.20 need Ktor update
     `ktor version` =                        "1.3.1"         // Updated: Feb 26, 2020
 
     // Android

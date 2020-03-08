@@ -30,5 +30,5 @@ data class WorldFullStat(
     val world: World,
     val stat: Stat,
     val otherStats: List<Stat>,
-    val countryStats: Map<CountryId, CountryFullStat>
+    val countryStats: Map<CountryId, CountryStat>
 )

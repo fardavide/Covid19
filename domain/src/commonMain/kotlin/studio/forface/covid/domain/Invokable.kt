@@ -10,4 +10,4 @@ interface Invokable
  * Invoke function for easily get into the [T] ( subtype of [Invokable] ) context.
  * @return [V] result of [block]
  */
-internal inline operator fun <T : Invokable, V> T.invoke(block: T.() -> V) = block()
+inline operator fun <T : Invokable, V> T.invoke(block: T.() -> V) = block()

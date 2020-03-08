@@ -13,15 +13,19 @@ kotlin {
     *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
 
     sourceSets {
+        all {
+            listOf(
+                "TypeInference", "Time"
+            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
+        }
+
         with(dependencyHandler) {
 
             val main by getting {
                 dependencies {
                     implementation(
                         project(Module.domain),
-
-                        `kotlin-jdk8`,
-                        `coroutines-core`,
+                        project(Module.data),
 
                         `picnic`
                     )
@@ -29,7 +33,7 @@ kotlin {
             }
             val test by getting {
                 dependencies {
-                    implementation(project(Module.sharedTest))
+
                 }
             }
         }

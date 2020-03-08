@@ -17,9 +17,10 @@ data class ProvinceStat(
 
 /**
  * Small stat for a [Province].
- * It includes the [ProvinceStat] and a List of other [Stat]
+ * It includes the last [Stat] and a List of other [Stat]
  */
 data class ProvinceFullStat(
-    val lastStat: ProvinceStat,
+    val province: Province,
+    val stat: Stat,
     val otherStats: List<Stat>
 )

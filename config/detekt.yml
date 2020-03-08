@@ -274,7 +274,7 @@ formatting:
     autoCorrect: true
   NoWildcardImports:
     active: false
-    excludes: "**/buildSrc/**"
+    excludes: "**/buildSrc/**,**/koin.kt"
   PackageName:
     active: true
     autoCorrect: true
@@ -607,5 +607,5 @@ style:
     active: false
   WildcardImport:
     active: true
-    excludes: "**/buildSrc/**,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
-    excludeImports: 'studio.forface.easygradle.dsl.*,studio.forface.easygradle.dsl.android.*,studio.forface.covid.domain.entity.*,java.util.*,kotlinx.android.synthetic.*'
+    excludes: "**/buildSrc/**,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt,**/koin.kt"
+    excludeImports: 'studio.forface.easygradle.dsl.*,studio.forface.easygradle.dsl.android.*,studio.forface.covid.domain.entity.*,studio.forface.covid.data.remote.model.*,java.util.*,kotlinx.android.synthetic.*'

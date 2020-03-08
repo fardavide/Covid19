@@ -4,14 +4,21 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import studio.forface.covid.domain.gateway.NoCacheRepository
 import studio.forface.covid.domain.gateway.Repository
-import studio.forface.covid.domain.usecase.GetCountries
-import studio.forface.covid.domain.usecase.GetProvinces
-import studio.forface.covid.domain.usecase.GetWorldStat
+import studio.forface.covid.domain.usecase.*
 
 private val useCaseModule = module {
+
+    // Get
     factory { GetCountries(repository = get(), syncCountries = get()) }
-    factory { GetProvinces(repository = get(), api = get()) }
-    factory { GetWorldStat(repository = get(), api = get()) }
+    factory { GetProvinces(repository = get(), syncProvinces = get()) }
+    factory { GetWorldStat(repository = get(), syncWorldStat = get()) }
+    factory { GetWorldFullStat(repository = get(), syncWorldFullStat = get()) }
+
+    // Sync
+    factory { SyncCountries(api = get(), repository = get()) }
+    factory { SyncProvinces(api = get(), repository = get()) }
+    factory { SyncWorldStat(api = get(), repository = get()) }
+    factory { SyncWorldFullStat(api = get(), repository = get()) }
 }
 
 val domainModule = module {
