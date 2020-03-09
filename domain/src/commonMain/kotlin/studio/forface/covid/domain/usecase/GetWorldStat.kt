@@ -29,7 +29,10 @@ class GetWorldStat(
     private val errorInterval: Duration = DEFAULT_ERROR_INTERVAL
 ) {
 
-    operator fun invoke() = channelFlow {
+    operator fun invoke(
+        refreshInterval: Duration = this.refreshInterval,
+        errorInterval: Duration = this.errorInterval
+    ) = channelFlow {
 
         // Sync every refresh interval
         launch {

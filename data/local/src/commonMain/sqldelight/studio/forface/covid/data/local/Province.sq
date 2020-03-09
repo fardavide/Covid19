@@ -1,0 +1,10 @@
+import studio.forface.covid.domain.entity.Id;
+import studio.forface.covid.domain.entity.Name;
+
+CREATE TABLE province (
+  id TEXT AS Id PRIMARY KEY,
+  country_id TEXT AS ID,
+  name TEXT AS Name,
+  lat REAL NOT NULL,
+  lng REAL NOT NULL
+);

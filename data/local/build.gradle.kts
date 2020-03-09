@@ -6,6 +6,7 @@ import studio.forface.easygradle.dsl.*
 plugins {
     kotlin(PluginsDeps.multiplatform)
     id(PluginsDeps.kotlinSerialization)
+    id(PluginsDeps.sqlDelight)
 }
 
 kotlin {
@@ -29,15 +30,41 @@ kotlin {
                 dependencies {
                     implementation(
                         project(Module.domain),
-                        project(Module.remoteData),
-                        project(Module.localData)
+
+                        `klock`,
+                        `serialization-common`
+                    )
+                }
+            }
+            val commonTest by getting {
+                dependencies {
+                    implementation(project(Module.sharedTest))
+                }
+            }
+
+            jvm().compilations["main"].defaultSourceSet {
+                dependencies {
+                    implementation(
+
                     )
                 }
             }
 
-            jvm().compilations["main"]
+            js().compilations["main"].defaultSourceSet {
+                dependencies {
+                    implementation(
+
+                    )
+                }
+            }
 
         }
+    }
+}
+
+sqldelight {
+    database("Database") {
+        packageName = "studio.forface.covid.data.local"
     }
 }
 

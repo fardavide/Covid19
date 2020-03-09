@@ -1,0 +1,7 @@
+import studio.forface.covid.domain.entity.Id;
+import studio.forface.covid.domain.entity.Name;
+
+CREATE TABLE country (
+  id TEXT AS Id PRIMARY KEY,
+  name TEXT AS Name
+);

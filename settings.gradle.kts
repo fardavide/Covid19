@@ -8,7 +8,10 @@ include("domain")
 
 // Data
 include("data")
-include("data:remote")
+include("data:local", "data:remote")
 
 // Presentation
 include("commandLine")
+
+
+enableFeaturePreview("GRADLE_METADATA")

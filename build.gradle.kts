@@ -1,4 +1,4 @@
-@file:Suppress("LocalVariableName")
+@file:Suppress("LocalVariableName", "VariableNaming")
 
 import io.gitlab.arturbosch.detekt.DetektPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -8,6 +8,7 @@ initVersions()
 
 buildscript {
     val `kotlin version` = studio.forface.easygradle.dsl.`kotlin version`
+    val `sqlDelight version` = studio.forface.easygradle.dsl.`sqlDelight version`
 
     repositories {
         google()
@@ -15,9 +16,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-serialization:${`kotlin version`}")
-
         classpath(kotlin("gradle-plugin", `kotlin version`))
+
+        classpath("org.jetbrains.kotlin:kotlin-serialization:${`kotlin version`}")
+        classpath("com.squareup.sqldelight:gradle-plugin:$`sqlDelight version`")
     }
 }
 
