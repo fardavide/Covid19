@@ -257,9 +257,8 @@ formatting:
     active: true
     autoCorrect: true
   NoMultipleSpaces:
-    active: true
-    autoCorrect: true
-    excludes: "**/buildSrc/**"
+    active: false
+    autoCorrect: false
   NoSemicolons:
     active: true
     autoCorrect: true
@@ -372,7 +371,7 @@ naming:
     packagePattern: '^[a-z]+(\.[a-z][A-Za-z0-9]*)*$'
   TopLevelPropertyNaming:
     active: true
-    excludes: "**/buildSrc/**,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    excludes: "**/buildSrc/**,*/dependencies.kt,**/versionsConfig.kt,**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
