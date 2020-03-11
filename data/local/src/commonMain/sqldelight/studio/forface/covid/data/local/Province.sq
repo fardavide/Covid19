@@ -3,8 +3,8 @@ import studio.forface.covid.domain.entity.Name;
 
 CREATE TABLE province (
   id TEXT AS Id PRIMARY KEY,
-  country_id TEXT AS Id,
-  name TEXT AS Name,
+  country_id TEXT AS Id NOT NULL,
+  name TEXT AS Name NOT NULL,
   lat REAL NOT NULL,
   lng REAL NOT NULL
 );
