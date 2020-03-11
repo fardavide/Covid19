@@ -5,6 +5,7 @@ import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
+//    id(PluginsDeps.androidLibrary)
     id(PluginsDeps.kotlinSerialization)
     id(PluginsDeps.sqlDelight)
 }
@@ -22,7 +23,8 @@ kotlin {
         }
 
         jvm()
-        js()
+//        android()
+//        js()
 
         with(dependencyHandler) {
 
@@ -45,18 +47,25 @@ kotlin {
             jvm().compilations["main"].defaultSourceSet {
                 dependencies {
                     implementation(
-
+                        `sqlDelight-sqlite-driver`
                     )
                 }
             }
-
-            js().compilations["main"].defaultSourceSet {
-                dependencies {
-                    implementation(
-
-                    )
-                }
-            }
+//            android().compilations["main"].defaultSourceSet {
+//                dependencies {
+//                    implementation(
+//                        `sqlDelight-android-driver`
+//                    )
+//                }
+//            }
+//            js().compilations["main"].defaultSourceSet {
+//                dependencies {
+//                    implementation(
+//                        // FIXME: remove version when sync with other SqlDelight artifacts
+//                        `sqlDelight-sqljs-driver` version "1.3.0"
+//                    )
+//                }
+//            }
 
         }
     }

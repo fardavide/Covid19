@@ -13,6 +13,7 @@ import studio.forface.covid.data.remote.mapper.StatApiModelMapper
 import studio.forface.covid.data.remote.mapper.TimestampApiModelMapper
 import studio.forface.covid.data.remote.mapper.UnixTimeApiModelMapper
 import studio.forface.covid.domain.gateway.Api
+import studio.forface.covid.domain.plus
 
 private val clientModule = module {
 
@@ -29,7 +30,7 @@ private val serviceModule = module {
 //    factory(HostQualifier) { "enrichman.github.io/covid19" }
 //    factory { CovidService(client = get(), host = get(HostQualifier)) }
     factory { CovidService(client = get(), host = "enrichman.github.io/covid19") }
-}
+} + clientModule
 
 private val mapperModule = module {
 
@@ -143,7 +144,7 @@ val remoteDataModule = module {
         )
     }
 
-} + clientModule + serviceModule + mapperModule
+} + serviceModule + mapperModule
 
 expect val HttpClientEngine: HttpClientEngine
 

@@ -6,7 +6,9 @@ CREATE TABLE province (
   country_id TEXT AS Id NOT NULL,
   name TEXT AS Name NOT NULL,
   lat REAL NOT NULL,
-  lng REAL NOT NULL
+  lng REAL NOT NULL,
+
+  FOREIGN KEY(country_id) REFERENCES country(id)
 );
 
 -- Indexes

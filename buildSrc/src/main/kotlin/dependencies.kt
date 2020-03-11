@@ -60,13 +60,16 @@ fun DependencyHandler.touchLab(module: String? = null, moduleSuffix: String? = n
 
 
 object PluginsDeps {
-    object Versions {
-        const val spotlessVersion = "3.24.2"
-    }
-
+    // Kotlin
     const val kotlinSerialization = "kotlinx-serialization"
     const val multiplatform = "multiplatform"
     const val jvm = "jvm"
+
+    // Android
+    const val androidLibrary = "android-library"
+    const val androidApplication = "android-application"
+
+    // Other
     const val sqlDelight = "com.squareup.sqldelight"
     const val detekt = "io.gitlab.arturbosch.detekt"
 
