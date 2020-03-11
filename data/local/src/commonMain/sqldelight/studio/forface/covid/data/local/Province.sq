@@ -8,3 +8,43 @@ CREATE TABLE province (
   lat REAL NOT NULL,
   lng REAL NOT NULL
 );
+
+-- Indexes
+CREATE INDEX province_country_id ON province(country_id);
+CREATE INDEX province_name ON province(name);
+
+-- Select
+selectAll:
+  SELECT * FROM province
+  ORDER BY name;
+
+selectAllByProvinceId:
+  SELECT * FROM province
+  WHERE country_id = ?
+  ORDER BY name;
+
+selectAllByName:
+  SELECT * FROM province
+  WHERE name LIKE ('%' || :query || '%')
+  ORDER BY name;
+
+selectById:
+  SELECT * FROM province
+  WHERE id = ?;
+
+-- Insert
+insert:
+  INSERT INTO province(id, country_id, name, lat, lng)
+  VALUES (?, ?, ?, ?, ?);
+
+-- Delete
+deleteAll:
+  DELETE FROM province;
+
+deleteAllByCountryId:
+  DELETE FROM province
+  WHERE country_id = ?;
+
+deleteById:
+  DELETE FROM province
+  WHERE id = ?;

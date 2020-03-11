@@ -5,3 +5,33 @@ CREATE TABLE country (
   id TEXT AS Id PRIMARY KEY,
   name TEXT AS Name
 );
+
+-- Indexes
+CREATE INDEX country_name ON country(name);
+
+-- Select
+selectAll:
+  SELECT * FROM country
+  ORDER BY name;
+
+selectAllByName:
+  SELECT * FROM country
+  WHERE name LIKE ('%' || :query || '%')
+  ORDER BY name;
+
+selectById:
+  SELECT * FROM country
+  WHERE id = ?;
+
+-- Insert
+insert:
+  INSERT INTO country(id, name)
+  VALUES (?, ?);
+
+-- Delete
+deleteAll:
+  DELETE FROM country;
+
+deleteById:
+  DELETE FROM country
+  WHERE id = ?;
