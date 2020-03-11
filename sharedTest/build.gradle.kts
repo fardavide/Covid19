@@ -20,6 +20,9 @@ kotlin {
             ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
         }
 
+        jvm()
+        js()
+
         with(dependencyHandler) {
 
             val commonMain by getting {
@@ -47,6 +50,13 @@ kotlin {
                     api(
                         `kotlin-test`,
                         `kotlin-test-junit`
+                    )
+                }
+            }
+            js().compilations["main"].defaultSourceSet {
+                dependencies {
+                    api(
+                        `kotlin-test-js`
                     )
                 }
             }

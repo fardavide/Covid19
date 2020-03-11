@@ -21,6 +21,7 @@ kotlin {
         }
 
         jvm()
+        js()
 
         with(dependencyHandler) {
 
@@ -52,9 +53,12 @@ kotlin {
                     )
                 }
             }
-            jvm().compilations["test"].defaultSourceSet {
+            js().compilations["main"].defaultSourceSet {
                 dependencies {
-                    implementation(project(Module.sharedTest))
+                    api(
+                        `kotlin-js`,
+                        `coroutines-core-js`
+                    )
                 }
             }
 

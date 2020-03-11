@@ -36,7 +36,7 @@ kotlin {
             }
 
             jvm().compilations["main"]
-
+            js().compilations["main"]
         }
     }
 }
