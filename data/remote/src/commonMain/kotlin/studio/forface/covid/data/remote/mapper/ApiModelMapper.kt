@@ -8,7 +8,7 @@ import studio.forface.covid.domain.mapper.OneWayMapper
  *
  * @author Davide Farella
  */
-interface ApiModelMapper<in ApiModel, out Entity> : OneWayMapper<ApiModel, Entity> {
+internal interface ApiModelMapper<in ApiModel, out Entity> : OneWayMapper<ApiModel, Entity> {
 
     fun ApiModel.toEntity(): Entity
 }

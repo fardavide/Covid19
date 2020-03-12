@@ -7,6 +7,7 @@ import studio.forface.covid.domain.gateway.Repository
  * @author Davide Farella
  */
 internal class RepositoryImpl(
-    private val countryQueries: CountryQueries,
-    private val provinceQueries: ProvinceQueries
+    private val country: CountryQueries,
+    private val province: ProvinceQueries,
+    private val stat: StatQueries
 ) : Repository

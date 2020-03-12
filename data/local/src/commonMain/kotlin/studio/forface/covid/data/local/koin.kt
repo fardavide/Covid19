@@ -23,6 +23,7 @@ private val adapterModule = module {
             )
         )
     }
+    factory { Stat.Adapter(parent_idAdapter = get(IdAdapterQualifier)) }
 }
 
 private val mapperModule = module {
@@ -30,14 +31,15 @@ private val mapperModule = module {
 }
 
 private val databaseModule = module {
-    single { Database(driver = sqlDriver, countryAdapter = get(), provinceAdapter = get()) }
+    single { Database(driver = sqlDriver, countryAdapter = get(), provinceAdapter = get(), statAdapter = get()) }
 
     factory { get<Database>().countryQueries }
     factory { get<Database>().provinceQueries }
+    factory { get<Database>().statQueries }
 } + adapterModule + mapperModule
 
 val localDataModule = module {
-    single<Repository> { RepositoryImpl(countryQueries = get(), provinceQueries = get()) }
+    single<Repository> { RepositoryImpl(countryQueries = get(), provinceQueries = get(), statQueries = get()) }
 
 } + databaseModule
 

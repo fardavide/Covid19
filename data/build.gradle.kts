@@ -21,7 +21,7 @@ kotlin {
         }
 
         jvm()
-        js()
+//        js()
 
         with(dependencyHandler) {
 
@@ -36,7 +36,7 @@ kotlin {
             }
 
             jvm().compilations["main"]
-            js().compilations["main"]
+//            js().compilations["main"]
         }
     }
 }

@@ -21,7 +21,7 @@ kotlin {
         }
 
         jvm()
-        js()
+//        js()
 
         with(dependencyHandler) {
 
@@ -58,15 +58,15 @@ kotlin {
                 }
             }
 
-            js().compilations["main"].defaultSourceSet {
-                dependencies {
-                    implementation(
-                        `ktor-client-js`,
-                        `ktor-client-json-js`,
-                        `ktor-client-serialization-js`
-                    )
-                }
-            }
+//            js().compilations["main"].defaultSourceSet {
+//                dependencies {
+//                    implementation(
+//                        `ktor-client-js`,
+//                        `ktor-client-json-js`,
+//                        `ktor-client-serialization-js`
+//                    )
+//                }
+//            }
 
         }
     }

@@ -1,0 +1,47 @@
+import studio.forface.covid.domain.entity.Id;
+
+CREATE TABLE stat (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  parent_id TEXT as Id NOT NULL, -- Province or Country id
+  confirmed INTEGER as Int NOT NULL,
+  deaths INTEGER as Int NOT NULL,
+  recovered INTEGER as Int NOT NULL,
+  timestamp REAL NOT NULL,
+
+  FOREIGN KEY(parent_id) REFERENCES country(id),
+  FOREIGN KEY(parent_id) REFERENCES province(id)
+);
+
+-- Indexes
+CREATE INDEX stat_parent_id ON stat(parent_id);
+-- CREATE INDEX stat_confirmed ON stat(confirmed);
+-- CREATE INDEX stat_deaths ON stat(deaths);
+-- CREATE INDEX stat_recovered ON stat(recovered);
+CREATE INDEX stat_timestamp ON stat(timestamp);
+
+-- Select
+selectAllByParentId:
+  SELECT * FROM stat
+  WHERE parent_id = ?
+  ORDER BY timestamp DESC;
+
+selectLastByParentId:
+  SELECT * FROM stat
+  WHERE parent_id = ?
+  ORDER BY timestamp DESC
+  LIMIT 1;
+
+-- TODO: more queries
+
+-- Insert
+insert:
+  INSERT INTO stat(parent_id, confirmed, deaths, recovered, timestamp)
+  VALUES (?, ?, ?, ?, ?);
+
+-- Delete
+deleteAll:
+  DELETE FROM stat;
+
+deleteAllByParentId:
+  DELETE FROM stat
+  WHERE parent_id = ?;
