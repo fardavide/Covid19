@@ -13,6 +13,9 @@ interface Api {
     /** @return List of all the available [Country]s */
     suspend fun getCountries(): List<Country>
 
+    /** @return [Country] for the given [CountryId] */
+    suspend fun getCountry(id: CountryId): Country
+
     /** @return List of all the [Province]s for the given [CountryId] */
     suspend fun getProvinces(id: CountryId): List<Province>
 

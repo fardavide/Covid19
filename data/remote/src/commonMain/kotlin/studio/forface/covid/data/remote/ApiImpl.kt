@@ -29,6 +29,7 @@ internal class ApiImpl(
 ) : Api {
 
     override suspend fun getCountries() = service.getCountries().map(countryMapper) { it.toEntity() }
+    override suspend fun getCountry(id: CountryId) = countryMapper { service.getCountry(id).toEntity() }
     override suspend fun getProvinces(id: CountryId) = service.getProvinces(id).map(provinceMapper) { it.toEntity() }
 
     override suspend fun getWorldStat() = worldStatMapper { service.getWorldStat().toEntity() }

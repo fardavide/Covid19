@@ -13,7 +13,8 @@ internal class CovidService(
 ) {
 
     suspend fun getCountries(): List<CountryStatApiModel> = getWorld(Small)
-    suspend fun getProvinces(id: CountryId): List<ProvinceStatApiModel> = getWorld(Small)
+    suspend fun getCountry(id: CountryId): CountryStatApiModel = getCountry(id, Small)
+    suspend fun getProvinces(id: CountryId) = getCountry<CountryStatApiModel>(id, Small).provinceStats
 
     suspend fun getWorldStat(): WorldStatApiModel = getWorld(Small)
     suspend fun getWorldFullStat(): WorldFullStatApiModel = getWorld(Full)

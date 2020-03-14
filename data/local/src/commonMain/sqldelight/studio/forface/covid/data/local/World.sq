@@ -1,0 +1,22 @@
+import studio.forface.covid.domain.entity.Id;
+import studio.forface.covid.domain.entity.Name;
+
+CREATE TABLE world (
+  _id INTEGER DEFAULT 0 PRIMARY KEY,
+  id TEXT as Id NOT NULL,
+  name TEXT as Name NOT NULL
+);
+
+-- Select
+select:
+  SELECT * FROM world
+  LIMIT 1;
+
+-- Insert
+insert:
+  INSERT INTO world(id, name)
+  VALUES (?, ?);
+
+-- Delete
+delete:
+  DELETE FROM world;

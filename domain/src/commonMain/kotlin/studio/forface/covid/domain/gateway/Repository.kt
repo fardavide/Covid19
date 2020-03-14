@@ -23,11 +23,8 @@ interface Repository {
     /** @return List of all the [Province]s for the given [CountryId] */
     fun getProvinces(id: CountryId): Flow<List<Province>>
 
-    /** Save [Country]s to local cache */
+    /** Save [Country]s and relative [Province]s to local cache */
     suspend fun storeCountries(countries: List<Country>)
-
-    /** Save [Province]s to local cache */
-    suspend fun storeProvinces(provinces: List<Province>)
 
     // * * * STATS * * * //
 
@@ -79,7 +76,6 @@ internal class NoCacheRepository(
     override fun getProvinces(id: CountryId): Flow<List<Province>> = repeatFlow { api.getProvinces(id) }
 
     override suspend fun storeCountries(countries: List<Country>) { /* Noop. No cache supported */ }
-    override suspend fun storeProvinces(provinces: List<Province>) { /* Noop. No cache supported */ }
     override suspend fun store(stat: WorldStat) { /* Noop. No cache supported */ }
     override suspend fun store(stat: WorldFullStat) { /* Noop. No cache supported */ }
     override suspend fun store(stat: CountrySmallStat) { /* Noop. No cache supported */ }

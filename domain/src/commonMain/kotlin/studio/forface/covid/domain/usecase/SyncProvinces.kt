@@ -12,7 +12,7 @@ import studio.forface.covid.domain.gateway.Repository
 class SyncProvinces(private val api: Api, private val repository: Repository) {
 
     suspend operator fun invoke(id: CountryId) {
-        repository.storeProvinces(api.getProvinces(id))
+        repository.storeCountries(listOf(api.getCountry(id)))
     }
 
     suspend operator fun invoke(country: Country) {

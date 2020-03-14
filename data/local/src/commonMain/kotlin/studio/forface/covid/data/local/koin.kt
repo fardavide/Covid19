@@ -4,6 +4,7 @@ import com.squareup.sqldelight.ColumnAdapter
 import com.squareup.sqldelight.db.SqlDriver
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
+import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.domain.entity.Id
 import studio.forface.covid.domain.entity.Name
 import studio.forface.covid.domain.gateway.Repository
@@ -31,7 +32,15 @@ private val mapperModule = module {
 }
 
 private val databaseModule = module {
-    single { Database(driver = sqlDriver, countryAdapter = get(), provinceAdapter = get(), statAdapter = get()) }
+    single {
+        Database(
+            driver = sqlDriver,
+            worldAdapter = get(),
+            countryAdapter = get(),
+            provinceAdapter = get(),
+            statAdapter = get()
+        )
+    }
 
     factory { get<Database>().countryQueries }
     factory { get<Database>().provinceQueries }
@@ -39,7 +48,19 @@ private val databaseModule = module {
 } + adapterModule + mapperModule
 
 val localDataModule = module {
-    single<Repository> { RepositoryImpl(countryQueries = get(), provinceQueries = get(), statQueries = get()) }
+    single<Repository> {
+        RepositoryImpl(
+            transaction = get(),
+            world = get(),
+            country = get(),
+            province = get(),
+            singleCountryMapper = get(),
+            multiCountryMapper = get(),
+            provinceMapper = get(),
+            statMapper = get()
+        )
+    }
+    factory { TransactionProvider(database = get()) }
 
 } + databaseModule
 

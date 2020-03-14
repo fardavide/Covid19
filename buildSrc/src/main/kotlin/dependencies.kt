@@ -30,6 +30,10 @@ val DependencyHandler.`ktor-client-serialization-native` get() = ktorClientSeria
 val DependencyHandler.`ktor-client-serialization-js` get() = ktorClientSerialization("js")
 val DependencyHandler.`ktor-client-serialization-jvm` get() = ktorClientSerialization("jvm")
 
+// SqlDelight extensions
+val DependencyHandler.`sqlDelight-coroutines` get() = sqlDelight("coroutines-extensions")
+val DependencyHandler.`sqlDelight-paging` get() = sqlDelight("android-paging-extensions")
+
 // Others
 val DependencyHandler.`koinMP` get() = touchLab("koin-core") version `koinMP version`
 val DependencyHandler.`klock` get() = korlibs("klock") version `klock version`

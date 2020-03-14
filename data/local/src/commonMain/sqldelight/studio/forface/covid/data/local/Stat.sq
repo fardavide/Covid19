@@ -2,7 +2,7 @@ import studio.forface.covid.domain.entity.Id;
 
 CREATE TABLE stat (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  parent_id TEXT as Id NOT NULL, -- Province or Country id
+  parent_id TEXT as Id NOT NULL, -- Province, Country or `World` id
   confirmed INTEGER as Int NOT NULL,
   deaths INTEGER as Int NOT NULL,
   recovered INTEGER as Int NOT NULL,

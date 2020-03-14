@@ -33,6 +33,8 @@ kotlin {
                     implementation(
                         project(Module.domain),
 
+                        `sqlDelight-coroutines`,
+
                         `klock`,
                         `serialization-common`
                     )

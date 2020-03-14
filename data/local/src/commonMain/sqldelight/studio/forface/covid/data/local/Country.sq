@@ -35,3 +35,28 @@ deleteAll:
 deleteById:
   DELETE FROM country
   WHERE id = ?;
+
+-- region CountryWithProvinces
+countyWithProvinces:
+  CREATE VIEW countryWithProvinces AS
+  SELECT
+    country.id,
+    country.name,
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng
+  FROM country
+  JOIN province ON province.country_id = country.id;
+
+selectAllCountriesWithProvinces:
+  SELECT *
+  FROM countryWithProvinces
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
+selectCountryWithProvincesById:
+  SELECT *
+  FROM countryWithProvinces
+  WHERE countryWithProvinces.id = ?
+  ORDER BY countryWithProvinces.provinceName;
+-- endregion
