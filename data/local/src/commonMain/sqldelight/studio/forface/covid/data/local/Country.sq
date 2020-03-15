@@ -1,8 +1,8 @@
-import studio.forface.covid.domain.entity.Id;
+import studio.forface.covid.domain.entity.CountryId;
 import studio.forface.covid.domain.entity.Name;
 
 CREATE TABLE country (
-  id TEXT AS Id PRIMARY KEY,
+  id TEXT AS CountryId PRIMARY KEY,
   name TEXT AS Name NOT NULL
 );
 
@@ -25,7 +25,8 @@ selectById:
 
 -- Insert
 insert:
-  INSERT INTO country(id, name)
+  INSERT OR REPLACE
+  INTO country(id, name)
   VALUES (?, ?);
 
 -- Delete
@@ -36,7 +37,7 @@ deleteById:
   DELETE FROM country
   WHERE id = ?;
 
--- region CountryWithProvinces
+-- CountryWithProvinces
 countyWithProvinces:
   CREATE VIEW countryWithProvinces AS
   SELECT
@@ -54,9 +55,80 @@ selectAllCountriesWithProvinces:
   FROM countryWithProvinces
   ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
 
-selectCountryWithProvincesById:
+selectAllCountryWithProvincesById:
   SELECT *
   FROM countryWithProvinces
   WHERE countryWithProvinces.id = ?
   ORDER BY countryWithProvinces.provinceName;
--- endregion
+
+-- CountryStat
+countryStat:
+  CREATE VIEW countryStat AS
+  SELECT
+    country.id countryId,
+    country.name countryName,
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng,
+    stat.confirmed,
+    stat.deaths,
+    stat.recovered,
+    stat.timestamp
+  FROM country
+  JOIN province ON province.country_id = country.id
+  JOIN stat ON stat.parent_id = country.id;
+
+selectAllCountryStats:
+  SELECT *
+  FROM countryStat
+  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
+
+selectAllCountryStatsById:
+  SELECT *
+  FROM countryStat
+  WHERE countryStat.countryId = ?
+  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
+
+-- CountryWithProvinceStat
+countryWithProvinceStat:
+  CREATE VIEW countryWithProvinceStat AS
+  SELECT
+    country.id countryId,
+    country.name countryName,
+    cStat.confirmed countryConfirmed,
+    cStat.deaths countryDeaths,
+    cStat.recovered countryRecovered,
+    cStat.timestamp countryTimestamp,
+
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng,
+    pStat.confirmed provinceConfirmed,
+    pStat.deaths provinceDeaths,
+    pStat.recovered provinceRecovered,
+    pStat.timestamp provinceTimestamp
+  FROM country
+  JOIN stat cStat ON cStat.parent_id = country.id
+  JOIN province ON province.country_id = country.id
+  JOIN stat pStat ON pStat.parent_id = province.id;
+
+selectAllCountryWithProvinceStats:
+  SELECT *
+  FROM countryWithProvinceStat
+  ORDER BY
+    countryWithProvinceStat.countryName,
+    countryWithProvinceStat.countryTimestamp DESC,
+    countryWithProvinceStat.provinceName,
+    countryWithProvinceStat.provinceTimestamp DESC;
+
+selectAllCountryWithProvinceStatsById:
+  SELECT *
+  FROM countryWithProvinceStat
+  WHERE countryWithProvinceStat.countryId = ?
+  ORDER BY
+    countryWithProvinceStat.countryName,
+    countryWithProvinceStat.countryTimestamp DESC,
+    countryWithProvinceStat.provinceName,
+    countryWithProvinceStat.provinceTimestamp DESC;

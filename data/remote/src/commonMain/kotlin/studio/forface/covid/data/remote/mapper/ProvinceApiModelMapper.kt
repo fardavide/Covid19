@@ -5,6 +5,7 @@ import studio.forface.covid.data.remote.model.ProvinceStatApiModel
 import studio.forface.covid.domain.entity.Province
 import studio.forface.covid.domain.entity.ProvinceFullStat
 import studio.forface.covid.domain.entity.ProvinceStat
+import studio.forface.covid.domain.entity.plus
 import studio.forface.covid.domain.invoke
 import studio.forface.covid.domain.mapper.map
 
@@ -25,16 +26,19 @@ internal class ProvinceFullStatApiModelMapper(
     private val statParamsMapper: StatParamsMapper
 ) : ApiModelMapper<ProvinceFullStatApiModel, ProvinceFullStat> {
 
-    override fun ProvinceFullStatApiModel.toEntity() = ProvinceFullStat(
-        province = provinceMapper { this@toEntity.toEntity() },
-        stat = statParamsMapper { StatParams(confirmed, deaths, recovered, lastUpdate).toEntity() },
-        otherStats = stats.map(statMapper) { it.toEntity() }
-    )
+    override fun ProvinceFullStatApiModel.toEntity(): ProvinceFullStat {
+        val lastStat = statParamsMapper { StatParams(confirmed, deaths, recovered, lastUpdate).toEntity() }
+        val otherStats = stats.map(statMapper) { it.toEntity() }
+        return ProvinceFullStat(
+            province = provinceMapper { this@toEntity.toEntity() },
+            stats = lastStat + otherStats
+        )
+    }
 }
 
 // TODO replace ProvinceStatApiModel with ProvinceApiModel, which does not exist ATM
 internal class ProvinceApiModelMapper(
-    private val idMapper: IdApiModelMapper,
+    private val idMapper: ProvinceIdApiModelMapper,
     private val nameMapper: NameApiModelMapper,
     private val locationMapper: LocationApiModelMapper
 ) : ApiModelMapper<ProvinceStatApiModel, Province> {

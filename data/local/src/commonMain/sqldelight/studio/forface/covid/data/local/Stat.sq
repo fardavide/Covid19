@@ -1,15 +1,16 @@
 import studio.forface.covid.domain.entity.Id;
 
 CREATE TABLE stat (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  parent_id TEXT as Id NOT NULL, -- Province, Country or `World` id
+  parent_id TEXT as Id NOT NULL, -- ProvinceId, CountryId or WorldId
   confirmed INTEGER as Int NOT NULL,
   deaths INTEGER as Int NOT NULL,
   recovered INTEGER as Int NOT NULL,
   timestamp REAL NOT NULL,
 
   FOREIGN KEY(parent_id) REFERENCES country(id),
-  FOREIGN KEY(parent_id) REFERENCES province(id)
+  FOREIGN KEY(parent_id) REFERENCES province(id),
+
+  PRIMARY KEY(parent_id, timestamp)
 );
 
 -- Indexes
@@ -35,7 +36,8 @@ selectLastByParentId:
 
 -- Insert
 insert:
-  INSERT INTO stat(parent_id, confirmed, deaths, recovered, timestamp)
+  INSERT OR REPLACE
+  INTO stat(parent_id, confirmed, deaths, recovered, timestamp)
   VALUES (?, ?, ?, ?, ?);
 
 -- Delete

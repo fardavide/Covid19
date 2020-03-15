@@ -1,7 +1,7 @@
 package studio.forface.covid.domain.entity
 
 data class Province(
-    val id: Id,
+    val id: ProvinceId,
     val name: Name,
     val location: Location
 )
@@ -17,10 +17,9 @@ data class ProvinceStat(
 
 /**
  * Small stat for a [Province].
- * It includes the last [Stat] and a List of other [Stat]
+ * It includes a List of [Stat]
  */
 data class ProvinceFullStat(
     val province: Province,
-    val stat: Stat,
-    val otherStats: List<Stat>
+    val stats: List<Stat>
 )

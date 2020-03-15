@@ -1,9 +1,9 @@
-import studio.forface.covid.domain.entity.Id;
 import studio.forface.covid.domain.entity.Name;
+import studio.forface.covid.domain.entity.WorldId;
 
 CREATE TABLE world (
-  _id INTEGER DEFAULT 0 PRIMARY KEY,
-  id TEXT as Id NOT NULL,
+  _id INTEGER NOT NULL DEFAULT 0 PRIMARY KEY,
+  id TEXT as WorldId NOT NULL,
   name TEXT as Name NOT NULL
 );
 
@@ -14,7 +14,8 @@ select:
 
 -- Insert
 insert:
-  INSERT INTO world(id, name)
+  INSERT OR REPLACE
+  INTO world(id, name)
   VALUES (?, ?);
 
 -- Delete

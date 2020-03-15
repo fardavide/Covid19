@@ -1,9 +1,10 @@
-import studio.forface.covid.domain.entity.Id;
+import studio.forface.covid.domain.entity.CountryId;
 import studio.forface.covid.domain.entity.Name;
+import studio.forface.covid.domain.entity.ProvinceId;
 
 CREATE TABLE province (
-  id TEXT AS Id PRIMARY KEY,
-  country_id TEXT AS Id NOT NULL,
+  id TEXT AS ProvinceId PRIMARY KEY,
+  country_id TEXT AS CountryId NOT NULL,
   name TEXT AS Name NOT NULL,
   lat REAL NOT NULL,
   lng REAL NOT NULL,
@@ -36,7 +37,8 @@ selectById:
 
 -- Insert
 insert:
-  INSERT INTO province(id, country_id, name, lat, lng)
+  INSERT OR REPLACE
+  INTO province(id, country_id, name, lat, lng)
   VALUES (?, ?, ?, ?, ?);
 
 -- Delete
@@ -50,3 +52,35 @@ deleteAllByCountryId:
 deleteById:
   DELETE FROM province
   WHERE id = ?;
+
+-- ProvinceStat
+provinceStats:
+  CREATE VIEW provinceStats AS
+  SELECT
+    province.id,
+    province.name,
+    province.lat,
+    province.lng,
+    stat.confirmed,
+    stat.deaths,
+    stat.recovered,
+    stat.timestamp
+  FROM province
+  JOIN stat ON stat.parent_id = province.id;
+
+selectAllProvincesStats:
+  SELECT *
+  FROM provinceStats
+  ORDER BY provinceStats.name, provinceStats.timestamp DESC;
+
+selectAllProvinceStatsById:
+  SELECT *
+  FROM provinceStats
+  WHERE provinceStats.id = ?
+  ORDER BY provinceStats.name, provinceStats.timestamp DESC;
+
+selectLastProvinceStatById:
+  SELECT *
+  FROM provinceStats
+  WHERE provinceStats.id = ?
+  LIMIT 1;

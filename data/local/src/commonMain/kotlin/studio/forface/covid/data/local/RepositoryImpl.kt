@@ -1,21 +1,36 @@
 package studio.forface.covid.data.local
 
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
+import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import studio.forface.covid.data.local.mapper.*
+import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
+import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryStatDbModelMapper
 import studio.forface.covid.data.local.mapper.MultiCountryDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceDbModelMapper
+import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
+import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
 import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
-import studio.forface.covid.data.local.mapper.StatDbModelMapper
+import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
 import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.data.local.utils.asListFlow
-import studio.forface.covid.domain.entity.*
+import studio.forface.covid.data.local.utils.asOneFlow
 import studio.forface.covid.domain.entity.Country
+import studio.forface.covid.domain.entity.CountryFullStat
+import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.entity.CountrySmallStat
+import studio.forface.covid.domain.entity.CountryStat
+import studio.forface.covid.domain.entity.Id
 import studio.forface.covid.domain.entity.Province
+import studio.forface.covid.domain.entity.ProvinceFullStat
+import studio.forface.covid.domain.entity.ProvinceId
+import studio.forface.covid.domain.entity.ProvinceStat
+import studio.forface.covid.domain.entity.Stat
+import studio.forface.covid.domain.entity.World
+import studio.forface.covid.domain.entity.WorldFullStat
+import studio.forface.covid.domain.entity.WorldId
+import studio.forface.covid.domain.entity.WorldStat
 import studio.forface.covid.domain.gateway.Repository
+import studio.forface.covid.domain.invoke
 import studio.forface.covid.domain.mapper.map
 
 /**
@@ -24,32 +39,31 @@ import studio.forface.covid.domain.mapper.map
  */
 internal class RepositoryImpl(
     private val transaction: TransactionProvider,
-    private val world: WorldQueries,
-    private val country: CountryQueries,
-    private val province: ProvinceQueries,
+    private val worldQueries: WorldQueries,
+    private val countryQueries: CountryQueries,
+    private val provinceQueries: ProvinceQueries,
+    private val statQueries: StatQueries,
     private val singleCountryMapper: SingleCountryDbModelMapper,
     private val multiCountryMapper: MultiCountryDbModelMapper,
-    private val provinceMapper: ProvinceDbModelMapper,
-    private val statMapper: StatDbModelMapper
+    private val countrySmallStatMapper: CountrySmallStatDbModelMapper,
+    private val countryStatMapper: CountryStatDbModelMapper,
+    private val countryFullStatMapper: CountryFullStatDbModelMapper,
+    private val provinceStatMapper: ProvinceStatDbModelMapper,
+    private val provinceFullStatMapper: ProvinceFullStatDbModelMapper,
+    private val timeMapper: UnixTimeDbModelMapper
 ) : Repository {
 
     override fun getCountries(): Flow<List<Country>> =
-        country.selectAllCountriesWithProvinces().asListFlow()
+        countryQueries.selectAllCountriesWithProvinces().asListFlow()
             .map(multiCountryMapper) { it.toEntity() }
 
     override fun getProvinces(id: CountryId): Flow<List<Province>> =
-        country.selectCountryWithProvincesById(id).asListFlow()
+        countryQueries.selectAllCountryWithProvincesById(id).asListFlow()
             .map(singleCountryMapper) { it.toEntity() }.map { it.provinces }
 
     override suspend fun storeCountries(countries: List<Country>) {
         transaction {
-            for (c in countries) {
-                country.insert(c.id, c.name)
-                
-                for (p in c.provinces) {
-                    province.insert(p.id, c.id, p.name, p.location.lat, p.location.lng)
-                }
-            }
+            for (country in countries) blockingStore(country)
         }
     }
 
@@ -61,55 +75,132 @@ internal class RepositoryImpl(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat> =
+        countryQueries.selectAllCountryStatsById(id).asListFlow()
+            .map(countrySmallStatMapper) { it.toEntity() }
 
-    override fun getCountryStat(id: CountryId): Flow<CountryStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getCountryStat(id: CountryId): Flow<CountryStat> =
+        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow()
+            .map(countryStatMapper) { it.toEntity() }
 
-    override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> =
+        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow()
+            .map(countryFullStatMapper) { it.toEntity() }
 
-    override fun getProvinceStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat> =
+        provinceQueries.selectLastProvinceStatById(id).asOneFlow()
+            .map(provinceStatMapper) { it.toEntity() }
 
-    override fun getProvinceFullStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceFullStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getProvinceFullStat(id: ProvinceId): Flow<ProvinceFullStat> =
+        provinceQueries.selectAllProvinceStatsById(id).asListFlow()
+            .map(provinceFullStatMapper) { it.toEntity() }
 
     override suspend fun store(stat: WorldStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (world, worldStats, countryStats) = stat
+            blockingStore(world)
+            for (worldStat in worldStats) blockingStore(world.id, worldStat)
+            for (countryStat in countryStats) blockingStore(countryStat.value)
+        }
     }
 
     override suspend fun store(stat: WorldFullStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (world, worldStats, countryStats) = stat
+            blockingStore(world)
+            for (worldStat in worldStats) blockingStore(world.id, worldStat)
+            for (countryStat in countryStats) blockingStore(countryStat.value)
+        }
     }
 
     override suspend fun store(stat: CountrySmallStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (country, s) = stat
+            blockingStore(country)
+            blockingStore(country.id, s)
+        }
     }
 
     override suspend fun store(stat: CountryStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (country, countryStats, provinceStats) = stat
+            blockingStore(country)
+            for (countryStat in countryStats) blockingStore(country.id, countryStat)
+            for ((_, provinceStat) in provinceStats) blockingStore(provinceStat)
+        }
     }
 
     override suspend fun store(stat: CountryFullStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (country, countryStats, provinceStats) = stat
+            blockingStore(country)
+            for (countyStat in countryStats) blockingStore(country.id, countyStat)
+            for ((_, provinceStat) in provinceStats) blockingStore(provinceStat)
+        }
     }
 
     override suspend fun store(stat: ProvinceStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            val (province, provinceStat) = stat
+            blockingStore(province.id, provinceStat)
+        }
     }
 
     override suspend fun store(stat: ProvinceFullStat) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transaction {
+            blockingStore(stat)
+        }
     }
 
+    // region Blocking
+    private fun blockingStore(world: World) {
+        worldQueries.insert(world.id, world.name)
+        for (country in world.countries) blockingStore(country)
+    }
+
+    private fun blockingStore(country: Country) {
+        countryQueries.insert(country.id, country.name)
+        for (province in country.provinces) blockingStore(country.id, province)
+    }
+
+    private fun blockingStore(countryId: CountryId, province: Province) {
+        provinceQueries.insert(province.id, countryId, province.name, province.location.lat, province.location.lng)
+    }
+
+    private fun blockingStore(stat: CountrySmallStat) {
+        val (country, countyStat) = stat
+        blockingStore(country.id, countyStat)
+    }
+
+    private fun blockingStore(stat: CountryStat) {
+        val (country, countyStats) = stat
+        for (countryStat in countyStats) blockingStore(country.id, countryStat)
+    }
+
+    private fun blockingStore(stat: ProvinceStat) {
+        val (province, provinceStat) = stat
+        blockingStore(province.id, provinceStat)
+    }
+
+    private fun blockingStore(stat: ProvinceFullStat) {
+        val (province, provinceStats) = stat
+        for (provinceStat in provinceStats) blockingStore(province.id, provinceStat)
+    }
+
+    private fun blockingStore(parentId: Id, stat: Stat) {
+        statQueries.insert(
+            parentId,
+            confirmed = stat.confirmed,
+            deaths = stat.deaths,
+            recovered = stat.recovered,
+            timestamp = stat.timestamp.toModel()
+        )
+    }
+    // endregion
+
+    private fun DateTime.toModel() = timeMapper { toModel() }
+    private fun Double.toEntity() = timeMapper { toEntity() }
 }
 
 // TODO: find better place
-private val WorldId = Id("world")
+private val WorldId = WorldId("world")

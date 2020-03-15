@@ -5,7 +5,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import studio.forface.covid.domain.DEFAULT_ERROR_INTERVAL
 import studio.forface.covid.domain.DEFAULT_REFRESH_INTERVAL
-import studio.forface.covid.domain.entity.*
+import studio.forface.covid.domain.entity.Country
+import studio.forface.covid.domain.entity.CountryFullStat
+import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.entity.CountrySmallStat
+import studio.forface.covid.domain.entity.CountryStat
+import studio.forface.covid.domain.entity.Province
+import studio.forface.covid.domain.entity.ProvinceFullStat
+import studio.forface.covid.domain.entity.ProvinceId
+import studio.forface.covid.domain.entity.ProvinceStat
+import studio.forface.covid.domain.entity.WorldFullStat
+import studio.forface.covid.domain.entity.WorldStat
 import studio.forface.covid.domain.util.repeatCatching
 import kotlin.time.Duration
 
@@ -33,8 +43,8 @@ interface Repository {
     fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat>
     fun getCountryStat(id: CountryId): Flow<CountryStat>
     fun getCountryFullStat(id: CountryId): Flow<CountryFullStat>
-    fun getProvinceStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceStat>
-    fun getProvinceFullStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceFullStat>
+    fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat>
+    fun getProvinceFullStat(id: ProvinceId): Flow<ProvinceFullStat>
 
 
     /** Save [WorldStat] to local cache */
@@ -89,10 +99,10 @@ internal class NoCacheRepository(
     override fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat> = repeatFlow { api.getCountrySmallStat(id) }
     override fun getCountryStat(id: CountryId): Flow<CountryStat> = repeatFlow { api.getCountryStat(id) }
     override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> = repeatFlow { api.getCountryFullStat(id) }
-    override fun getProvinceStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceStat> =
-        repeatFlow { api.getProvinceStat(countryId, id) }
-    override fun getProvinceFullStat(countryId: CountryId, id: ProvinceId): Flow<ProvinceFullStat> =
-        repeatFlow { api.getProvinceFullStat(countryId, id) }
+    override fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat> =
+        repeatFlow { api.getProvinceStat(TODO(), id) }
+    override fun getProvinceFullStat(id: ProvinceId): Flow<ProvinceFullStat> =
+        repeatFlow { api.getProvinceFullStat(TODO(), id) }
 
     private fun <T> repeatFlow(block: suspend ProducerScope<T>.() -> T) = channelFlow<T> {
         repeatCatching(refreshInterval, errorInterval) { send(block()) }

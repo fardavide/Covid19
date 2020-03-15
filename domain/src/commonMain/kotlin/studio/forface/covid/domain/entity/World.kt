@@ -1,21 +1,20 @@
 package studio.forface.covid.domain.entity
 
 data class World(
-    val id: Id,
+    val id: WorldId,
     val name: Name,
     val countries: List<Country>
 )
 
 /**
  * Small stat for a [World].
- * It includes the [World], the last [Stat], a List of other [Stat] and a List of [CountrySmallStat]
+ * It includes the [World], a List of [Stat] and a List of [CountrySmallStat]
  *
  * This is analogue to [CountryStat]
  */
 data class WorldStat(
     val world: World,
-    val stat: Stat,
-    val otherStats: List<Stat>,
+    val stats: List<Stat>,
     val countryStats: Map<CountryId, CountrySmallStat>
 )
 
@@ -28,7 +27,6 @@ data class WorldStat(
  */
 data class WorldFullStat(
     val world: World,
-    val stat: Stat,
-    val otherStats: List<Stat>,
+    val stats: List<Stat>,
     val countryStats: Map<CountryId, CountryStat>
 )

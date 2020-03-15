@@ -1,7 +1,7 @@
 package studio.forface.covid.domain.entity
 
 data class Country(
-    val id: Id,
+    val id: CountryId,
     val name: Name,
     val provinces: List<Province> = emptyList()
 )
@@ -19,12 +19,11 @@ data class CountrySmallStat(
 
 /**
  * Medium stat for a [Country].
- * It includes the [Country], the last [Stat], a List of other [Stat] and a List of [ProvinceStat], if any
+ * It includes the [Country], a List of [Stat]s and a List of [ProvinceStat], if any
  */
 data class CountryStat(
     val country: Country,
-    val stat: Stat,
-    val otherStats: List<Stat>,
+    val stats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceStat> = emptyMap()
 )
 
@@ -35,7 +34,6 @@ data class CountryStat(
  */
 data class CountryFullStat(
     val country: Country,
-    val stat: Stat,
-    val otherStats: List<Stat>,
+    val stats: List<Stat>,
     val provinceStats: Map<ProvinceId, ProvinceFullStat> = emptyMap()
 )

@@ -6,12 +6,25 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
-import studio.forface.covid.data.remote.mapper.*
-import studio.forface.covid.data.remote.mapper.IdApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryIdApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountrySmallStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.LocationApiModelMapper
 import studio.forface.covid.data.remote.mapper.NameApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceIdApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.StatApiModelMapper
+import studio.forface.covid.data.remote.mapper.StatParamsMapper
 import studio.forface.covid.data.remote.mapper.TimestampApiModelMapper
 import studio.forface.covid.data.remote.mapper.UnixTimeApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldIdApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldStatApiModelMapper
 import studio.forface.covid.domain.gateway.Api
 import studio.forface.covid.domain.plus
 
@@ -35,7 +48,9 @@ private val serviceModule = module {
 private val mapperModule = module {
 
     // Fields
-    factory { IdApiModelMapper() }
+    factory { WorldIdApiModelMapper() }
+    factory { CountryIdApiModelMapper() }
+    factory { ProvinceIdApiModelMapper() }
     factory { NameApiModelMapper() }
     factory { LocationApiModelMapper() }
     factory { TimestampApiModelMapper() }

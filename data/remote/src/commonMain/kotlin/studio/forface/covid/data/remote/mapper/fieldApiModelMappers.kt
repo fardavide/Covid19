@@ -3,12 +3,23 @@ package studio.forface.covid.data.remote.mapper
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
 import com.soywiz.klock.parse
+import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.Id
 import studio.forface.covid.domain.entity.Location
 import studio.forface.covid.domain.entity.Name
+import studio.forface.covid.domain.entity.ProvinceId
+import studio.forface.covid.domain.entity.WorldId
 
-internal class IdApiModelMapper : ApiModelMapper<String, Id> {
-    override fun String.toEntity() = Id(this)
+internal class WorldIdApiModelMapper : ApiModelMapper<String, Id> {
+    override fun String.toEntity() = WorldId(this)
+}
+
+internal class CountryIdApiModelMapper : ApiModelMapper<String, Id> {
+    override fun String.toEntity() = CountryId(this)
+}
+
+internal class ProvinceIdApiModelMapper : ApiModelMapper<String, Id> {
+    override fun String.toEntity() = ProvinceId(this)
 }
 
 internal class NameApiModelMapper : ApiModelMapper<String, Name> {

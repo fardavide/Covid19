@@ -8,3 +8,6 @@ data class Stat(
     val recovered: Int,
     val timestamp: DateTime
 )
+
+/** @return [List] of [Stat] composed from the receiver [Stat] plus [others] */
+operator fun Stat.plus(others: List<Stat>) = listOf(this) + others

@@ -1,10 +1,14 @@
 package studio.forface.covid.domain.entity
 
-inline class Id(val s: String)
-inline class Name(val s: String)
+interface Id {
+    val s: String
+}
 
-typealias CountryId = Id
-typealias ProvinceId = Id
+inline class WorldId(override val s: String): Id
+inline class CountryId(override val s: String): Id
+inline class ProvinceId(override val s: String): Id
+
+inline class Name(val s: String)
 
 data class Location(
     val lat: Double,
