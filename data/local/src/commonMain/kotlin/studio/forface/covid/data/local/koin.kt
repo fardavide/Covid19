@@ -21,6 +21,10 @@ import studio.forface.covid.data.local.mapper.ProvinceWrapperMapper
 import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
 import studio.forface.covid.data.local.mapper.SingleCountryPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldPlainDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldStatPlainDModelMapper
 import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.Id
@@ -55,6 +59,22 @@ private val adapterModule = module {
 
 private val mapperModule = module {
     // World
+    factory {
+        WorldStatDbModelMapper(
+            worldPlainMapper = get(),
+            worldStatPlainMapper = get(),
+            countryStatMapper = get()
+        )
+    }
+    factory {
+        WorldFullStatDbModelMapper(
+            worldPlainMapper = get(),
+            worldStatPlainMapper = get(),
+            countryStatMapper = get()
+        )
+    }
+    factory { WorldPlainDbModelMapper(singleCountryPlainMapper = get()) }
+    factory { WorldStatPlainDModelMapper(timeMapper = get()) }
 
     // Country
     factory { SingleCountryDbModelMapper(provinceMapper = get()) }
@@ -119,6 +139,8 @@ val localDataModule = module {
             countryQueries = get(),
             provinceQueries = get(),
             statQueries = get(),
+            worldStatMapper = get(),
+            worldFullStatMapper = get(),
             singleCountryMapper = get(),
             multiCountryMapper = get(),
             countrySmallStatMapper = get(),

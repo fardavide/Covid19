@@ -205,4 +205,4 @@ internal class RepositoryImpl(
 }
 
 // TODO: find better place
-private val WorldId = WorldId("world")
+internal val WorldId = WorldId("world")
