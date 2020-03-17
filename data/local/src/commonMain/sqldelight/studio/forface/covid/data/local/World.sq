@@ -21,3 +21,100 @@ insert:
 -- Delete
 delete:
   DELETE FROM world;
+
+-- WoldWithCountriesAndProvinces
+worldWithCountriesAndProvinces:
+  CREATE VIEW worldWithCountriesAndProvinces AS
+  SELECT
+    world.id,
+    world.name,
+    country.id countryId,
+    country.name countryName,
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng
+  FROM world
+  JOIN country ON country.id != NULL
+  JOIN province ON province.country_id = country.id;
+
+selectAllWorldWithCountriesAndProvinces:
+  SELECT *
+  FROM worldWithCountriesAndProvinces
+  ORDER BY worldWithCountriesAndProvinces.countryName, worldWithCountriesAndProvinces.provinceName;
+
+-- WorldStat
+worldStat:
+  CREATE VIEW worldStat AS
+  SELECT
+    world.id worldId,
+    world.name worldName,
+    wStat.confirmed worldConfirmed,
+    wStat.deaths worldDeaths,
+    wStat.recovered worldRecovered,
+    wStat.timestamp worldTimestamp,
+
+    country.id countryId,
+    country.name countryName,
+    countryStat.confirmed countryConfirmed,
+    countryStat.deaths countryDeaths,
+    countryStat.recovered countryRecovered,
+    countryStat.timestamp countryTimestamp,
+
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng
+  FROM world
+  JOIN stat wStat ON wStat.parent_id = world.id
+  JOIN country ON country.id != NULL
+  JOIN stat countryStat ON countryStat.parent_id = country.id
+  JOIN province ON province.country_id = country.id;
+
+selectAllWorldStat:
+  SELECT *
+  FROM worldStat
+  ORDER BY worldStat.worldTimestamp DESC, worldStat.countryName, worldStat.countryTimestamp DESC;
+
+-- WorldWithProvinceStat
+worldWithProvinceStat:
+  CREATE VIEW worldWithProvinceStat AS
+  SELECT
+    world.id worldId,
+    world.name worldName,
+    wStat.confirmed worldConfirmed,
+    wStat.deaths worldDeaths,
+    wStat.recovered worldRecovered,
+    wStat.timestamp worldTimestamp,
+
+    country.id countryId,
+    country.name countryName,
+    countryStat.confirmed countryConfirmed,
+    countryStat.deaths countryDeaths,
+    countryStat.recovered countryRecovered,
+    countryStat.timestamp countryTimestamp,
+
+    province.id provinceId,
+    province.name provinceName,
+    province.lat provinceLat,
+    province.lng provinceLng,
+    provinceStat.confirmed provinceConfirmed,
+    provinceStat.deaths provinceDeaths,
+    provinceStat.recovered provinceRecovered,
+    provinceStat.timestamp provinceTimestamp
+  FROM world
+  JOIN stat wStat ON wStat.parent_id = world.id
+  JOIN country ON country.id != NULL
+  JOIN stat countryStat ON countryStat.parent_id = country.id
+  JOIN province ON province.country_id = country.id
+  JOIN stat provinceStat ON provinceStat.parent_id = province.id;
+
+selectAllWorldWithProvinceStat:
+  SELECT *
+  FROM worldWithProvinceStat
+  ORDER BY
+    worldWithProvinceStat.worldTimestamp DESC,
+    worldWithProvinceStat.countryName,
+    worldWithProvinceStat.countryTimestamp DESC,
+    worldWithProvinceStat.provinceName,
+    worldWithProvinceStat.provinceTimestamp DESC;

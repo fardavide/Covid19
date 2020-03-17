@@ -11,6 +11,8 @@ import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
 import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
 import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
 import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.data.local.utils.asListFlow
 import studio.forface.covid.data.local.utils.asOneFlow
@@ -43,6 +45,8 @@ internal class RepositoryImpl(
     private val countryQueries: CountryQueries,
     private val provinceQueries: ProvinceQueries,
     private val statQueries: StatQueries,
+    private val worldStatMapper: WorldStatDbModelMapper,
+    private val worldFullStatMapper: WorldFullStatDbModelMapper,
     private val singleCountryMapper: SingleCountryDbModelMapper,
     private val multiCountryMapper: MultiCountryDbModelMapper,
     private val countrySmallStatMapper: CountrySmallStatDbModelMapper,
@@ -67,13 +71,11 @@ internal class RepositoryImpl(
         }
     }
 
-    override fun getWorldStat(): Flow<WorldStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWorldStat(): Flow<WorldStat> = worldQueries.selectAllWorldStat().asListFlow()
+        .map(worldStatMapper) { it.toEntity() }
 
-    override fun getWorldFullStat(): Flow<WorldFullStat> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getWorldFullStat(): Flow<WorldFullStat> = worldQueries.selectAllWorldWithProvinceStat().asListFlow()
+        .map(worldFullStatMapper) { it.toEntity() }
 
     override fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat> =
         countryQueries.selectAllCountryStatsById(id).asListFlow()

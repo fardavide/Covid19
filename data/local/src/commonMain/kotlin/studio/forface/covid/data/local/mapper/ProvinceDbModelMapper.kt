@@ -10,23 +10,34 @@ import studio.forface.covid.domain.entity.ProvinceStat
 import studio.forface.covid.domain.invoke
 import studio.forface.covid.domain.mapper.map
 
-// region Province Mappers
-internal class ProvinceDbModelMapper(
-    private val locationMapper: LocationDbModelMapper
+// region Province mappers
+internal class ProvinceWrapperMapper(
+    private val provinceMapper: ProvinceDbModelMapper,
+    private val countryWithProvinceMapper: CountryWithProvinceDbModelMapper
 ) : DatabaseModelMapper<ProvinceWrapper, Province> {
 
     override fun ProvinceWrapper.toEntity() = when (this) {
-        is ProvinceWrapper.Standalone -> province.toEntity()
-        is ProvinceWrapper.FromCounty -> countryWithProvince.toEntity()
+        is ProvinceWrapper.Standalone -> provinceMapper { province.toEntity() }
+        is ProvinceWrapper.FromCounty -> countryWithProvinceMapper { countryWithProvince.toEntity() }
     }
+}
 
-    fun ProvinceDbModel.toEntity() = Province(
+internal class ProvinceDbModelMapper(
+    private val locationMapper: LocationDbModelMapper
+) : DatabaseModelMapper<ProvinceDbModel, Province> {
+
+    override fun ProvinceDbModel.toEntity() = Province(
         id = id,
         name = name,
         location = locationMapper { (lat to lng).toEntity() }
     )
+}
 
-    fun CountryWithProvinceDbModel.toEntity() = Province(
+internal class CountryWithProvinceDbModelMapper(
+    private val locationMapper: LocationDbModelMapper
+) : DatabaseModelMapper<CountryWithProvinceDbModel, Province> {
+
+    override fun CountryWithProvinceDbModel.toEntity() = Province(
         id = provinceId,
         name = provinceName,
         location = locationMapper { (provinceLat to provinceLng).toEntity() }
@@ -34,7 +45,7 @@ internal class ProvinceDbModelMapper(
 }
 // endregion
 
-// region ProvinceStat Mappers
+// region ProvinceStat mappers
 internal class ProvinceStatDbModelMapper(
     private val provincePlainMapper: ProvincePlainDbModelMapper,
     private val provincePlainStatMapper: ProvinceStatPlainDbModelMapper
@@ -64,7 +75,7 @@ internal class ProvinceFullStatDbModelMapper(
 }
 // endregion
 
-// region Plain mapper
+// region Plain mappers
 internal class ProvincePlainDbModelMapper(
     private val locationMapper: LocationDbModelMapper
 ) : DatabaseModelMapper<ProvinceStatPlainDbModel, Province> {

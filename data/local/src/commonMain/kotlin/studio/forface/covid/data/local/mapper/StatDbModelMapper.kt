@@ -3,24 +3,35 @@ package studio.forface.covid.data.local.mapper
 import studio.forface.covid.data.local.model.CountryStatPlainDbModel
 import studio.forface.covid.data.local.model.CountryWithProvincesStatPlainDbModel
 import studio.forface.covid.data.local.model.ProvinceStatPlainDbModel
-import studio.forface.covid.data.local.model.StatDbModel
+import studio.forface.covid.data.local.model.WorldStatPlainDbModel
+import studio.forface.covid.data.local.model.WorldWithProvinceStatPlainDbModel
 import studio.forface.covid.domain.entity.Stat
 import studio.forface.covid.domain.invoke
 
-// TODO: remove
-internal class StatDbModelMapper(
+internal class WorldStatFromWorldWithProvincesStatPlainDModelMapper(
     private val timeMapper: UnixTimeDbModelMapper
-) : DatabaseModelMapper<StatDbModel, Stat> {
+) : DatabaseModelMapper<WorldWithProvinceStatPlainDbModel, Stat> {
 
-    override fun StatDbModel.toEntity() = Stat(
-        confirmed = confirmed,
-        deaths = deaths,
-        recovered = recovered,
-        timestamp = timeMapper { timestamp.toEntity() }
+    override fun WorldWithProvinceStatPlainDbModel.toEntity() = Stat(
+        confirmed = worldConfirmed,
+        deaths = worldDeaths,
+        recovered = worldRecovered,
+        timestamp = timeMapper { worldTimestamp.toEntity() }
     )
 }
 
-// region Plain mappers
+internal class WorldStatPlainDModelMapper(
+    private val timeMapper: UnixTimeDbModelMapper
+) : DatabaseModelMapper<WorldStatPlainDbModel, Stat> {
+
+    override fun WorldStatPlainDbModel.toEntity() = Stat(
+        confirmed = worldConfirmed,
+        deaths = worldDeaths,
+        recovered = worldRecovered,
+        timestamp = timeMapper { worldTimestamp.toEntity() }
+    )
+}
+
 internal class CountryStatPlainDbModelMapper(
     private val timeMapper: UnixTimeDbModelMapper
 ) : DatabaseModelMapper<CountryStatPlainDbModel, Stat> {
@@ -45,19 +56,6 @@ internal class CountryStatFromCountryWithProvinceStatPlainDbModelMapper(
     )
 }
 
-// TODO: remove
-internal class ProvinceStatFromCountryWithProvincesStatPlainDbModelMapper(
-    private val timeMapper: UnixTimeDbModelMapper
-) : DatabaseModelMapper<CountryWithProvincesStatPlainDbModel, Stat> {
-
-    override fun CountryWithProvincesStatPlainDbModel.toEntity() = Stat(
-        confirmed = provinceConfirmed,
-        deaths = provinceDeaths,
-        recovered = provinceRecovered,
-        timestamp = timeMapper { provinceTimestamp.toEntity() }
-    )
-}
-
 internal class ProvinceStatPlainDbModelMapper(
     private val timeMapper: UnixTimeDbModelMapper
 ) : DatabaseModelMapper<ProvinceStatPlainDbModel, Stat> {
@@ -69,4 +67,3 @@ internal class ProvinceStatPlainDbModelMapper(
         timestamp = timeMapper { timestamp.toEntity() }
     )
 }
-// endregion

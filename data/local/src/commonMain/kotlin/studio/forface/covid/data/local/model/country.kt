@@ -9,3 +9,4 @@ internal typealias CountryDbModelImpl = Country.Impl
 internal typealias CountryStatPlainDbModel = CountryStat
 internal typealias CountryStatPlainDbModelImpl = CountryStat.Impl
 internal typealias CountryWithProvincesStatPlainDbModel = CountryWithProvinceStat
+internal typealias CountryWithProvincesStatPlainDbModelImpl = CountryWithProvinceStat.Impl

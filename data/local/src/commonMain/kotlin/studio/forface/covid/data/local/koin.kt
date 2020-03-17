@@ -9,6 +9,7 @@ import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
 import studio.forface.covid.data.local.mapper.CountryStatDbModelMapper
 import studio.forface.covid.data.local.mapper.CountryStatFromCountryWithProvinceStatPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.CountryStatPlainDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceDbModelMapper
 import studio.forface.covid.data.local.mapper.LocationDbModelMapper
 import studio.forface.covid.data.local.mapper.MultiCountryDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceDbModelMapper
@@ -16,6 +17,7 @@ import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvincePlainDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatPlainDbModelMapper
+import studio.forface.covid.data.local.mapper.ProvinceWrapperMapper
 import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
 import studio.forface.covid.data.local.mapper.SingleCountryPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
@@ -75,7 +77,9 @@ private val mapperModule = module {
     factory { SingleCountryPlainDbModelMapper(provincePlainMapper = get()) }
 
     // Province
+    factory { ProvinceWrapperMapper(provinceMapper = get(), countryWithProvinceMapper = get()) }
     factory { ProvinceDbModelMapper(locationMapper = get()) }
+    factory { CountryWithProvinceDbModelMapper(locationMapper = get()) }
     factory { ProvinceStatDbModelMapper(provincePlainMapper = get(), provincePlainStatMapper = get()) }
     factory { ProvinceFullStatDbModelMapper(provincePlainMapper = get(), provinceStatPlainMapper = get()) }
     factory { ProvincePlainDbModelMapper(locationMapper = get()) }

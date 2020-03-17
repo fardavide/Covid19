@@ -18,6 +18,7 @@ import studio.forface.covid.domain.entity.Stat
 import studio.forface.covid.domain.invoke
 import studio.forface.covid.domain.mapper.map
 
+// region Country mappers
 /**
  * Map a [List] of [CountryWithProvinceDbModel] to a [Country]
  * NOTE: [CountryWithProvinceDbModel]s are supposed to refer all to the same County!!
@@ -25,7 +26,7 @@ import studio.forface.covid.domain.mapper.map
  * @author Davide Farella
  */
 internal class SingleCountryDbModelMapper(
-    private val provinceMapper: ProvinceDbModelMapper
+    private val provinceMapper: CountryWithProvinceDbModelMapper
 ) : DatabaseModelMapper<List<CountryWithProvinceDbModel>, Country> {
 
     override fun List<CountryWithProvinceDbModel>.toEntity() = Country(
@@ -42,19 +43,18 @@ internal class SingleCountryDbModelMapper(
  */
 internal class MultiCountryDbModelMapper(
     private val singleCountyMapper: SingleCountryDbModelMapper,
-    private val provinceMapper: ProvinceDbModelMapper
+    private val provinceMapper: ProvinceWrapperMapper
 ) : DatabaseModelMapper<List<CountryWithProvinceDbModel>, List<Country>> {
 
-    /**
-     * @return [List] of [Country] from the receiver list of [CountryWithProvinceDbModel]
-     */
     override fun List<CountryWithProvinceDbModel>.toEntity() = groupBy { it.id }.map { (_, list) ->
         val country = singleCountyMapper { list.toEntity() }
         val provinces = list.wrap.map(provinceMapper) { it.toEntity() }
         country.copy(provinces = provinces)
     }
 }
+// endregion
 
+// region CountryStat mappers
 /**
  * Map a [List] of [CountryStatPlainDbModel] to a [CountrySmallStat]
  * NOTE: [CountryStatPlainDbModel]s are supposed to refer all to the same County!!
@@ -182,6 +182,7 @@ internal class CountryFullStatDbModelMapper(
     },
     toCountryStatType = { CountryFullStat(country, countryStat, provinceStats) }
 )
+// endregion
 
 // region Plain mappers
 /**
