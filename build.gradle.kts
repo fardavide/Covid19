@@ -32,6 +32,7 @@ allprojects {
         jcenter()
         google()
         mavenCentral()
+        maven(url = "https://dl.bintray.com/touchlabpublic/kotlin")
     }
 }
 

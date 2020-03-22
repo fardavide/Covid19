@@ -2,17 +2,24 @@ package studio.forface.covid.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import studio.forface.covid.data.remote.CovidService.DataType.Small
 import studio.forface.covid.data.remote.CovidService.DataType.Full
-import studio.forface.covid.data.remote.model.*
-import studio.forface.covid.domain.entity.*
+import studio.forface.covid.data.remote.CovidService.DataType.Small
+import studio.forface.covid.data.remote.model.CountryFullStatApiModel
+import studio.forface.covid.data.remote.model.CountrySmallStatApiModel
+import studio.forface.covid.data.remote.model.CountryStatApiModel
+import studio.forface.covid.data.remote.model.ProvinceFullStatApiModel
+import studio.forface.covid.data.remote.model.ProvinceStatApiModel
+import studio.forface.covid.data.remote.model.WorldFullStatApiModel
+import studio.forface.covid.data.remote.model.WorldStatApiModel
+import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.entity.ProvinceId
 
 internal class CovidService(
     private val client: HttpClient,
     private val host: String
 ) {
 
-    suspend fun getCountries(): List<CountryStatApiModel> = getWorld(Small)
+    suspend fun getCountries(): List<CountryStatApiModel> = getWorld<WorldFullStatApiModel>(Full).countryStats
     suspend fun getCountry(id: CountryId): CountryStatApiModel = getCountry(id, Small)
     suspend fun getProvinces(id: CountryId) = getCountry<CountryStatApiModel>(id, Small).provinceStats
 

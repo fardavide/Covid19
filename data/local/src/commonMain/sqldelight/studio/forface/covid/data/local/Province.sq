@@ -54,19 +54,18 @@ deleteById:
   WHERE id = ?;
 
 -- ProvinceStat
-provinceStats:
-  CREATE VIEW provinceStats AS
-  SELECT
-    province.id,
-    province.name,
-    province.lat,
-    province.lng,
-    stat.confirmed,
-    stat.deaths,
-    stat.recovered,
-    stat.timestamp
-  FROM province
-  JOIN stat ON stat.parent_id = province.id;
+CREATE VIEW provinceStats AS
+SELECT
+  province.id,
+  province.name,
+  province.lat,
+  province.lng,
+  stat.confirmed,
+  stat.deaths,
+  stat.recovered,
+  stat.timestamp
+FROM province
+JOIN stat ON stat.parent_id = province.id;
 
 selectAllProvincesStats:
   SELECT *

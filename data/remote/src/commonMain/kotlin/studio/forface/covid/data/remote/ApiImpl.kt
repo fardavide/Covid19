@@ -1,12 +1,16 @@
 package studio.forface.covid.data.remote
 
-import studio.forface.covid.data.remote.mapper.*
-import studio.forface.covid.data.remote.mapper.CountryApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFromStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFullStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.CountrySmallStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceFromStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.WorldFullStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.WorldStatApiModelMapper
-import studio.forface.covid.domain.entity.*
+import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.entity.ProvinceId
 import studio.forface.covid.domain.gateway.Api
 import studio.forface.covid.domain.invoke
 import studio.forface.covid.domain.mapper.map
@@ -17,8 +21,8 @@ import studio.forface.covid.domain.mapper.map
  */
 internal class ApiImpl(
     private val service: CovidService,
-    private val countryMapper: CountryApiModelMapper,
-    private val provinceMapper: ProvinceApiModelMapper,
+    private val countryMapper: CountryFromStatApiModelMapper,
+    private val provinceMapper: ProvinceFromStatApiModelMapper,
     private val worldStatMapper: WorldStatApiModelMapper,
     private val worldFullStatMapper: WorldFullStatApiModelMapper,
     private val countrySmallStatMapper: CountrySmallStatApiModelMapper,

@@ -13,7 +13,7 @@ import studio.forface.covid.domain.mapper.associateMap
 import studio.forface.covid.domain.mapper.map
 
 internal class CountrySmallStatApiModelMapper(
-    private val countryMapper: CountryApiModelMapper,
+    private val countryMapper: CountryFromSmallStatApiModelMapper,
     private val statParamsMapper: StatParamsMapper
 ) : ApiModelMapper<CountrySmallStatApiModel, CountrySmallStat> {
 
@@ -24,7 +24,7 @@ internal class CountrySmallStatApiModelMapper(
 }
 
 internal class CountryStatApiModelMapper(
-    private val countryMapper: CountryApiModelMapper,
+    private val countryMapper: CountryFromStatApiModelMapper,
     private val provinceMapper: ProvinceStatApiModelMapper,
     private val statMapper: StatApiModelMapper,
     private val statParamsMapper: StatParamsMapper,
@@ -45,7 +45,7 @@ internal class CountryStatApiModelMapper(
 }
 
 internal class CountryFullStatApiModelMapper(
-    private val countryMapper: CountryApiModelMapper,
+    private val countryMapper: CountryFromFullStatApiModelMapper,
     private val provinceMapper: ProvinceFullStatApiModelMapper,
     private val statMapper: StatApiModelMapper,
     private val statParamsMapper: StatParamsMapper,
@@ -65,27 +65,43 @@ internal class CountryFullStatApiModelMapper(
     }
 }
 
+// TODO replace CountrySmallStatApiModel with CountryApiModel, which does not exist ATM
+internal class CountryFromSmallStatApiModelMapper(
+    private val idMapper: CountryIdApiModelMapper,
+    private val nameMapper: NameApiModelMapper
+) : ApiModelMapper<CountrySmallStatApiModel, Country> {
+
+    override fun CountrySmallStatApiModel.toEntity() = Country(
+        id = idMapper { id.toEntity() },
+        name = nameMapper { name.toEntity() },
+        provinces = emptyList() // TODO not supported
+    )
+}
+
 // TODO replace CountryStatApiModel with CountryApiModel, which does not exist ATM
-internal class CountryApiModelMapper(
+internal class CountryFromStatApiModelMapper(
+    private val provinceMapper: ProvinceFromStatApiModelMapper,
     private val idMapper: CountryIdApiModelMapper,
     private val nameMapper: NameApiModelMapper
 ) : ApiModelMapper<CountryStatApiModel, Country> {
 
-    fun CountrySmallStatApiModel.toEntity() = Country(
-        id = idMapper { id.toEntity() },
-        name = nameMapper { name.toEntity() },
-        provinces = emptyList() // TODO not supported
-    )
-
     override fun CountryStatApiModel.toEntity() = Country(
         id = idMapper { id.toEntity() },
         name = nameMapper { name.toEntity() },
-        provinces = emptyList() // TODO not supported
+        provinces = provinceStats.map(provinceMapper) { it.toEntity() }
     )
+}
 
-    fun CountryFullStatApiModel.toEntity() = Country(
+// TODO replace CountryFullStatApiModel with CountryApiModel, which does not exist ATM
+internal class CountryFromFullStatApiModelMapper(
+    private val provinceMapper: ProvinceFromFullStatApiModelMapper,
+    private val idMapper: CountryIdApiModelMapper,
+    private val nameMapper: NameApiModelMapper
+) : ApiModelMapper<CountryFullStatApiModel, Country> {
+
+    override fun CountryFullStatApiModel.toEntity() = Country(
         id = idMapper { id.toEntity() },
         name = nameMapper { name.toEntity() },
-        provinces = emptyList() // TODO not supported
+        provinces = provinceStats.map(provinceMapper) { it.toEntity() }
     )
 }

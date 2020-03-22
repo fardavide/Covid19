@@ -6,14 +6,17 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
-import studio.forface.covid.data.remote.mapper.CountryApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFromFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFromSmallStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.CountryFromStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.CountryFullStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.CountryIdApiModelMapper
 import studio.forface.covid.data.remote.mapper.CountrySmallStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.CountryStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.LocationApiModelMapper
 import studio.forface.covid.data.remote.mapper.NameApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceFromFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.ProvinceFromStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.ProvinceFullStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.ProvinceIdApiModelMapper
 import studio.forface.covid.data.remote.mapper.ProvinceStatApiModelMapper
@@ -21,12 +24,15 @@ import studio.forface.covid.data.remote.mapper.StatApiModelMapper
 import studio.forface.covid.data.remote.mapper.StatParamsMapper
 import studio.forface.covid.data.remote.mapper.TimestampApiModelMapper
 import studio.forface.covid.data.remote.mapper.UnixTimeApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldFromFullStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.WorldFromStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.WorldFullStatApiModelMapper
 import studio.forface.covid.data.remote.mapper.WorldIdApiModelMapper
 import studio.forface.covid.data.remote.mapper.WorldStatApiModelMapper
 import studio.forface.covid.domain.gateway.Api
-import studio.forface.covid.domain.plus
+
+/** Koin `Qualifier` for host */
+val HostQualifier = qualifier("base_url")
 
 private val clientModule = module {
 
@@ -40,9 +46,9 @@ private val clientModule = module {
 }
 
 private val serviceModule = module {
-//    factory(HostQualifier) { "enrichman.github.io/covid19" }
-//    factory { CovidService(client = get(), host = get(HostQualifier)) }
-    factory { CovidService(client = get(), host = "enrichman.github.io/covid19") }
+    factory(HostQualifier) { "enrichman.github.io/covid19" }
+    factory { CovidService(client = get(), host = get(HostQualifier)) }
+//    factory { CovidService(client = get(), host = "enrichman.github.io/covid19") }
 } + clientModule
 
 private val mapperModule = module {
@@ -58,7 +64,21 @@ private val mapperModule = module {
 
     // Models
     factory {
-        CountryApiModelMapper(
+        CountryFromSmallStatApiModelMapper(
+            idMapper = get(),
+            nameMapper = get()
+        )
+    }
+    factory {
+        CountryFromStatApiModelMapper(
+            provinceMapper = get(),
+            idMapper = get(),
+            nameMapper = get()
+        )
+    }
+    factory {
+        CountryFromFullStatApiModelMapper(
+            provinceMapper = get(),
             idMapper = get(),
             nameMapper = get()
         )
@@ -88,7 +108,14 @@ private val mapperModule = module {
         )
     }
     factory {
-        ProvinceApiModelMapper(
+        ProvinceFromStatApiModelMapper(
+            idMapper = get(),
+            nameMapper = get(),
+            locationMapper = get()
+        )
+    }
+    factory {
+        ProvinceFromFullStatApiModelMapper(
             idMapper = get(),
             nameMapper = get(),
             locationMapper = get()
@@ -118,7 +145,15 @@ private val mapperModule = module {
         )
     }
     factory {
-        WorldApiModelMapper(
+        WorldFromStatApiModelMapper(
+            countyMapper = get(),
+            idMapper = get(),
+            nameMapper = get()
+        )
+    }
+    factory {
+        WorldFromFullStatApiModelMapper(
+            countyMapper = get(),
             idMapper = get(),
             nameMapper = get()
         )
@@ -162,6 +197,3 @@ val remoteDataModule = module {
 } + serviceModule + mapperModule
 
 expect val HttpClientEngine: HttpClientEngine
-
-/** Koin `Qualifier` for host */
-val HostQualifier = qualifier("base_url")

@@ -45,6 +45,26 @@ kotlin {
                 }
             }
 
+            val commonTest by getting {
+                dependencies {
+
+                    // Base Dependencies
+                    implementation(
+                        `kotlin-common`,
+                        `coroutines-core-common`
+//                        `serialization-common`,
+//                        `klock`
+                    )
+
+                    // Test Dependencies
+                    api(
+                        `kotlin-test-common`,
+                        `kotlin-test-annotations`,
+                        `coroutines-test`
+                    )
+                }
+            }
+
             jvm().compilations["main"].defaultSourceSet {
                 dependencies {
                     api(
@@ -53,6 +73,15 @@ kotlin {
                     )
                 }
             }
+            jvm().compilations["test"].defaultSourceSet {
+                dependencies {
+                    api(
+                        `kotlin-test`,
+                        `kotlin-test-junit`
+                    )
+                }
+            }
+
             js().compilations["main"].defaultSourceSet {
                 dependencies {
                     api(

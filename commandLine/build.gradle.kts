@@ -1,7 +1,6 @@
 @file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.jvm)
@@ -27,6 +26,7 @@ kotlin {
                         project(Module.domain),
                         project(Module.data),
 
+                        `clikt-jvm`,
                         `picnic`
                     )
                 }

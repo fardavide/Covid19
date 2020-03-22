@@ -38,17 +38,16 @@ deleteById:
   WHERE id = ?;
 
 -- CountryWithProvinces
-countyWithProvinces:
-  CREATE VIEW countryWithProvinces AS
-  SELECT
-    country.id,
-    country.name,
-    province.id provinceId,
-    province.name provinceName,
-    province.lat provinceLat,
-    province.lng provinceLng
-  FROM country
-  JOIN province ON province.country_id = country.id;
+CREATE VIEW countryWithProvinces AS
+SELECT
+  country.id,
+  country.name,
+  province.id provinceId,
+  province.name provinceName,
+  province.lat provinceLat,
+  province.lng provinceLng
+FROM country
+JOIN province ON province.country_id = country.id;
 
 selectAllCountriesWithProvinces:
   SELECT *
@@ -62,22 +61,21 @@ selectAllCountryWithProvincesById:
   ORDER BY countryWithProvinces.provinceName;
 
 -- CountryStat
-countryStat:
-  CREATE VIEW countryStat AS
-  SELECT
-    country.id countryId,
-    country.name countryName,
-    province.id provinceId,
-    province.name provinceName,
-    province.lat provinceLat,
-    province.lng provinceLng,
-    stat.confirmed,
-    stat.deaths,
-    stat.recovered,
-    stat.timestamp
-  FROM country
-  JOIN province ON province.country_id = country.id
-  JOIN stat ON stat.parent_id = country.id;
+CREATE VIEW countryStat AS
+SELECT
+  country.id countryId,
+  country.name countryName,
+  province.id provinceId,
+  province.name provinceName,
+  province.lat provinceLat,
+  province.lng provinceLng,
+  stat.confirmed,
+  stat.deaths,
+  stat.recovered,
+  stat.timestamp
+FROM country
+JOIN province ON province.country_id = country.id
+JOIN stat ON stat.parent_id = country.id;
 
 selectAllCountryStats:
   SELECT *
@@ -91,28 +89,27 @@ selectAllCountryStatsById:
   ORDER BY countryStat.countryName, countryStat.timestamp DESC;
 
 -- CountryWithProvinceStat
-countryWithProvinceStat:
-  CREATE VIEW countryWithProvinceStat AS
-  SELECT
-    country.id countryId,
-    country.name countryName,
-    cStat.confirmed countryConfirmed,
-    cStat.deaths countryDeaths,
-    cStat.recovered countryRecovered,
-    cStat.timestamp countryTimestamp,
+CREATE VIEW countryWithProvinceStat AS
+SELECT
+  country.id countryId,
+  country.name countryName,
+  cStat.confirmed countryConfirmed,
+  cStat.deaths countryDeaths,
+  cStat.recovered countryRecovered,
+  cStat.timestamp countryTimestamp,
 
-    province.id provinceId,
-    province.name provinceName,
-    province.lat provinceLat,
-    province.lng provinceLng,
-    pStat.confirmed provinceConfirmed,
-    pStat.deaths provinceDeaths,
-    pStat.recovered provinceRecovered,
-    pStat.timestamp provinceTimestamp
-  FROM country
-  JOIN stat cStat ON cStat.parent_id = country.id
-  JOIN province ON province.country_id = country.id
-  JOIN stat pStat ON pStat.parent_id = province.id;
+  province.id provinceId,
+  province.name provinceName,
+  province.lat provinceLat,
+  province.lng provinceLng,
+  pStat.confirmed provinceConfirmed,
+  pStat.deaths provinceDeaths,
+  pStat.recovered provinceRecovered,
+  pStat.timestamp provinceTimestamp
+FROM country
+JOIN stat cStat ON cStat.parent_id = country.id
+JOIN province ON province.country_id = country.id
+JOIN stat pStat ON pStat.parent_id = province.id;
 
 selectAllCountryWithProvinceStats:
   SELECT *

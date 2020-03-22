@@ -24,6 +24,7 @@ import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
+import studio.forface.covid.data.local.mapper.WorldStatFromWorldWithProvincesStatPlainDModelMapper
 import studio.forface.covid.data.local.mapper.WorldStatPlainDModelMapper
 import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.domain.entity.CountryId
@@ -32,7 +33,19 @@ import studio.forface.covid.domain.entity.Name
 import studio.forface.covid.domain.entity.ProvinceId
 import studio.forface.covid.domain.entity.WorldId
 import studio.forface.covid.domain.gateway.Repository
-import studio.forface.covid.domain.plus
+
+// Fields
+private val IdAdapterQualifier = qualifier("IdAdapter")
+private val WorldIdAdapterQualifier = qualifier("WorldIdAdapter")
+private val CountryIdAdapterQualifier = qualifier("CountryIdAdapter")
+private val ProvinceIdAdapterQualifier = qualifier("ProvinceIdAdapter")
+private val NameAdapterQualifier = qualifier("nameAdapter")
+
+// Models
+private val WorldAdapterQualifier = qualifier("WorldAdapter")
+private val CountryAdapterQualifier = qualifier("CountryAdapter")
+private val ProvinceAdapterQualifier = qualifier("ProvinceAdapter")
+private val StatAdapterQualifier = qualifier("StatAdapter")
 
 private val adapterModule = module {
     // Fields
@@ -43,9 +56,19 @@ private val adapterModule = module {
     factory<ColumnAdapter<Name, String>>(NameAdapterQualifier) { NameAdapter() }
 
     // Models
-    factory { World.Adapter(idAdapter = get(WorldIdAdapterQualifier), nameAdapter = get(NameAdapterQualifier)) }
-    factory { Country.Adapter(idAdapter = get(CountryIdAdapterQualifier), nameAdapter = get(NameAdapterQualifier)) }
-    factory {
+    factory(WorldAdapterQualifier) {
+        World.Adapter(
+            idAdapter = get(WorldIdAdapterQualifier),
+            nameAdapter = get(NameAdapterQualifier)
+        )
+    }
+    factory(CountryAdapterQualifier) {
+        Country.Adapter(
+            idAdapter = get(CountryIdAdapterQualifier),
+            nameAdapter = get(NameAdapterQualifier)
+        )
+    }
+    factory(ProvinceAdapterQualifier) {
         Province.Adapter(
             idAdapter = get(ProvinceIdAdapterQualifier),
             country_idAdapter = get(CountryIdAdapterQualifier),
@@ -54,7 +77,7 @@ private val adapterModule = module {
             )
         )
     }
-    factory { Stat.Adapter(parent_idAdapter = get(IdAdapterQualifier)) }
+    factory(StatAdapterQualifier) { Stat.Adapter(parent_idAdapter = get(IdAdapterQualifier)) }
 }
 
 private val mapperModule = module {
@@ -75,6 +98,7 @@ private val mapperModule = module {
     }
     factory { WorldPlainDbModelMapper(singleCountryPlainMapper = get()) }
     factory { WorldStatPlainDModelMapper(timeMapper = get()) }
+    factory { WorldStatFromWorldWithProvincesStatPlainDModelMapper(timeMapper = get()) }
 
     // Country
     factory { SingleCountryDbModelMapper(provinceMapper = get()) }
@@ -118,10 +142,10 @@ private val databaseModule = module {
     single {
         Database(
             driver = sqlDriver,
-            worldAdapter = get(),
-            countryAdapter = get(),
-            provinceAdapter = get(),
-            statAdapter = get()
+            worldAdapter = get(WorldAdapterQualifier),
+            countryAdapter = get(CountryAdapterQualifier),
+            provinceAdapter = get(ProvinceAdapterQualifier),
+            statAdapter = get(StatAdapterQualifier)
         )
     }
 
@@ -154,11 +178,5 @@ val localDataModule = module {
     factory { TransactionProvider(database = get()) }
 
 } + databaseModule
-
-private val IdAdapterQualifier = qualifier("idAdapter")
-private val WorldIdAdapterQualifier = qualifier("WorldIdAdapter")
-private val CountryIdAdapterQualifier = qualifier("CountryIdAdapter")
-private val ProvinceIdAdapterQualifier = qualifier("ProvinceIdAdapter")
-private val NameAdapterQualifier = qualifier("nameAdapter")
 
 internal expect val sqlDriver: SqlDriver

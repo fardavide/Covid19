@@ -3,8 +3,9 @@ package studio.forface.covid.data.local
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.BeforeClass
-import org.koin.core.context.GlobalContext
+import org.koin.core.KoinComponent
 import org.koin.core.context.loadKoinModules
+import org.koin.core.get
 import studio.forface.covid.domain.entity.Country
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.Location
@@ -27,7 +28,7 @@ internal class RepositoryImplTest : CoroutinesTest by coroutinesTest {
         loadKoinModules(localDataModule)
     }
 
-    private val koin by lazy { GlobalContext.get() }
+    private val koin: KoinComponent by lazy { object : KoinComponent {} }
     private fun repository() = koin.get<RepositoryImpl>()
 
     @Test
@@ -46,8 +47,8 @@ internal class RepositoryImplTest : CoroutinesTest by coroutinesTest {
 
     @Test
     fun `verify store and get WorldStat`() = runBlockingTest {
+        // GIVEN
         with(repository()) {
-            // GIVEN
 
         }
     }

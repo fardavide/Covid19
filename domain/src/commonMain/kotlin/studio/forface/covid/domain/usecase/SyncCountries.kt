@@ -10,6 +10,7 @@ import studio.forface.covid.domain.gateway.Repository
 class SyncCountries(private val api: Api, private val repository: Repository) {
 
     suspend operator fun invoke() {
-        repository.storeCountries(api.getCountries())
+        val countries = api.getCountries()
+        repository.storeCountries(countries)
     }
 }

@@ -10,6 +10,7 @@ import studio.forface.covid.domain.gateway.Repository
 class SyncWorldFullStat(private val api: Api, private val repository: Repository) {
 
     suspend operator fun invoke() {
-        repository.store(api.getWorldFullStat())
+        val stats = api.getWorldFullStat()
+        repository.store(stats)
     }
 }

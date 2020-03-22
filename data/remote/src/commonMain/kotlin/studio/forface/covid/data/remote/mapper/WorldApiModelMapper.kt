@@ -11,7 +11,7 @@ import studio.forface.covid.domain.mapper.associateMap
 import studio.forface.covid.domain.mapper.map
 
 internal class WorldStatApiModelMapper(
-    private val worldMapper: WorldApiModelMapper,
+    private val worldMapper: WorldFromStatApiModelMapper,
     private val countryMapper: CountrySmallStatApiModelMapper,
     private val statMapper: StatApiModelMapper,
     private val statParamsMapper: StatParamsMapper,
@@ -32,7 +32,7 @@ internal class WorldStatApiModelMapper(
 }
 
 internal class WorldFullStatApiModelMapper(
-    private val worldMapper: WorldApiModelMapper,
+    private val worldMapper: WorldFromFullStatApiModelMapper,
     private val countryMapper: CountryStatApiModelMapper,
     private val statMapper: StatApiModelMapper,
     private val statParamsMapper: StatParamsMapper,
@@ -43,7 +43,7 @@ internal class WorldFullStatApiModelMapper(
         val lastStat = statParamsMapper { StatParams(confirmed, deaths, recovered, lastUpdate).toEntity() }
         val otherStats = stats.map(statMapper) { it.toEntity() }
         return WorldFullStat(
-            world = worldMapper { this@toEntity.toEntity() },
+            world = worldMapper { toEntity() },
             stats = lastStat + otherStats,
             countryStats = countryStats.associateMap(countryMapper) {
                 idMapper { it.id.toEntity() } to it.toEntity()
@@ -53,21 +53,30 @@ internal class WorldFullStatApiModelMapper(
 }
 
 // TODO replace WorldStatApiModel with WorldApiModel, which does not exist ATM
-internal class WorldApiModelMapper(
+internal class WorldFromStatApiModelMapper(
     private val idMapper: WorldIdApiModelMapper,
-    private val nameMapper: NameApiModelMapper
+    private val nameMapper: NameApiModelMapper,
+    private val countyMapper: CountryFromSmallStatApiModelMapper
 ) : ApiModelMapper<WorldStatApiModel, World> {
 
     override fun WorldStatApiModel.toEntity() = World(
         id = idMapper { id.toEntity() },
         name = nameMapper { name.toEntity() },
-        countries = emptyList() // TODO not supported
+        countries = countryStats.map(countyMapper) { it.toEntity() }
     )
+}
 
-    fun WorldFullStatApiModel.toEntity() = World(
+// TODO replace WorldFullStatApiModel with WorldApiModel, which does not exist ATM
+internal class WorldFromFullStatApiModelMapper(
+    private val countyMapper: CountryFromStatApiModelMapper,
+    private val idMapper: WorldIdApiModelMapper,
+    private val nameMapper: NameApiModelMapper
+) : ApiModelMapper<WorldFullStatApiModel, World> {
+
+    override fun WorldFullStatApiModel.toEntity() = World(
         id = idMapper { id.toEntity() },
         name = nameMapper { name.toEntity() },
-        countries = emptyList() // TODO not supported
+        countries = countryStats.map(countyMapper) { it.toEntity() }
     )
 }
 

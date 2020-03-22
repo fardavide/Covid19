@@ -5,8 +5,8 @@ import kotlinx.coroutines.withTimeoutOrNull
 import studio.forface.covid.test.CoroutinesTest
 import studio.forface.covid.test.assertBetween
 import studio.forface.covid.test.coroutinesTest
-import kotlin.test.Test
 import kotlin.time.milliseconds
+import kotlin.test.Test
 
 internal class CommonUtilsTest : CoroutinesTest by coroutinesTest {
 

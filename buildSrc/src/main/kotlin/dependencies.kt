@@ -2,8 +2,11 @@
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.kotlin
-import org.gradle.plugin.use.PluginDependenciesSpec
-import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.`ktor version`
+import studio.forface.easygradle.dsl.dependency
+import studio.forface.easygradle.dsl.jakeWharton
+import studio.forface.easygradle.dsl.sqlDelight
+import studio.forface.easygradle.dsl.version
 
 // Kotlin
 val DependencyHandler.`kotlin-test-annotations` get() = kotlin("test-annotations-common")
@@ -35,12 +38,17 @@ val DependencyHandler.`sqlDelight-coroutines` get() = sqlDelight("coroutines-ext
 val DependencyHandler.`sqlDelight-paging` get() = sqlDelight("android-paging-extensions")
 
 // Others
-val DependencyHandler.`koinMP` get() = touchLab("koin-core") version `koinMP version`
+val DependencyHandler.`clikt` get() = clikt("multiplatform")
+val DependencyHandler.`clikt-jvm` get() = clikt()
+val DependencyHandler.`koin` get() = dependency("org.koin", module = "koin", moduleSuffix = "core") version `koin version`
 val DependencyHandler.`klock` get() = korlibs("klock") version `klock version`
 val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic version`
 
 
 // Accessors
+fun DependencyHandler.`clikt`(moduleSuffix: String? = null, version: String? = `clikt version`) =
+    dependency("com.github.ajalt", module = "clikt", moduleSuffix = moduleSuffix, version = version)
+
 fun DependencyHandler.korlibs(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
     dependency("com.soywiz.korlibs", groupName, module, moduleSuffix, version)
 

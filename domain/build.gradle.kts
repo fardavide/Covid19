@@ -30,7 +30,7 @@ kotlin {
                     api(
                         `kotlin-common`,
                         `coroutines-core-common`,
-                        `koinMP`
+                        `koin`
                     )
 
                     implementation(
@@ -41,7 +41,7 @@ kotlin {
             }
             val commonTest by getting {
                 dependencies {
-                    implementation(project(Module.sharedTest))
+                    api(project(Module.sharedTest))
                 }
             }
 
@@ -53,6 +53,15 @@ kotlin {
                     )
                 }
             }
+            jvm().compilations["test"].defaultSourceSet {
+                dependencies {
+                    api(
+                        `kotlin-test`,
+                        `kotlin-test-junit`
+                    )
+                }
+            }
+
             js().compilations["main"].defaultSourceSet {
                 dependencies {
                     api(
