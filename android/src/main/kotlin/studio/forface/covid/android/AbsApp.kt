@@ -10,7 +10,7 @@ abstract class AbsApp : Application() {
 
     /** This should be implemented with a [Module] for `studio.forface.covid.android.classic` or
      * `studio.forface.covid.android.compose` */
-    abstract val androidImplModule: Module
+    abstract val androidImplModule: List<Module>
 
     override fun onCreate() {
         super.onCreate()

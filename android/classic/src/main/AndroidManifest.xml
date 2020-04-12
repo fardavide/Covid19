@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<manifest package="studio.forface.covid.android.classic">
+<manifest package="studio.forface.covid.android.classic"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name=".App"
+        android:label="@string/covid_app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/App"
+
+        android:allowBackup="false"
+        android:fullBackupContent="false">
+
+        <activity android:name=".ui.SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 import studio.forface.easygradle.dsl.android.`lifecycle-viewModel`
 import studio.forface.easygradle.dsl.android.appcompat
 import studio.forface.easygradle.dsl.android.fluentNotifications
+import studio.forface.easygradle.dsl.android.material
 import studio.forface.easygradle.dsl.android.timber
 import studio.forface.easygradle.dsl.android.viewStateStore
 import studio.forface.easygradle.dsl.api
@@ -23,6 +24,7 @@ dependencies {
         `fluentNotifications`,
         `fragment`,
         `lifecycle-viewModel`,
+        `material`,
         `viewStateStore`,
 
         // Other

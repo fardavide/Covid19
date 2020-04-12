@@ -6,13 +6,20 @@ import studio.forface.easygradle.dsl.serialization
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
+    id(PluginsDeps.androidLibrary)
     id(PluginsDeps.kotlinSerialization)
 }
+
+android()
 
 kotlin {
     /* Targets configuration omitted. 
     *  To find out how to configure the targets, please follow the link:
     *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+
+    jvm()
+    android()
+//        js()
 
     sourceSets {
         all {
@@ -20,9 +27,6 @@ kotlin {
                 "experimental.ExperimentalTypeInference", "time.ExperimentalTime"
             ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
         }
-
-        jvm()
-//        js()
 
         with(dependencyHandler) {
 
@@ -51,8 +55,21 @@ kotlin {
                     implementation(
                         `serialization`,
 
-                        `ktor-client-core-jvm`,
                         `ktor-client-apache`,
+                        `ktor-client-core-jvm`,
+                        `ktor-client-json-jvm`,
+                        `ktor-client-serialization-jvm`
+                    )
+                }
+            }
+
+            val androidMain by getting {
+                dependencies {
+                    implementation(
+                        `serialization`,
+
+                        `ktor-client-android`,
+                        `ktor-client-core-jvm`,
                         `ktor-client-json-jvm`,
                         `ktor-client-serialization-jvm`
                     )

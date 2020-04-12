@@ -4,4 +4,6 @@
     <string name="error_no_query">Insert the name of the country to search</string>
     <string name="error_no_results">No results found for %s</string>
 
+    <string name="hint_search">@string/error_no_query</string>
+
 </resources>

@@ -2,19 +2,26 @@
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import studio.forface.easygradle.dsl.`serialization-common`
+import studio.forface.easygradle.dsl.`sqlDelight-android-driver`
 import studio.forface.easygradle.dsl.`sqlDelight-sqlite-driver`
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
-//    id(PluginsDeps.androidLibrary)
+    id(PluginsDeps.androidLibrary)
     id(PluginsDeps.kotlinSerialization)
     id(PluginsDeps.sqlDelight)
 }
+
+android()
 
 kotlin {
     /* Targets configuration omitted. 
     *  To find out how to configure the targets, please follow the link:
     *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+
+    jvm()
+    android()
+//    js()
 
     sourceSets {
         all {
@@ -22,10 +29,6 @@ kotlin {
                 "experimental.ExperimentalTypeInference", "time.ExperimentalTime"
             ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
         }
-
-        jvm()
-//        android()
-//        js()
 
         with(dependencyHandler) {
 
@@ -54,13 +57,15 @@ kotlin {
                     )
                 }
             }
-//            android().compilations["main"].defaultSourceSet {
-//                dependencies {
-//                    implementation(
-//                        `sqlDelight-android-driver`
-//                    )
-//                }
-//            }
+
+            val androidMain by getting {
+                dependencies {
+                    implementation(
+                        `sqlDelight-android-driver`
+                    )
+                }
+            }
+
 //            js().compilations["main"].defaultSourceSet {
 //                dependencies {
 //                    implementation(

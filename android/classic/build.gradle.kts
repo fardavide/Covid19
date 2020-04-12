@@ -4,6 +4,7 @@ import studio.forface.easygradle.dsl.implementation
 plugins {
     id(PluginsDeps.androidApplication)
     id(PluginsDeps.kotlinAndroid)
+    id(PluginsDeps.kotlinAndroidExtensions)
 }
 
 android("classic")

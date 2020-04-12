@@ -20,6 +20,7 @@ abstract class AbsSearchActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initUi()
 
         searchViewModel.countries.observe {
             doOnData(::onSearchResult)
@@ -27,6 +28,8 @@ abstract class AbsSearchActivity : BaseActivity() {
             doOnLoadingChange(::onLoadingChange)
         }
     }
+
+    protected abstract fun initUi()
 
     /** Start the search for Countries matching the given [countryName] */
     protected fun search(countryName: CharSequence) {
