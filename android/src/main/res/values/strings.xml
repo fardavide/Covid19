@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_no_query">Insert the name of the country to search</string>
+    <string name="error_no_results">No results found for %s</string>
+
+</resources>

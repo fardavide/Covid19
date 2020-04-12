@@ -9,6 +9,7 @@ initVersions()
 buildscript {
     val `kotlin version` = studio.forface.easygradle.dsl.`kotlin version`
     val `sqlDelight version` = studio.forface.easygradle.dsl.`sqlDelight version`
+    val `agp version` = studio.forface.easygradle.dsl.android.`android-gradle-plugin version`
 
     repositories {
         google()
@@ -19,7 +20,8 @@ buildscript {
         classpath(kotlin("gradle-plugin", `kotlin version`))
 
         classpath("org.jetbrains.kotlin:kotlin-serialization:${`kotlin version`}")
-        classpath("com.squareup.sqldelight:gradle-plugin:$`sqlDelight version`")
+        classpath("com.squareup.sqldelight:gradle-plugin:${`sqlDelight version`}")
+        classpath("com.android.tools.build:gradle:${`agp version`}")
     }
 }
 
@@ -66,15 +68,6 @@ subprojects {
             html.enabled = true // observe findings in your browser with structure and code snippets
             xml.enabled = false // checkstyle like format mainly for integrations like Jenkins
             txt.enabled = false // similar to the console output, contains issue signature to edit baseline files
-        }
-    }
-    // Kotlin options
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "1.8"
-            freeCompilerArgs = freeCompilerArgs +
-                    "-XXLanguage:+NewInference" +
-                    "-Xuse-experimental=kotlin.Experimental"
         }
     }
 }

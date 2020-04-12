@@ -1,7 +1,16 @@
-@file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
+@file:Suppress("LocalVariableName")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.`coroutines-core-common`
+import studio.forface.easygradle.dsl.`coroutines-core-js`
+import studio.forface.easygradle.dsl.`coroutines-core`
+import studio.forface.easygradle.dsl.`kotlin-common`
+import studio.forface.easygradle.dsl.`kotlin-jdk8`
+import studio.forface.easygradle.dsl.`kotlin-js`
+import studio.forface.easygradle.dsl.`kotlin-test-junit`
+import studio.forface.easygradle.dsl.`kotlin-test`
+import studio.forface.easygradle.dsl.`serialization-common`
+import studio.forface.easygradle.dsl.mockk
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
@@ -9,19 +18,21 @@ plugins {
 }
 
 kotlin {
-    /* Targets configuration omitted. 
-    *  To find out how to configure the targets, please follow the link:
-    *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+    /* Targets configuration omitted.
+     * To find out how to configure the targets, please follow the link:
+     * https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+
+    jvm()
+    js()
 
     sourceSets {
         all {
             listOf(
-                "TypeInference", "Time"
-            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
+                "coroutines.ExperimentalCoroutinesApi",
+                "experimental.ExperimentalTypeInference",
+                "time.ExperimentalTime"
+            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
         }
-
-        jvm()
-        js()
 
         with(dependencyHandler) {
 
@@ -45,7 +56,8 @@ kotlin {
                 }
             }
 
-            jvm().compilations["main"].defaultSourceSet {
+
+            val jvmMain by getting {
                 dependencies {
                     api(
                         `kotlin-jdk8`,
@@ -53,11 +65,12 @@ kotlin {
                     )
                 }
             }
-            jvm().compilations["test"].defaultSourceSet {
+            val jvmTest by getting {
                 dependencies {
                     api(
                         `kotlin-test`,
-                        `kotlin-test-junit`
+                        `kotlin-test-junit`,
+                        `mockk`
                     )
                 }
             }

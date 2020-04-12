@@ -27,3 +27,7 @@ suspend inline fun repeatCatching(refreshInterval: Duration, errorInterval: Dura
  * `count` is the number of current iteration
  */
 typealias RepeatingBlock = (count: Int) -> Unit
+
+
+/** @return `true` if receiver [Boolean] is `true`, else `null` */
+fun Boolean.takeIfTrue() = takeIf { it }

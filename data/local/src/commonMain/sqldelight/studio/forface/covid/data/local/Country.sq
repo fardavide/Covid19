@@ -58,7 +58,13 @@ selectAllCountryWithProvincesById:
   SELECT *
   FROM countryWithProvinces
   WHERE countryWithProvinces.id = ?
-  ORDER BY countryWithProvinces.provinceName;
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
+selectAllCountryWithProvincesByName:
+  SELECT *
+  FROM countryWithProvinces
+  WHERE name LIKE ('%' || :query || '%')
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
 
 -- CountryStat
 CREATE VIEW countryStat AS

@@ -2,9 +2,17 @@ package studio.forface.covid.domain
 
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import studio.forface.covid.domain.gateway.NoCacheRepository
-import studio.forface.covid.domain.gateway.Repository
-import studio.forface.covid.domain.usecase.*
+import studio.forface.covid.domain.usecase.GetCountries
+import studio.forface.covid.domain.usecase.GetCountryFullStat
+import studio.forface.covid.domain.usecase.GetProvinces
+import studio.forface.covid.domain.usecase.GetWorldFullStat
+import studio.forface.covid.domain.usecase.GetWorldStat
+import studio.forface.covid.domain.usecase.SearchCountry
+import studio.forface.covid.domain.usecase.SyncCountries
+import studio.forface.covid.domain.usecase.SyncCountryFullStat
+import studio.forface.covid.domain.usecase.SyncProvinces
+import studio.forface.covid.domain.usecase.SyncWorldFullStat
+import studio.forface.covid.domain.usecase.SyncWorldStat
 
 private val useCaseModule = module {
 
@@ -21,6 +29,9 @@ private val useCaseModule = module {
     factory { SyncProvinces(api = get(), repository = get()) }
     factory { SyncWorldStat(api = get(), repository = get()) }
     factory { SyncWorldFullStat(api = get(), repository = get()) }
+
+    // Search
+    factory { SearchCountry(repository = get(), syncCountries = get()) }
 }
 
 val domainModule = module {

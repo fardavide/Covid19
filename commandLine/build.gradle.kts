@@ -14,8 +14,8 @@ kotlin {
     sourceSets {
         all {
             listOf(
-                "TypeInference", "Time"
-            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
+                "experimental.ExperimentalTypeInference", "time.ExperimentalTime"
+            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
         }
 
         with(dependencyHandler) {

@@ -11,7 +11,6 @@ import com.github.ajalt.clikt.parameters.types.int
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import org.koin.core.KoinComponent
@@ -43,7 +42,7 @@ class Covid(scope: CoroutineScope) : CliktCommand(), KoinComponent, CoroutineSco
         launch {
             getCountries(refreshInterval = refresh.seconds).collect {
                 println("Available countries")
-                println(it.joinToString(separator = "\n") { country -> "* ${country.name.s}" })
+                println(it.joinToString(separator = "\n") { country -> "* ${country.name.s} ( ${country.id.s} )" })
             }
         }
     }

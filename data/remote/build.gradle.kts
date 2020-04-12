@@ -1,7 +1,8 @@
 @file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.`serialization-common`
+import studio.forface.easygradle.dsl.serialization
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
@@ -16,8 +17,8 @@ kotlin {
     sourceSets {
         all {
             listOf(
-                "TypeInference", "Time"
-            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.time.Experimental$it") }
+                "experimental.ExperimentalTypeInference", "time.ExperimentalTime"
+            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
         }
 
         jvm()

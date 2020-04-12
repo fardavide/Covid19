@@ -22,6 +22,7 @@ import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.CountrySmallStat
 import studio.forface.covid.domain.entity.CountryStat
 import studio.forface.covid.domain.entity.Id
+import studio.forface.covid.domain.entity.Name
 import studio.forface.covid.domain.entity.Province
 import studio.forface.covid.domain.entity.ProvinceFullStat
 import studio.forface.covid.domain.entity.ProvinceId
@@ -60,6 +61,11 @@ internal class RepositoryImpl(
     override fun getCountries(): Flow<List<Country>> =
         countryQueries.selectAllCountriesWithProvinces().asListFlow()
             .map(multiCountryMapper) { it.toEntity() }
+
+    override fun getCountries(query: Name): Flow<List<Country>> {
+        return countryQueries.selectAllCountryWithProvincesByName(query.s).asListFlow()
+            .map(multiCountryMapper) { it.toEntity() }
+    }
 
     override fun getProvinces(id: CountryId): Flow<List<Province>> =
         countryQueries.selectAllCountryWithProvincesById(id).asListFlow()

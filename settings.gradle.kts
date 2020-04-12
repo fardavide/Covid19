@@ -12,6 +12,7 @@ include("data:local", "data:remote")
 
 // Presentation
 include("commandLine")
+include("android", "android:classic")
 
 
 enableFeaturePreview("GRADLE_METADATA")
