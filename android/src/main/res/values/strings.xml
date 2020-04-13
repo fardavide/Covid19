@@ -2,7 +2,8 @@
 <resources>
 
     <string name="error_no_query">Insert the name of the country to search</string>
-    <string name="error_no_results">No results found for %s</string>
+    <string name="error_no_results">No results found</string>
+    <string name="error_no_results_arg_name">No results found for %s</string>
 
     <string name="hint_search">@string/error_no_query</string>
 

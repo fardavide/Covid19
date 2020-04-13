@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cornflower_blue</item>
+        <item name="colorSecondary">@color/shamrock</item>
 
+        <item name="statusBarBackground">?attr/colorSurface</item>
+        <item name="android:navigationBarColor">?attr/colorBackgroundFloating</item>
 
+        <item name="appBarLayoutStyle">@style/Theme.App.AppBarLayout</item>
+        <item name="toolbarStyle">@style/Theme.App.Toolbar</item>
+        <item name="textInputStyle">@style/Theme.App.TextInput</item>
 
     </style>
+
+    <style name="Theme.App.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Surface" />
+
+    <style name="Theme.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface" />
+
+    <style name="Theme.App.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
+
+    <!-- region TextAppearance -->
+
+    <style name="Theme.App.TextAppearance"/>
+
+    <style name="Theme.App.TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="Theme.App.TextAppearance.Data" parent="TextAppearance.MaterialComponents.Body1"/>
+
+    <!-- endregion -->
 
 </resources>

@@ -9,7 +9,6 @@ import com.squareup.sqldelight.runtime.coroutines.mapToOneOrDefault
 import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.dropWhile
 import kotlin.coroutines.CoroutineContext
 
 /** @return [Flow] of [T] from receiver [Query] of [T] */
@@ -36,4 +35,4 @@ internal fun <T : Any> Query<T>.asOneNotNullFlow(
 /** @return [Flow] of [List] of [T] from receiver [Query] of [T] */
 internal fun <T : Any> Query<T>.asListFlow(
     context: CoroutineContext = Dispatchers.Default
-) = asFlow().mapToList(context).dropWhile { it.isEmpty() }
+) = asFlow().mapToList(context)

@@ -2,6 +2,7 @@ package studio.forface.covid.data.local
 
 import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.flow.map
 import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
@@ -92,7 +93,7 @@ internal class RepositoryImpl(
             .map(countryStatMapper) { it.toEntity() }
 
     override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> =
-        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow()
+        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhile { it.isEmpty() }
             .map(countryFullStatMapper) { it.toEntity() }
 
     override fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat> =

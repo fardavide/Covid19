@@ -41,12 +41,12 @@ kotlin {
                     api(
                         `kotlin-common`,
                         `coroutines-core-common`,
-                        `koin`
+                        `koin`,
+                        `klock`
                     )
 
                     implementation(
-                        `serialization-common`,
-                        `klock`
+                        `serialization-common`
                     )
                 }
             }

@@ -25,7 +25,7 @@ fun initVersions() {
     `ktor version` =                        "1.3.1"         // Released: Feb 26, 2020
 
     // Android
-    `android-gradle-plugin version` =       "4.1.0-alpha04" // Released: Mar 24, 2020
+    `android-gradle-plugin version` =       "4.1.0-alpha05" // Released: Apr 13, 2020
     `appcompat version` =                   "1.2.0-beta01"  // Released: Apr 05, 2020
     `constraint-layout version` =           "2.0.0-beta4"   // Released: Dec 16, 2019
     `ktx version` =                         "1.3.0-beta01"  // Released: Apr 05, 2020

@@ -7,7 +7,7 @@
         android:label="@string/covid_app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/App"
+        android:theme="@style/Theme.App"
 
         android:allowBackup="false"
         android:fullBackupContent="false">
@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.CountryStatActivity"/>
 
     </application>
 

@@ -6,26 +6,26 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import studio.forface.covid.domain.DEFAULT_ERROR_INTERVAL
 import studio.forface.covid.domain.DEFAULT_REFRESH_INTERVAL
-import studio.forface.covid.domain.entity.CountryFullStat
 import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.entity.CountryStat
 import studio.forface.covid.domain.gateway.Repository
 import studio.forface.covid.domain.util.repeatCatching
 import kotlin.time.Duration
 
 /**
- * Get Country Full Stat for given [CountryId]
+ * Get Country Stat for given [CountryId]
  *
  * @param refreshInterval: optional interval for refresh the data from the remote source
  * @param errorInterval: optional interval for retry the data sync when failed
  *
  * * Output:
- *  * a[Flow] of [CountryFullStat]
+ *  * a[Flow] of [CountryStat]
  *
  * @author Davide Farella
  */
-class GetCountryFullStat(
+class GetCountryStat(
     private val repository: Repository,
-    private val syncCountryFullStat: SyncCountryFullStat,
+    private val syncCountryStat: SyncCountryStat,
     private val refreshInterval: Duration = DEFAULT_REFRESH_INTERVAL,
     private val errorInterval: Duration = DEFAULT_ERROR_INTERVAL
 ) {
@@ -39,11 +39,11 @@ class GetCountryFullStat(
         // Sync every refresh interval
         launch {
             repeatCatching(refreshInterval, errorInterval) {
-                syncCountryFullStat(id)
+                syncCountryStat(id)
             }
         }
 
         // Observe changes from repository
-        repository.getCountryFullStat(id).collect { send(it) }
+        repository.getCountryStat(id).collect { send(it) }
     }
 }

@@ -1,6 +1,5 @@
 package studio.forface.covid.android.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.actor
@@ -15,10 +14,10 @@ import studio.forface.covid.domain.util.DispatcherProvider
 import studio.forface.viewstatestore.ViewState
 import studio.forface.viewstatestore.ViewState.Loading
 import studio.forface.viewstatestore.ViewStateStore
-import studio.forface.viewstatestore.ViewStateStoreScope
 
 /**
- * A [ViewModel] for search Countries
+ * A `ViewModel` for search Countries
+ * Inherit from [BaseViewModel]
  *
  * * Input:
  *  * send a query [Name] to [search]
@@ -30,8 +29,8 @@ import studio.forface.viewstatestore.ViewStateStoreScope
  */
 class SearchViewModel(
     private val searchCountry: SearchCountry,
-    private val dispatcherProvider: DispatcherProvider
-) : ViewModel(), ViewStateStoreScope, DispatcherProvider by dispatcherProvider {
+    dispatcherProvider: DispatcherProvider
+) : BaseViewModel(dispatcherProvider) {
 
     /** Delivers [ViewState] for search result */
     val countries = ViewStateStore<List<Country>>(NoQueryError).lock
@@ -52,7 +51,7 @@ class SearchViewModel(
         }
     }
 
-    private var lastQuery: Name = Name("")
+    private var lastQuery = Name("")
     private val query = Channel<Name>()
 
     init {
