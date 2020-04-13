@@ -2,7 +2,6 @@ package studio.forface.covid.data.local
 
 import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.flow.map
 import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
@@ -17,6 +16,7 @@ import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
 import studio.forface.covid.data.local.utils.TransactionProvider
 import studio.forface.covid.data.local.utils.asListFlow
 import studio.forface.covid.data.local.utils.asOneFlow
+import studio.forface.covid.data.local.utils.dropWhileEmpty
 import studio.forface.covid.domain.entity.Country
 import studio.forface.covid.domain.entity.CountryFullStat
 import studio.forface.covid.domain.entity.CountryId
@@ -89,11 +89,11 @@ internal class RepositoryImpl(
             .map(countrySmallStatMapper) { it.toEntity() }
 
     override fun getCountryStat(id: CountryId): Flow<CountryStat> =
-        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow()
+        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhileEmpty()
             .map(countryStatMapper) { it.toEntity() }
 
     override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> =
-        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhile { it.isEmpty() }
+        countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhileEmpty()
             .map(countryFullStatMapper) { it.toEntity() }
 
     override fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat> =

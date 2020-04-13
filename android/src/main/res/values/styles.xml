@@ -24,9 +24,12 @@
 
     <style name="Theme.App.TextAppearance"/>
 
-    <style name="Theme.App.TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6" />
+    <style name="Theme.App.TextAppearance.List" parent="TextAppearance.MaterialComponents.Body2"/>
+    <style name="Theme.App.TextAppearance.List.Large" parent="TextAppearance.MaterialComponents.Headline5"/>
 
-    <style name="Theme.App.TextAppearance.Data" parent="TextAppearance.MaterialComponents.Body1"/>
+    <style name="Theme.App.TextAppearance.Stat"/>
+    <style name="Theme.App.TextAppearance.Stat.Title" parent="TextAppearance.MaterialComponents.Headline6" />
+    <style name="Theme.App.TextAppearance.Stat.Data" parent="TextAppearance.MaterialComponents.Body1"/>
 
     <!-- endregion -->
 

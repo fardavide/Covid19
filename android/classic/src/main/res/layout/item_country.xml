@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_small"
 
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
@@ -14,7 +12,19 @@
         android:id="@+id/country_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/margin_medium"
+        android:layout_gravity="start|center_vertical"
         tools:text="Italy"
-        style="@style/TextAppearance.AppCompat.Headline"/>
+        style="@style/Theme.App.TextAppearance.List.Large"/>
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:padding="@dimen/margin_medium"
+        tools:src="@drawable/ic_star_bw_32"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/content_desc_favorite_channel" />
 
 </FrameLayout>

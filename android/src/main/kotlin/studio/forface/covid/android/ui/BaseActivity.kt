@@ -3,7 +3,6 @@ package studio.forface.covid.android.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import studio.forface.covid.android.Router
 import studio.forface.viewstatestore.ViewStateActivity
 
@@ -21,7 +20,7 @@ import studio.forface.viewstatestore.ViewStateActivity
 abstract class BaseActivity : AppCompatActivity(), KoinComponent, ViewStateActivity {
 
     /** Every Activity has a [Router] for navigate though pages */
-    protected val router by inject<Router>()
+    protected abstract val router: Router
 
     /** Override with initial UI setup */
     protected abstract fun initUi()

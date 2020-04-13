@@ -1,7 +1,6 @@
 package studio.forface.covid.android.classic
 
-import android.content.Context
-import androidx.core.app.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import studio.forface.covid.android.Router
 import studio.forface.covid.android.classic.ui.CountryStatActivity
 import studio.forface.covid.android.classic.ui.SearchActivity
@@ -13,21 +12,23 @@ import studio.forface.covid.domain.entity.CountryId
  *
  * @author Davide Farella
  */
-class ClassicRouter(private val context: Context) : Router {
+class ClassicRouter(private val activity: FragmentActivity) : Router {
 
     /** Navigate to Home page */
     override fun toHome() {
         toSearch()
-        if (context is ComponentActivity) context.finish()
+        activity.finish()
     }
 
     /** Navigate to Search page */
     override fun toSearch() {
-        SearchActivity.launch(context)
+        SearchActivity.launch(activity)
     }
 
     /** Navigate to CountryStat page for Country with given [id] */
     override fun toCountryStat(id: CountryId) {
-        CountryStatActivity.launch(context, id)
+        CountryStatActivity.launch(activity, id)
     }
 }
+
+fun FragmentActivity.Router() = ClassicRouter(this)

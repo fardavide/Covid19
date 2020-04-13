@@ -1,6 +1,9 @@
 import com.android.build.gradle.TestedExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionAware
+import studio.forface.easygradle.dsl.android.Version
+import studio.forface.easygradle.dsl.android.version
 
 fun Project.android(
 
@@ -8,11 +11,12 @@ fun Project.android(
     minSdk: Int = 23,
     targetSdk: Int = 29
 
-) = (this as org.gradle.api.plugins.ExtensionAware).extensions.configure<TestedExtension>("android") {
+) = (this as ExtensionAware).extensions.configure<TestedExtension>("android") {
 
     compileSdkVersion(29)
     defaultConfig {
         appIdSuffix?.let { applicationId = "studio.forface.covid.android.$it" }
+        version = Version(0, 1)
         minSdkVersion(minSdk)
         targetSdkVersion(targetSdk)
     }

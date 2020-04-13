@@ -5,6 +5,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_search.*
 import studio.forface.covid.android.classic.R
+import studio.forface.covid.android.classic.Router
+import studio.forface.covid.android.classic.utils.showSnackbar
 import studio.forface.covid.android.classic.utils.startActivity
 import studio.forface.covid.android.error.NoQueryError
 import studio.forface.covid.android.error.NoResultError
@@ -14,7 +16,10 @@ import studio.forface.viewstatestore.ViewState
 
 class SearchActivity : AbsSearchActivity() {
 
-    private val countriesAdapter = CountriesAdapter(onClick = router::toCountryStat)
+    override val router = Router()
+
+    private val countriesAdapter =
+        CountriesAdapter(onClick = router::toCountryStat, onFavorite = ::onFavorite)
 
     override fun initUi() {
         setContentView(R.layout.activity_search)
@@ -44,6 +49,11 @@ class SearchActivity : AbsSearchActivity() {
 
     /** Called when Loading state is changed */
     override fun onLoadingChange(loading: Boolean) {}
+
+    /** This must toggle the favorite state for the given Country */
+    override fun onFavorite(country: Country) {
+        showSnackbar(R.string.error_feature_not_available)
+    }
 
     companion object {
 
