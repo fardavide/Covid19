@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>studio.forface.covid.android.classic.utils - classic</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">classic</a>&nbsp;/&nbsp;<a href="./index.html">studio.forface.covid.android.classic.utils</a><br/>
+<br/>
+<h2>Package studio.forface.covid.android.classic.utils</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-click-listener.html">ClickListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ClickListener</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-item-click-listener.html">ItemClickListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ItemClickListener</span><span class="symbol">&lt;</span><span class="identifier">Item</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><span class="identifier">Item</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-snackbar-duration/index.html">SnackbarDuration</a></h4>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">SnackbarDuration</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-view-click-listener.html">ViewClickListener</a></h4>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ViewClickListener</span><span class="symbol">&lt;</span><span class="identifier">View</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><span class="identifier">View</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="android.content.-context/index.html">android.content.Context</a></h4>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="android.view.-view-group/index.html">android.view.ViewGroup</a></h4>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="studio.forface.covid.android.ui.-base-activity/index.html">studio.forface.covid.android.ui.BaseActivity</a></h4>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-d-e-f-a-u-l-t_-s-n-a-c-k-b-a-r_-d-u-r-a-t-i-o-n.html">DEFAULT_SNACKBAR_DURATION</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">DEFAULT_SNACKBAR_DURATION</span><span class="symbol">: </span><a href="-snackbar-duration/index.html"><span class="identifier">SnackbarDuration</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-click.html">onClick</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">V</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">&gt;</span> <span class="identifier">V</span><span class="symbol">.</span><span class="identifier">onClick</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.utils$onClick(studio.forface.covid.android.classic.utils.onClick.V, kotlin.Function1((studio.forface.covid.android.classic.utils.onClick.V, kotlin.Unit)))/clickListener">clickListener</span><span class="symbol">:</span>&nbsp;<a href="-view-click-listener.html"><span class="identifier">ViewClickListener</span></a><span class="symbol">&lt;</span><span class="identifier">V</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-snackbar.html">Snackbar</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Snackbar</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.CharSequence, studio.forface.covid.android.classic.utils.SnackbarDuration)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.CharSequence, studio.forface.covid.android.classic.utils.SnackbarDuration)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html"><span class="identifier">CharSequence</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.CharSequence, studio.forface.covid.android.classic.utils.SnackbarDuration)/duration">duration</span><span class="symbol">:</span>&nbsp;<a href="-snackbar-duration/index.html"><span class="identifier">SnackbarDuration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;DEFAULT_SNACKBAR_DURATION<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Snackbar</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">Snackbar</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.Int, studio.forface.covid.android.classic.utils.SnackbarDuration)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.Int, studio.forface.covid.android.classic.utils.SnackbarDuration)/resId">resId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, kotlin.Int, studio.forface.covid.android.classic.utils.SnackbarDuration)/duration">duration</span><span class="symbol">:</span>&nbsp;<a href="-snackbar-duration/index.html"><span class="identifier">SnackbarDuration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;DEFAULT_SNACKBAR_DURATION<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Snackbar</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">Snackbar</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, studio.forface.viewstatestore.ViewState.Error, studio.forface.covid.android.classic.utils.SnackbarDuration)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, studio.forface.viewstatestore.ViewState.Error, studio.forface.covid.android.classic.utils.SnackbarDuration)/error">error</span><span class="symbol">:</span>&nbsp;<span class="identifier">Error</span><span class="symbol">, </span><span class="identifier" id="studio.forface.covid.android.classic.utils$Snackbar(android.view.View, studio.forface.viewstatestore.ViewState.Error, studio.forface.covid.android.classic.utils.SnackbarDuration)/duration">duration</span><span class="symbol">:</span>&nbsp;<a href="-snackbar-duration/index.html"><span class="identifier">SnackbarDuration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;DEFAULT_SNACKBAR_DURATION<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Snackbar</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

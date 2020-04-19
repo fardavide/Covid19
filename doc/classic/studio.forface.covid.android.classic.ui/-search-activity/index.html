@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SearchActivity - classic</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">classic</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.covid.android.classic.ui</a>&nbsp;/&nbsp;<a href="./index.html">SearchActivity</a><br/>
+<br/>
+<h1>SearchActivity</h1>
+<code><span class="keyword">class </span><span class="identifier">SearchActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AbsSearchActivity</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">SearchActivity</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="router.html">router</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">router</span><span class="symbol">: </span><a href="../../studio.forface.covid.android.classic/-classic-router/index.html"><span class="identifier">ClassicRouter</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="init-ui.html">initUi</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initUi</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-favorite.html">onFavorite</a></h4>
+</td>
+<td>
+<p>This must toggle the favorite state for the given Country</p>
+<code><span class="keyword">fun </span><span class="identifier">onFavorite</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.ui.SearchActivity$onFavorite(studio.forface.covid.domain.entity.Country)/country">country</span><span class="symbol">:</span>&nbsp;<span class="identifier">Country</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-loading-change.html">onLoadingChange</a></h4>
+</td>
+<td>
+<p>Called when Loading state is changed</p>
+<code><span class="keyword">fun </span><span class="identifier">onLoadingChange</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.ui.SearchActivity$onLoadingChange(kotlin.Boolean)/loading">loading</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-search-error.html">onSearchError</a></h4>
+</td>
+<td>
+<p>Called when an Error is received for the search</p>
+<code><span class="keyword">fun </span><span class="identifier">onSearchError</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.ui.SearchActivity$onSearchError(studio.forface.viewstatestore.ViewState.Error)/error">error</span><span class="symbol">:</span>&nbsp;<span class="identifier">Error</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-search-result.html">onSearchResult</a></h4>
+</td>
+<td>
+<p>Called when a List of <a href="#">Country</a>s is available</p>
+<code><span class="keyword">fun </span><span class="identifier">onSearchResult</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.ui.SearchActivity$onSearchResult(kotlin.collections.List((studio.forface.covid.domain.entity.Country)))/result">result</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">Country</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="launch.html">launch</a></h4>
+</td>
+<td>
+<p>Start <a href="./index.html">SearchActivity</a> using its class Intent</p>
+<code><span class="keyword">fun </span><span class="identifier">launch</span><span class="symbol">(</span><span class="identifier" id="studio.forface.covid.android.classic.ui.SearchActivity.Companion$launch(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
