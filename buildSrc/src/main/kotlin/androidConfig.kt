@@ -18,10 +18,10 @@ fun Project.android(
     compileSdkVersion(29)
     defaultConfig {
         appIdSuffix?.let {
-            requireNotNull(version) { "'appIdSuffix' is specified but 'version' is null." }
+            val v = version ?: projectVersion
             applicationId = "studio.forface.covid.android.$it"
-            this.version = version
-            archivesBaseName = "Covid-android-${appIdSuffix}_${version.versionName}"
+            this.version = v
+            archivesBaseName = "Covid-android-${appIdSuffix}_${v.versionName}"
         }
         minSdkVersion(minSdk)
         targetSdkVersion(targetSdk)

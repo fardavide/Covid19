@@ -39,6 +39,7 @@ allprojects {
 }
 
 subprojects {
+    projectVersion = studio.forface.easygradle.dsl.android.Version(0, 0)
 
     // Setup KDoc and archives
     if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {
