@@ -6,33 +6,15 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
-import studio.forface.covid.data.remote.mapper.CountryFromFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountryFromSmallStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountryFromStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountryFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountryIdApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountrySmallStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.CountryStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.LocationApiModelMapper
-import studio.forface.covid.data.remote.mapper.NameApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceFromFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceFromStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceIdApiModelMapper
-import studio.forface.covid.data.remote.mapper.ProvinceStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.StatApiModelMapper
-import studio.forface.covid.data.remote.mapper.StatParamsMapper
-import studio.forface.covid.data.remote.mapper.TimestampApiModelMapper
-import studio.forface.covid.data.remote.mapper.UnixTimeApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldFromFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldFromStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldFullStatApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldIdApiModelMapper
-import studio.forface.covid.data.remote.mapper.WorldStatApiModelMapper
+import studio.forface.covid.data.remote.mapper.*
+import studio.forface.covid.domain.ConfigurationNameQualifier
 import studio.forface.covid.domain.gateway.Api
+import studio.forface.covid.domain.gateway.UpdatesApi
 
-/** Koin `Qualifier` for host */
-val HostQualifier = qualifier("base_url")
+// Qualifier
+val HostQualifier = qualifier("host")
+val UpdatesRegularHostQualifier = qualifier("updates_regular_host")
+val UpdatesRawHostQualifier = qualifier("updates_raw_host")
 
 private val clientModule = module {
 
@@ -44,12 +26,6 @@ private val clientModule = module {
         }
     }
 }
-
-private val serviceModule = module {
-    factory(HostQualifier) { "enrichman.github.io/covid19" }
-    factory { CovidService(client = get(), host = get(HostQualifier)) }
-//    factory { CovidService(client = get(), host = "enrichman.github.io/covid19") }
-} + clientModule
 
 private val mapperModule = module {
 
@@ -178,6 +154,29 @@ private val mapperModule = module {
     }
 }
 
+private val updatesMapperModule = module {
+    factory { UpdateVersionTimestampApiModelMapper() }
+    factory { UpdateVersionApiModelMapper(timeMapper = get()) }
+}
+
+private val serviceModule = module {
+    factory(HostQualifier) { "enrichman.github.io/covid19" }
+    factory { CovidService(client = get(), host = get(HostQualifier)) }
+} + mapperModule
+
+private val updatesServiceModule = module {
+    factory(UpdatesRegularHostQualifier) { "github.com/4face-studi0/Covid19/blob/master/releases" }
+    factory(UpdatesRawHostQualifier) { "raw.githubusercontent.com/4face-studi0/Covid19/master/releases" }
+    factory {
+        UpdatesService(
+            client = get(),
+            regularHost = get(UpdatesRegularHostQualifier),
+            rawHost = get(UpdatesRawHostQualifier),
+            configName = get(ConfigurationNameQualifier)
+        )
+    }
+} + updatesMapperModule
+
 val remoteDataModule = module {
     factory<Api> {
         ApiImpl(
@@ -194,6 +193,10 @@ val remoteDataModule = module {
         )
     }
 
-} + serviceModule + mapperModule
+    factory<UpdatesApi> {
+        UpdatesApiImpl(service = get(), mapper = get())
+    }
+
+} + serviceModule + updatesServiceModule + clientModule
 
 expect val HttpClientEngine: HttpClientEngine

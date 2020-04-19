@@ -1,20 +1,7 @@
 @file:Suppress("ObjectPropertyName")
 
-import studio.forface.easygradle.dsl.`coroutines version`
-import studio.forface.easygradle.dsl.`detekt version`
-import studio.forface.easygradle.dsl.`kotlin version`
-import studio.forface.easygradle.dsl.`ktor version`
-import studio.forface.easygradle.dsl.`mockK version`
-import studio.forface.easygradle.dsl.`serialization version`
-import studio.forface.easygradle.dsl.`sqlDelight version`
-import studio.forface.easygradle.dsl.android.`android-gradle-plugin version`
-import studio.forface.easygradle.dsl.android.`appcompat version`
-import studio.forface.easygradle.dsl.android.`constraint-layout version`
-import studio.forface.easygradle.dsl.android.`fluentNotifications version`
-import studio.forface.easygradle.dsl.android.`ktx version`
-import studio.forface.easygradle.dsl.android.`lifecycle version`
-import studio.forface.easygradle.dsl.android.`material version`
-import studio.forface.easygradle.dsl.android.`viewStateStore version`
+import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.android.*
 
 fun initVersions() {
 
@@ -40,6 +27,9 @@ fun initVersions() {
     `viewStateStore version` =              "1.4-beta-4"    // Released: Mar 02, 2020
 }
 
+// Kotlin
+const val `kotlinIo version` =              "0.1.16"        // Release: Nov 20, 2019
+
 // Android
 const val `activity version` =              "1.2.0-alpha03" // Released: Apr 05, 2020
 const val `androidUi version` =             "0.1.0-dev08"   // Released: Apr 03, 2020
@@ -50,4 +40,5 @@ const val `clikt version` =                 "2.6.0"         // Released: Mar 17,
 const val `klock version` =                 "1.10.0"        // Released: Mar 07, 2020
 const val `koin version` =                  "2.1.5"         // Released: Mar 23, 2020
 const val `koin3 version` =                 "3.0.0-alpha-8" // Released: ???
+const val `okIo version` =                  "2.5.0"         // Released: Mar 21, 2020
 const val `picnic version` =                "0.3.0"         // Released: Feb 18, 2020

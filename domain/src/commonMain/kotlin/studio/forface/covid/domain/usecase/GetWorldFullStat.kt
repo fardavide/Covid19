@@ -18,7 +18,7 @@ import kotlin.time.Duration
  * @param errorInterval: optional interval for retry the data sync when failed
  *
  * * Output:
- *  * a[Flow] of [WorldStat]
+ *  * [Flow] of [WorldStat]
  *
  * @author Davide Farella
  */

@@ -3,12 +3,7 @@ package studio.forface.covid.data.remote.mapper
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
 import com.soywiz.klock.parse
-import studio.forface.covid.domain.entity.CountryId
-import studio.forface.covid.domain.entity.Id
-import studio.forface.covid.domain.entity.Location
-import studio.forface.covid.domain.entity.Name
-import studio.forface.covid.domain.entity.ProvinceId
-import studio.forface.covid.domain.entity.WorldId
+import studio.forface.covid.domain.entity.*
 
 internal class WorldIdApiModelMapper : ApiModelMapper<String, Id> {
     override fun String.toEntity() = WorldId(this)
@@ -35,6 +30,11 @@ data class LocationParams(val lat: Double, val lng: Double)
 internal class TimestampApiModelMapper : ApiModelMapper<String, DateTime> {
     override fun String.toEntity() = DATE_FORMAT.parse(this).local
     private companion object { val DATE_FORMAT = DateFormat("yyyy-MM-dd'T'HH:mm:ssZ") }
+}
+
+internal class UpdateVersionTimestampApiModelMapper : ApiModelMapper<String, DateTime> {
+    override fun String.toEntity() = DATE_FORMAT.parse(this).local
+    private companion object { val DATE_FORMAT = DateFormat("MMM dd, yyyy") }
 }
 
 internal class UnixTimeApiModelMapper : ApiModelMapper<Int, DateTime> {

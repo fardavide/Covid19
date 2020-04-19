@@ -1,16 +1,7 @@
 @file:Suppress("LocalVariableName")
 
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import studio.forface.easygradle.dsl.`coroutines-core-common`
-import studio.forface.easygradle.dsl.`coroutines-core-js`
-import studio.forface.easygradle.dsl.`coroutines-core`
-import studio.forface.easygradle.dsl.`kotlin-common`
-import studio.forface.easygradle.dsl.`kotlin-jdk8`
-import studio.forface.easygradle.dsl.`kotlin-js`
-import studio.forface.easygradle.dsl.`kotlin-test-junit`
-import studio.forface.easygradle.dsl.`kotlin-test`
-import studio.forface.easygradle.dsl.`serialization-common`
-import studio.forface.easygradle.dsl.mockk
+import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.multiplatform)
@@ -41,6 +32,7 @@ kotlin {
                     api(
                         `kotlin-common`,
                         `coroutines-core-common`,
+                        `okIo`,
                         `koin`,
                         `klock`
                     )

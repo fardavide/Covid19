@@ -22,6 +22,8 @@ fun Project.android(
             applicationId = "studio.forface.covid.android.$it"
             this.version = v
             archivesBaseName = "Covid-android-${appIdSuffix}_${v.versionName}"
+
+            buildConfigField("String", "CONFIGURATION_NAME", "\"$fullName\"")
         }
         minSdkVersion(minSdk)
         targetSdkVersion(targetSdk)

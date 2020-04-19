@@ -1,15 +1,12 @@
 @file:Suppress("ClassName", "ObjectPropertyName", "RemoveRedundantBackticks")
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import studio.forface.easygradle.dsl.`ktor version`
+import studio.forface.easygradle.dsl.*
 import studio.forface.easygradle.dsl.android.androidx
-import studio.forface.easygradle.dsl.dependency
-import studio.forface.easygradle.dsl.jakeWharton
-import studio.forface.easygradle.dsl.kotlin
-import studio.forface.easygradle.dsl.sqlDelight
-import studio.forface.easygradle.dsl.version
 
 // region Kotlin
+val DependencyHandler.`kotlin-io` get() = kotlinIo()
+val DependencyHandler.`kotlin-io-jvm` get() = kotlinIo("jvm")
 val DependencyHandler.`kotlin-test-annotations` get() = kotlin("test-annotations-common")
 // endregion
 
@@ -78,6 +75,7 @@ val DependencyHandler.`koin-android` get() = koin("android")
 val DependencyHandler.`koin-viewModel` get() = koin("androidx-viewmodel")
 val DependencyHandler.`klock` get() = klock()
 val DependencyHandler.`klock-android` get() = klock("android")
+val DependencyHandler.`okIo` get() = squareup("okio", moduleSuffix = "multiplatform") version `okIo version`
 val DependencyHandler.`picnic` get() = jakeWharton("picnic") version `picnic version`
 // endregion
 
@@ -101,6 +99,9 @@ fun DependencyHandler.korlibs(
     moduleSuffix: String? = null,
     version: String? = null
 ) = dependency("com.soywiz.korlibs", groupName, module, moduleSuffix, version)
+
+fun DependencyHandler.kotlinIo(moduleSuffix: String? = null, version: String? = `kotlinIo version`) =
+    kotlinx(moduleSuffix = "io${moduleSuffix?.let { "-$it" } ?: ""}", version = version)
 
 fun DependencyHandler.ktor(moduleSuffix: String? = null, version: String = `ktor version`) =
     dependency("io.ktor", module = "ktor", moduleSuffix = moduleSuffix, version = version)

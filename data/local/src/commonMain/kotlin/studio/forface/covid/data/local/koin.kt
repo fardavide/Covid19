@@ -4,35 +4,12 @@ import com.squareup.sqldelight.ColumnAdapter
 import com.squareup.sqldelight.db.SqlDriver
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
-import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryStatFromCountryWithProvinceStatPlainDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryStatPlainDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryWithProvinceDbModelMapper
-import studio.forface.covid.data.local.mapper.LocationDbModelMapper
-import studio.forface.covid.data.local.mapper.MultiCountryDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvincePlainDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceStatPlainDbModelMapper
-import studio.forface.covid.data.local.mapper.ProvinceWrapperMapper
-import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
-import studio.forface.covid.data.local.mapper.SingleCountryPlainDbModelMapper
-import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
-import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
-import studio.forface.covid.data.local.mapper.WorldPlainDbModelMapper
-import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
-import studio.forface.covid.data.local.mapper.WorldStatFromWorldWithProvincesStatPlainDModelMapper
-import studio.forface.covid.data.local.mapper.WorldStatPlainDModelMapper
+import studio.forface.covid.data.local.mapper.*
 import studio.forface.covid.data.local.utils.TransactionProvider
-import studio.forface.covid.domain.entity.CountryId
-import studio.forface.covid.domain.entity.Id
-import studio.forface.covid.domain.entity.Name
-import studio.forface.covid.domain.entity.ProvinceId
-import studio.forface.covid.domain.entity.WorldId
+import studio.forface.covid.domain.UpdatesDirectoryQualifier
+import studio.forface.covid.domain.entity.*
 import studio.forface.covid.domain.gateway.Repository
+import studio.forface.covid.domain.gateway.UpdatesRepository
 
 // Fields
 private val IdAdapterQualifier = qualifier("IdAdapter")
@@ -176,6 +153,10 @@ val localDataModule = module {
         )
     }
     factory { TransactionProvider(database = get()) }
+
+    single<UpdatesRepository> {
+        UpdatesRepositoryImpl(updatesDirectory = get(UpdatesDirectoryQualifier))
+    }
 
 } + databaseModule
 
