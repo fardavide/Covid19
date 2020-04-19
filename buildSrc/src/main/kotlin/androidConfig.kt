@@ -4,10 +4,12 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import studio.forface.easygradle.dsl.android.Version
 import studio.forface.easygradle.dsl.android.version
+import studio.forface.easygradle.dsl.archivesBaseName
 
 fun Project.android(
 
     appIdSuffix: String? = null,
+    version: Version? = null,
     minSdk: Int = 23,
     targetSdk: Int = 29
 
@@ -15,8 +17,12 @@ fun Project.android(
 
     compileSdkVersion(29)
     defaultConfig {
-        appIdSuffix?.let { applicationId = "studio.forface.covid.android.$it" }
-        version = Version(0, 1)
+        appIdSuffix?.let {
+            requireNotNull(version) { "'appIdSuffix' is specified but 'version' is null." }
+            applicationId = "studio.forface.covid.android.$it"
+            this.version = version
+            archivesBaseName = "Covid-android-${appIdSuffix}_${version.versionName}"
+        }
         minSdkVersion(minSdk)
         targetSdkVersion(targetSdk)
     }

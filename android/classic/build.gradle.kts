@@ -1,4 +1,5 @@
-import studio.forface.easygradle.dsl.android.`constraint-layout`
+import studio.forface.easygradle.dsl.android.*
+import studio.forface.easygradle.dsl.dokka
 import studio.forface.easygradle.dsl.implementation
 
 plugins {
@@ -7,7 +8,7 @@ plugins {
     id(PluginsDeps.kotlinAndroidExtensions)
 }
 
-android("classic")
+android("classic", Version(0, 2))
 
 dependencies {
     implementation(
@@ -19,3 +20,5 @@ dependencies {
 
     testImplementation(project(Module.sharedTest))
 }
+
+dokka()

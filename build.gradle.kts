@@ -40,6 +40,30 @@ allprojects {
 
 subprojects {
 
+    // Setup KDoc and archives
+    if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {
+
+        tasks.create("generateReleases") {
+            doLast {
+                with(ReleaseManager) {
+                    moveApk("releases")
+                    generateKdocIfNeeded()
+                    // updateReadme()
+                }
+            }
+        }
+
+        afterEvaluate {
+            tasks.getByName("assemble").doLast {
+                with(ReleaseManager) {
+                    moveApk("releases")
+                    generateKdocIfNeeded()
+                    // updateReadme()
+                }
+            }
+        }
+    }
+
     // Options for Kotlin
     tasks.withType<KotlinCompile> {
         kotlinOptions {
@@ -72,6 +96,6 @@ subprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
+tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
