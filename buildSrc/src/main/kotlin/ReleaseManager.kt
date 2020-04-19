@@ -84,7 +84,7 @@ class ReleaseManager internal constructor(project: Project) : Project by project
 
             README_FILE.writeText(
                 README_FILE.readText()
-                    .replace(README_VERSION_REGEX, readmeVersion(name, newVersion!!, timestamp))
+                    .replace(README_VERSION_REGEX, readmeVersion(readableName, newVersion!!, timestamp))
             )
         }
     }
@@ -95,7 +95,7 @@ class ReleaseManager internal constructor(project: Project) : Project by project
         val Project.AAR_DIRECTORY get() = File(buildDir, "outputs" + File.separator + "aar")
         val Project.APK_DIRECTORY get() = File(buildDir, "outputs" + File.separator + "apk")
         val Project.README_FILE get() = File(rootDir, "README.md")
-        val Project.README_VERSION_REGEX get() = readmeVersion(name, "(.+)", "(.+)").toRegex()
+        val Project.README_VERSION_REGEX get() = readmeVersion(readableName, "(.+)", "(.+)").toRegex()
 
         @OptIn(ExperimentalStdlibApi::class) // String.capitalize(Locale)
         fun readmeVersion(name: String, version: String, timestamp: String) =
@@ -103,13 +103,19 @@ class ReleaseManager internal constructor(project: Project) : Project by project
     }
 }
 
-val Project.fullName get() = with(StringBuilder(name)) {
+val Project.fullName get() = namesHierarchy.joinToString(separator = "-")
+
+val Project.readableName get() = namesHierarchy.joinToString(separator = " ")
+
+@OptIn(ExperimentalStdlibApi::class)
+private val Project.namesHierarchy get() = buildList {
+    add(0, name)
+
     var p = parent
     while (p != null && p != rootProject) {
-        insert(0, "${p.name}-")
+        add(0, p.name)
         p = p.parent
     }
-    toString()
 }
 
 val Project.ReleaseManager get() = ReleaseManager(this)

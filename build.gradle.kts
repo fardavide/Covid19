@@ -43,23 +43,23 @@ subprojects {
     // Setup KDoc and archives
     if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {
 
+        val generateReleases = {
+            with(ReleaseManager) {
+                moveApk("releases")
+                generateKdocIfNeeded()
+                updateReadme()
+            }
+        }
+
         tasks.create("generateReleases") {
             doLast {
-                with(ReleaseManager) {
-                    moveApk("releases")
-                    generateKdocIfNeeded()
-                    // updateReadme()
-                }
+                generateReleases()
             }
         }
 
         afterEvaluate {
             tasks.getByName("assemble").doLast {
-                with(ReleaseManager) {
-                    moveApk("releases")
-                    generateKdocIfNeeded()
-                    // updateReadme()
-                }
+                generateReleases()
             }
         }
     }
@@ -69,9 +69,10 @@ subprojects {
         kotlinOptions {
             jvmTarget = "1.8"
             freeCompilerArgs = freeCompilerArgs + arrayOf(
-                    "-XXLanguage:+NewInference",
-                    "-Xuse-experimental=kotlin.Experimental",
-                    "-Xuse-experimental=kotlin.time.ExperimentalTime"
+                "-XXLanguage:+NewInference",
+                "-Xuse-experimental=kotlin.Experimental",
+                "-Xuse-experimental=kotlin.time.ExperimentalTime",
+                "-Xopt-in=kotlin.RequiresOptIn"
             )
         }
     }
