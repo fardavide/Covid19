@@ -9,5 +9,5 @@ internal class UpdateVersionApiModelMapper(
 ) : ApiModelMapper<UpdateVersionApiModel, UpdateVersion> {
 
     override fun UpdateVersionApiModel.toEntity() =
-        UpdateVersion(code.toInt(), name, timeMapper { timestamp.toEntity() })
+        UpdateVersion(code.trim().toInt(), name.trim(), timeMapper { timestamp.toEntity() })
 }

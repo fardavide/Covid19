@@ -18,5 +18,5 @@ interface UpdatesApi {
     suspend fun getLastUpdateVersion(): UpdateVersion
 
     /** @return [BufferedSource] of update File */
-    suspend fun getUpdateFile(fileName: String): BufferedSource
+    suspend fun getUpdateFile(fileName: String): ByteArray
 }

@@ -1,6 +1,5 @@
 package studio.forface.covid.data.local
 
-import okio.BufferedSource
 import studio.forface.covid.domain.entity.Directory
 import studio.forface.covid.domain.gateway.UpdatesRepository
 
@@ -14,7 +13,7 @@ internal class UpdatesRepositoryImpl(
 
     override suspend fun getUpdate() = updatesDirectory.files().firstOrNull()
 
-    override suspend fun storeUpdate(source: BufferedSource, name: String) {
-        updatesDirectory.createFile(source, name)
+    override suspend fun storeUpdate(data: ByteArray, name: String) {
+        updatesDirectory.saveFile(name, data)
     }
 }

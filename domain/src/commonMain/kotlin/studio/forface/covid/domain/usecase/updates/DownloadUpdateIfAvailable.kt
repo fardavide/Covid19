@@ -1,3 +1,5 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
+
 package studio.forface.covid.domain.usecase.updates
 
 import kotlinx.coroutines.async

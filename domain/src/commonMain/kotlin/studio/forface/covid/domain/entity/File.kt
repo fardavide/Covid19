@@ -19,10 +19,10 @@ expect class Directory : File {
     fun files(): List<File>
 
     /** Write given [file] in this directory */
-    fun createFile(file: File)
+    fun saveFile(file: File)
 
     /** Create a File writing the [BufferedSource] with the given [name] */
-    fun createFile(source: BufferedSource, name: String)
+    fun saveFile(name: String, data: ByteArray)
 
     /** Delete all the files contained in this directory */
     fun deleteFiles()

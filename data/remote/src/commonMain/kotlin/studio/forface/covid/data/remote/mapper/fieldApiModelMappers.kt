@@ -33,7 +33,7 @@ internal class TimestampApiModelMapper : ApiModelMapper<String, DateTime> {
 }
 
 internal class UpdateVersionTimestampApiModelMapper : ApiModelMapper<String, DateTime> {
-    override fun String.toEntity() = DATE_FORMAT.parse(this).local
+    override fun String.toEntity() = DATE_FORMAT.parse(trim()).local
     private companion object { val DATE_FORMAT = DateFormat("MMM dd, yyyy") }
 }
 

@@ -10,9 +10,9 @@ import studio.forface.covid.domain.gateway.UpdatesRepository
  *
  * @author Davide Farella
  */
-class GetInstallableUpdate (
-    private val repository: UpdatesRepository,
+class GetInstallableUpdate(
     private val api: UpdatesApi,
+    private val repository: UpdatesRepository,
     private val buildDownloadableUpdateFileName: BuildDownloadableUpdateFileName
 ) {
 

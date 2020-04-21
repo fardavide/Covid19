@@ -2,7 +2,6 @@ package studio.forface.covid.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import okio.BufferedSource
 import studio.forface.covid.data.remote.model.UpdateVersionApiModel
 import studio.forface.covid.domain.util.checkNotBlank
 
@@ -23,7 +22,7 @@ internal class UpdatesService(
         .parseToUpdateVersion()
 
     // https://github.com/4face-studi0/Covid19/blob/master/releases/android-classic/release/Covid-android-classic_0.2-release-unsigned.apk
-    suspend fun geUpdateFile(fileName: String) = client.get<BufferedSource>(
+    suspend fun geUpdateFile(fileName: String) = client.get<ByteArray>(
         scheme = "https",
         host = regularHost,
         path = "$configName/$fileName"

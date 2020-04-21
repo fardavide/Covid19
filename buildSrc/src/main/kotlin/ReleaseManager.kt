@@ -52,11 +52,8 @@ class ReleaseManager internal constructor(project: Project) : Project by project
 
                 APK_DIRECTORY.listFiles { file, _ -> file.isDirectory }?.forEach { subDir ->
 
-                    val newSubDir = File(newDir, subDir.name)
-                        .also { if (!it.exists()) it.mkdir() }
-
                     subDir.listFiles()?.filter { it.extension == "apk" }?.forEach { apk ->
-                        val newFile = File(newSubDir, apk.name)
+                        val newFile = File(newDir, apk.name)
                         // If file is absent, copy it and generate KDoc
                         if (!newFile.exists()) {
                             apk.copyTo(newFile)

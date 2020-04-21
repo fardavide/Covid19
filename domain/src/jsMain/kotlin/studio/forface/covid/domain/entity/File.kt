@@ -20,11 +20,11 @@ actual class Directory : File() {
     }
 
     /** Write given [file] in this directory */
-    actual fun createFile(file: File) {
+    actual fun saveFile(file: File) {
     }
 
     /** Create a File writing the [BufferedSource] with the given [name] */
-    actual fun createFile(source: BufferedSource, name: String) {
+    actual fun saveFile(name: String, data: ByteArray) {
     }
 
     /** Delete all the files contained in this directory */

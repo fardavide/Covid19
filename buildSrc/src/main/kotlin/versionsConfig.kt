@@ -18,6 +18,7 @@ fun initVersions() {
     `ktx version` =                         "1.3.0-beta01"  // Released: Apr 05, 2020
     `material version` =                    "1.2.0-alpha05" // Released: Feb 21, 2020
     `lifecycle version` =                   "2.3.0-alpha01" // Released: Mar 06, 2020
+    `android-work version` =                "2.4.0-alpha02" // Released: Apr 05, 2020
 
     // Others
     `detekt version` =                      "1.6.0"         // Released: Feb 26, 2020

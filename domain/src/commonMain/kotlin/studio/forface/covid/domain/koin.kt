@@ -4,9 +4,38 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 import studio.forface.covid.domain.usecase.*
+import studio.forface.covid.domain.usecase.updates.DownloadUpdate
+import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
+import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
 
 val ConfigurationNameQualifier = qualifier("configuration_name")
 val UpdatesDirectoryQualifier = qualifier("updates_directory")
+
+private val updatesModule = module {
+
+    factory {
+        DownloadUpdate(
+            api = get(),
+            repository = get(),
+            buildDownloadableUpdateFileName = get()
+        )
+    }
+    factory {
+        DownloadUpdateIfAvailable(
+            api = get(),
+            repository = get(),
+            getInstallableUpdate = get(),
+            buildDownloadableUpdateFileName = get()
+        )
+    }
+    factory {
+        GetInstallableUpdate(
+            api = get(),
+            repository = get(),
+            buildDownloadableUpdateFileName = get()
+        )
+    }
+}
 
 private val useCaseModule = module {
 
@@ -28,7 +57,7 @@ private val useCaseModule = module {
 
     // Search
     factory { SearchCountry(repository = get(), syncCountries = get()) }
-}
+} + updatesModule
 
 val domainModule = module {
 
