@@ -12,8 +12,9 @@ import studio.forface.covid.domain.gateway.UpdatesRepository
 /**
  * Download and save locally the last update, if newed version is available
  *
- * This will check the last available version to download, compare with the already downloaded one and,
- * if downloadable version is greater than the downloaded one, download it
+ * This will check the last available version to download, compare with the installed on and the
+ * already downloaded one and, if downloadable version is greater than the local ones, it will be
+ * downloaded
  *
  *
  * @author Davide Farella
