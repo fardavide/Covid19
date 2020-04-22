@@ -21,6 +21,7 @@ import studio.forface.covid.domain.gateway.UpdatesRepository
 class DownloadUpdateIfAvailable(
     private val api: UpdatesApi,
     private val repository: UpdatesRepository,
+    private val getAppVersion: GetAppVersion,
     private val getInstallableUpdate: GetInstallableUpdate,
     private val buildDownloadableUpdateFileName: BuildDownloadableUpdateFileName
 ) {
@@ -29,7 +30,7 @@ class DownloadUpdateIfAvailable(
         val versionToDownload = async { api.getLastUpdateVersion() }
         val downloadedVersion = async { getInstallableUpdate()?.updateVersion ?: Version.Empty }
 
-        if (versionToDownload.await() > downloadedVersion.await()) {
+        if (versionToDownload.await() > getAppVersion() && versionToDownload.getCompleted() > downloadedVersion.await()) {
             val name = buildDownloadableUpdateFileName(versionToDownload.getCompleted())
             repository.storeUpdate(api.getUpdateFile(name), name)
         }

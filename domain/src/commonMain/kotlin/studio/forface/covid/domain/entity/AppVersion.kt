@@ -20,7 +20,12 @@ operator fun Version.compareTo(other: InstallableUpdateVersion) = code.compareTo
 data class BaseVersion(
     override val code: Int,
     override val name: String
-) : Version
+) : Version {
+
+    companion object {
+        val Empty = BaseVersion(0, "")
+    }
+}
 
 operator fun BaseVersion.compareTo(other: Version) = code.compareTo(other.code)
 
@@ -28,7 +33,12 @@ data class UpdateVersion(
     override val code: Int,
     override val name: String,
     val timestamp: DateTime
-) : Version
+) : Version {
+
+    companion object {
+        val Empty = UpdateVersion(0, "", DateTime.EPOCH)
+    }
+}
 
 operator fun UpdateVersion.compareTo(other: Version) = code.compareTo(other.code)
 
