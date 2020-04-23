@@ -6,10 +6,12 @@
 /local.properties
 */local.properties
 
-# Compiled class file
+# Compiled class files
 *.class
-*/build/*
-*/*/build/*
+build
+
+# Mac files
+.DS_Store
 
 # Log file
 *.log
@@ -33,4 +35,3 @@
 hs_err_pid*
 
 # New ( added from IDE, to be properly located )
-
