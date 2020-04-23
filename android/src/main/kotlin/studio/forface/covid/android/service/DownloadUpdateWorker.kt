@@ -2,6 +2,8 @@ package studio.forface.covid.android.service
 
 import android.content.Context
 import androidx.work.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.produceIn
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
@@ -21,13 +23,35 @@ class DownloadUpdateWorker(
 
     private val downloadUpdateIfAvailable by inject<DownloadUpdateIfAvailable>()
 
-    override suspend fun doWork(): Result {
-        runCatching { downloadUpdateIfAvailable() }
-            .onSuccess { return success() }
-            .onFailure { return failure(it) }
+    override suspend fun doWork() = coroutineScope {
+        try {
+            for (state in downloadUpdateIfAvailable().produceIn(this)) {
 
-        throw AssertionError()
+                when (state) {
+                    DownloadUpdateIfAvailable.State.Checking -> { /* noop */ }
+                    DownloadUpdateIfAvailable.State.UpToDate -> return@coroutineScope success()
+                    is DownloadUpdateIfAvailable.State.Downloading -> showProgress(state.progress)
+                    DownloadUpdateIfAvailable.State.AlreadyDownloaded, DownloadUpdateIfAvailable.State.Completed -> {
+                        promptInstall()
+                        return@coroutineScope success()
+                    }
+                }
+            }
+        } catch (t: Throwable) {
+            return@coroutineScope failure(t)
+        }
+
+        throw AssertionError("This should never happen")
     }
+
+    private fun showProgress(progress: Float) {
+        TODO("show progress")
+    }
+
+    private fun promptInstall() {
+        TODO("prompt install")
+    }
+
 
     class Enqueuer(
         override val workManager: WorkManager,
