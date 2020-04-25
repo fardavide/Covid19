@@ -3,7 +3,7 @@
 
 
 ## Status
-* Android Classic: **0.2** - _released on: Apr 19, 2020_
+* Android Classic: **0.3** - _released on: Apr 25, 2020_
 * Android Compose: TODO
 * Web: TODO
 * CLI: TODO
