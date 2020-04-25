@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="notification_update_download">100</integer>
+    <integer name="notification_update_install">101</integer>
+
+</resources>

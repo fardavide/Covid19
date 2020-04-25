@@ -10,4 +10,17 @@
 
     <string name="hint_search">@string/error_no_query</string>
 
+    <string name="notification_update_download_channel_id">notification_download_channel_id</string>
+    <string name="notification_update_download_channel_name">Download updates</string>
+    <string name="notification_update_download_channel_desc">Show a notification for ongoing updates download</string>
+    <string name="notification_update_downloading_title">Downloading update</string>
+    <string name="notification_update_downloading_title_arg">Downloading version %s</string>
+
+    <string name="notification_update_install_channel_id">notification_install_channel_id</string>
+    <string name="notification_update_install_channel_name">Install updated</string>
+    <string name="notification_update_install_channel_desc">Show a notification for updates ready to be installed</string>
+    <string name="notification_update_install_title">Update ready to be installed</string>
+    <string name="notification_update_install_title_args">Updated %s ready to be installed</string>
+    <string name="notification_update_install_content">Press to install</string>
+
 </resources>

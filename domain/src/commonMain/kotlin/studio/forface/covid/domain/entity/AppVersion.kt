@@ -43,7 +43,7 @@ data class UpdateVersion(
 operator fun UpdateVersion.compareTo(other: Version) = code.compareTo(other.code)
 
 data class InstallableUpdateVersion(
-    val file: BufferedSource,
+    val file: File,
     val updateVersion: UpdateVersion
 ) : Version by updateVersion
 

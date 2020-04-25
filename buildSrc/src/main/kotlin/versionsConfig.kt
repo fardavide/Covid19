@@ -12,7 +12,7 @@ fun initVersions() {
     `ktor version` =                        "1.3.1"         // Released: Feb 26, 2020
 
     // Android
-    `android-gradle-plugin version` =       "4.1.0-alpha06" // Released: Apr 19, 2020
+    `android-gradle-plugin version` =       "4.1.0-alpha07" // Released: Apr 24, 2020
     `appcompat version` =                   "1.2.0-beta01"  // Released: Apr 05, 2020
     `constraint-layout version` =           "2.0.0-beta4"   // Released: Dec 16, 2019
     `ktx version` =                         "1.3.0-beta01"  // Released: Apr 05, 2020
@@ -22,7 +22,7 @@ fun initVersions() {
 
     // Others
     `detekt version` =                      "1.8.0"         // Released: Apr 20, 2020
-    `fluentNotifications version` =         "0.1-alpha-6"   // Released: May 26, 2019
+    `fluentNotifications version` =         "0.2-alpha-2"   // Released: Apr 25, 2020
     `mockK version` =                       "1.9.3"         // Released:
     `sqlDelight version` =                  "1.2.2"         // Released: Jan 23, 2020
     `viewStateStore version` =              "1.4-beta-4"    // Released: Mar 02, 2020

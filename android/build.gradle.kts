@@ -1,6 +1,6 @@
+import org.gradle.kotlin.dsl.testImplementation
+import studio.forface.easygradle.dsl.*
 import studio.forface.easygradle.dsl.android.*
-import studio.forface.easygradle.dsl.api
-import studio.forface.easygradle.dsl.implementation
 
 plugins {
     id(PluginsDeps.androidLibrary)
@@ -12,6 +12,7 @@ android()
 dependencies {
     api(
         project(Module.domain),
+        `coroutines-android`,
 
         // Android
         `activity`,

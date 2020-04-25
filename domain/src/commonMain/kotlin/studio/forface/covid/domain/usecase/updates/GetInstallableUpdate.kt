@@ -25,7 +25,7 @@ class GetInstallableUpdate(
             file.name.substringAfter(pre).substringBefore(post)
         }
         val fileVersion = api.getUpdateVersion(fileVersionName)
-        return InstallableUpdateVersion(file = file.bufferedSource(), updateVersion = fileVersion)
+        return InstallableUpdateVersion(file = file, updateVersion = fileVersion)
     }
 
     private companion object {

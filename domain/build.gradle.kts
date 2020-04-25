@@ -34,10 +34,7 @@ kotlin {
                         `coroutines-core-common`,
                         `okIo`,
                         `koin`,
-                        `klock`
-                    )
-
-                    implementation(
+                        `klock`,
                         `serialization-common`
                     )
                 }
@@ -53,7 +50,8 @@ kotlin {
                 dependencies {
                     api(
                         `kotlin-jdk8`,
-                        `coroutines-core`
+                        `coroutines-core`,
+                        `serialization`
                     )
                 }
             }

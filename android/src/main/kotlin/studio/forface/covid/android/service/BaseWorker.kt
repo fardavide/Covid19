@@ -3,13 +3,19 @@ package studio.forface.covid.android.service
 import android.content.Context
 import androidx.work.BackoffPolicy
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ListenableWorker
+import androidx.work.ListenableWorker.Result
 import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import org.koin.core.KoinComponent
+import studio.forface.covid.domain.util.deserialize
+import studio.forface.covid.domain.util.serialize
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration
@@ -29,6 +35,22 @@ abstract class BaseWorker(appContext: Context, params: WorkerParameters) :
     protected fun success() = Result.success()
     protected fun failure(t: Throwable) = Result.failure().also { Timber.e(t) }
     protected fun retry(t: Throwable) = Result.retry().also { Timber.e(t) }
+
+    /** @return [Result] with a [Data] of [T] */
+    protected inline fun <reified T : Any> success(data: T) =
+        Result.success(workDataOf(data))
+
+    /** @see CoroutineWorker.setProgress with a [Data] of [T] */
+    protected suspend inline fun <reified T : Any> setProgress(data: T) =
+        setProgress(workDataOf(data))
+
+    /** @see ListenableWorker.setProgressAsync with a [Data] of [T] */
+    protected inline fun <reified T : Any> setProgressAsync(data: T) =
+        setProgressAsync(workDataOf(data))
+
+    /** @return [Data] of [T] */
+    protected inline fun <reified T : Any> workDataOf(data: T) =
+        androidx.work.workDataOf(SERIALIZED_DATA_KEY to data.serialize())
 
     /**
      * An element that can enqueue a [BaseWorker]
@@ -69,3 +91,12 @@ inline fun <reified W : ListenableWorker> PeriodicWorkRequestBuilder(
     flexTimeInterval.inSeconds.toLong(),
     TimeUnit.SECONDS
 )
+
+
+// region Serialization
+/** @return [T] deserialized from receiver [Data] */
+inline fun <reified T : Any> Data.deserialize(): T = getString(SERIALIZED_DATA_KEY)!!.deserialize()
+
+@PublishedApi // inline
+internal const val SERIALIZED_DATA_KEY = "serialized_data_key"
+// endregion

@@ -10,7 +10,16 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.produceIn
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import studio.forface.covid.android.R
+import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
+import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State
+import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
+import studio.forface.fluentnotifications.builder.channel
+import studio.forface.fluentnotifications.enum.NotificationImportance
+import studio.forface.fluentnotifications.setForeground
+import studio.forface.fluentnotifications.setForegroundAsync
+import studio.forface.fluentnotifications.showNotification
 import kotlin.time.Duration
 import kotlin.time.seconds
 
@@ -32,10 +41,10 @@ class DownloadUpdateWorker(
             for (state in downloadUpdateIfAvailable().produceIn(this)) {
 
                 when (state) {
-                    DownloadUpdateIfAvailable.State.Checking -> { /* noop */ }
-                    DownloadUpdateIfAvailable.State.UpToDate -> return@coroutineScope success()
-                    is DownloadUpdateIfAvailable.State.Downloading -> showProgress(state.progress)
-                    DownloadUpdateIfAvailable.State.AlreadyDownloaded, DownloadUpdateIfAvailable.State.Completed -> {
+                    State.Checking -> { /* noop */ }
+                    is State.Downloading -> showProgress(state.progress)
+                    State.UpToDate -> return@coroutineScope success()
+                    State.AlreadyDownloaded, State.Completed -> {
                         promptInstall()
                         return@coroutineScope success()
                     }
@@ -49,11 +58,49 @@ class DownloadUpdateWorker(
     }
 
     private fun showProgress(progress: Float) {
-        TODO("show progress")
+        setProgressAsync(progress)
+
+        setForegroundAsync(idRes = R.integer.notification_update_download) {
+
+            behaviour {
+                importance = NotificationImportance.LOW
+            }
+
+            channel {
+                idRes = R.string.notification_update_download_channel_id
+                nameRes = R.string.notification_update_download_channel_name
+                descriptionRes = R.string.notification_update_download_channel_desc
+            }
+
+            notification {
+                titleRes = R.string.notification_update_downloading_title
+                smallIconRes = R.drawable.ic_notification_virus
+            }
+        }
     }
 
+
     private fun promptInstall() {
-        TODO("prompt install")
+        applicationContext.showNotification(idRes = R.integer.notification_update_install) {
+
+            behaviour {
+                importance = NotificationImportance.HIGH
+            }
+
+            channel {
+                idRes = R.string.notification_update_install_channel_id
+                nameRes = R.string.notification_update_install_channel_name
+                descriptionRes = R.string.notification_update_install_channel_desc
+            }
+
+            notification {
+                titleRes = R.string.notification_update_install_title
+                contentTextRes = R.string.notification_update_install_content
+                smallIconRes = R.drawable.ic_notification_virus
+
+                onContentAction { start<PromptUpdateInstallReceiver>() }
+            }
+        }
     }
 
 
