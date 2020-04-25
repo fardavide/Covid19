@@ -9,7 +9,12 @@ import kotlin.time.Duration
  * @param block [RepeatingBlock]
  */
 @Suppress("TooGenericExceptionCaught")
-suspend inline fun repeatCatching(refreshInterval: Duration, errorInterval: Duration, block: RepeatingBlock) {
+suspend inline fun repeatCatching(
+    refreshInterval: Duration,
+    errorInterval: Duration,
+    errorBlock: (Throwable) -> Unit = {},
+    block: RepeatingBlock
+) {
     var count = 0
 
     while (true) {
@@ -17,6 +22,7 @@ suspend inline fun repeatCatching(refreshInterval: Duration, errorInterval: Dura
             block(count++)
             delay(refreshInterval)
         } catch (t: Throwable) {
+            errorBlock(t)
             delay(errorInterval)
         }
     }

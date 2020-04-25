@@ -5,8 +5,8 @@ import kotlinx.coroutines.withTimeoutOrNull
 import studio.forface.covid.test.CoroutinesTest
 import studio.forface.covid.test.assertBetween
 import studio.forface.covid.test.coroutinesTest
-import kotlin.time.milliseconds
 import kotlin.test.Test
+import kotlin.time.milliseconds
 
 internal class CommonUtilsTest : CoroutinesTest by coroutinesTest {
 
@@ -28,7 +28,7 @@ internal class CommonUtilsTest : CoroutinesTest by coroutinesTest {
 
         // WHEN
         withTimeoutOrNull(totalRunTime.toLong()) {
-            repeatCatching(refreshInterval.milliseconds, errorInterval.milliseconds, block)
+            repeatCatching(refreshInterval.milliseconds, errorInterval.milliseconds, block = block)
         }
 
         // THEN

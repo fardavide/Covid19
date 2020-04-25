@@ -9,8 +9,9 @@ import android.text.style.StyleSpan
  * are Bold
  */
 fun Int.toStyledText(): CharSequence {
+    val charsToStyle = 3
     return SpannableString(this.toString()).apply {
-        val (start, end) = (0 to length - 3).takeIf { it.second > 0 } ?: return@apply
+        val (start, end) = (0 to length - charsToStyle).takeIf { it.second > 0 } ?: return@apply
         setSpan(StyleSpan(BOLD), start, end, 0)
     }
 }

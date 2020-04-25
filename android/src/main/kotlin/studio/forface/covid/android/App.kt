@@ -8,6 +8,10 @@ import org.koin.core.module.Module
 import studio.forface.covid.android.service.DownloadUpdateWorker
 import timber.log.Timber
 
+/**
+ * Base [Application] that contains initialization for Android services and libs
+ * @author Davide Farella
+ */
 abstract class AbsApp : Application() {
 
     /** This should be implemented with a [Module] for `studio.forface.covid.android.classic` or

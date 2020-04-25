@@ -21,7 +21,7 @@ fun initVersions() {
     `android-work version` =                "2.4.0-alpha02" // Released: Apr 05, 2020
 
     // Others
-    `detekt version` =                      "1.6.0"         // Released: Feb 26, 2020
+    `detekt version` =                      "1.8.0"         // Released: Apr 20, 2020
     `fluentNotifications version` =         "0.1-alpha-6"   // Released: May 26, 2019
     `mockK version` =                       "1.9.3"         // Released:
     `sqlDelight version` =                  "1.2.2"         // Released: Jan 23, 2020
