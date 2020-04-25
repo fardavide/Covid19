@@ -1,5 +1,7 @@
-import studio.forface.easygradle.dsl.android.Version
-import studio.forface.easygradle.dsl.android.`constraint-layout`
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.project
+import org.gradle.kotlin.dsl.testImplementation
+import studio.forface.easygradle.dsl.android.*
 import studio.forface.easygradle.dsl.dokka
 import studio.forface.easygradle.dsl.implementation
 
@@ -9,7 +11,7 @@ plugins {
     id(PluginsDeps.kotlinAndroidExtensions)
 }
 
-projectVersion = Version(0, 1)
+projectVersion = Version(0, 3)
 android("classic")
 
 dependencies {
