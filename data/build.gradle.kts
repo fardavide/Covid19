@@ -1,5 +1,3 @@
-@file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
-
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
@@ -8,19 +6,12 @@ plugins {
 }
 
 kotlin {
-    /* Targets configuration omitted. 
-    *  To find out how to configure the targets, please follow the link:
-    *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+
+    jvm()
+    // js()
+
 
     sourceSets {
-        all {
-            listOf(
-                "experimental.ExperimentalTypeInference", "time.ExperimentalTime"
-            ).forEach { languageSettings.useExperimentalAnnotation("kotlin.$it") }
-        }
-
-        jvm()
-//        js()
 
         with(dependencyHandler) {
 
@@ -36,7 +27,9 @@ kotlin {
 
             jvm().compilations["main"]
 //            js().compilations["main"]
+
         }
+
     }
 }
 

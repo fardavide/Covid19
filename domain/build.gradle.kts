@@ -1,5 +1,3 @@
-@file:Suppress("LocalVariableName")
-
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import studio.forface.easygradle.dsl.*
 
@@ -9,9 +7,6 @@ plugins {
 }
 
 kotlin {
-    /* Targets configuration omitted.
-     * To find out how to configure the targets, please follow the link:
-     * https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
 
     jvm()
     js()
