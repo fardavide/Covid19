@@ -31,26 +31,28 @@ operator fun Stat.minus(other: Stat) = Stat(
 )
 
 /**
- * Create a diff from the most recent [Stat], based on given [duration]
- * Note: premises are:
- * * the [Collection] is already ordered
- * * the [Collection] is not Empty
- *
+ * @see diff
  * @return [Stat]
  */
-suspend fun <C : Collection<Stat>> C.diff(duration: Duration) = diff(DateTimeSpan(duration))
+suspend operator fun <C : Collection<Stat>> C.rem(
+    span: TimeSpan
+) = diff(span)
 
 /**
- * Create a diff from the most recent [Stat], based on given [span] of [TimeSpan]
- * Note: premises are:
- * * the [Collection] is already ordered
- * * the [Collection] is not Empty
- *
+ * @see diff
  * @return [Stat]
  */
 suspend fun <C : Collection<Stat>> C.diff(
     span: TimeSpan
 ) = diff(DateTimeSpan(MonthSpan(0), span))
+
+/**
+ * @see diff
+ * @return [Stat]
+ */
+suspend operator fun <C : Collection<Stat>> C.rem(
+    span: DateTimeSpan
+) = diff(span)
 
 /**
  * Create a diff from the most recent [Stat], based on given [span] of [DateTimeSpan]

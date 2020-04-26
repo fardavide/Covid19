@@ -41,7 +41,7 @@
         android:id="@+id/titles_end_barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierMargin="@dimen/margin_small"
+        app:barrierMargin="@dimen/margin_medium"
         app:constraint_referenced_ids="infected_title_text, deaths_title_text, recovered_title_text"
         app:barrierDirection="end" />
 
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/infected_title_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/data_end_barrier"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/titles_end_barrier"
         tools:text="99" />
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/deaths_title_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/data_end_barrier"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/titles_end_barrier"
         tools:text="99999" />
@@ -73,9 +73,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/recovered_title_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/data_end_barrier"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/titles_end_barrier"
         tools:text="99" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/data_end_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierMargin="@dimen/margin_medium"
+        app:constraint_referenced_ids="infected_data_text, deaths_data_text, recovered_data_text"
+        app:barrierDirection="end" />
+
+    <TextView
+        android:id="@+id/infected_diff_text"
+        style="@style/Theme.App.TextAppearance.Stat.Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/infected_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/data_end_barrier"
+        tools:text="+99" />
+
+    <TextView
+        android:id="@+id/deaths_diff_text"
+        style="@style/Theme.App.TextAppearance.Stat.Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/deaths_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/data_end_barrier"
+        tools:text="+99999" />
+
+    <TextView
+        android:id="@+id/recovered_diff_text"
+        style="@style/Theme.App.TextAppearance.Stat.Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/recovered_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/data_end_barrier"
+        tools:text="+99" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

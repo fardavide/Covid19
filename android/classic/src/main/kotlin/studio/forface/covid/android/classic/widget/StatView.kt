@@ -1,5 +1,6 @@
 package studio.forface.covid.android.classic.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.StyleRes
@@ -26,9 +27,20 @@ class StatView @JvmOverloads constructor(
         inflate(R.layout.item_stat, attachToRoot = true)
     }
 
-    fun setStat(infected: Int, deaths: Int, recovered: Int) {
+    @SuppressLint("SetTextI18n")
+    fun setStat(
+        infected: Int,
+        infectedDiff: Int,
+        deaths: Int,
+        deathsDiff: Int,
+        recovered: Int,
+        recoveredDiff: Int
+    ) {
         infected_data_text.text = infected.toStyledText()
+        infected_diff_text.text = "+ ${infectedDiff.toStyledText()}"
         deaths_data_text.text = deaths.toStyledText()
+        deaths_diff_text.text = "+ ${deathsDiff.toStyledText()}"
         recovered_data_text.text = recovered.toStyledText()
+        recovered_diff_text.text = "+ ${recoveredDiff.toStyledText()}"
     }
 }

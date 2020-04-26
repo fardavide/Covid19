@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
 internal class StatTest : CoroutinesTest by coroutinesTest {
 
     @Test
-    fun `diff works correctly`() = runBlockingTest {
+    fun `diff works correctly with updated stats`() = runBlockingTest {
 
         // GIVEN
         val now = DateTime.now()
@@ -35,5 +35,45 @@ internal class StatTest : CoroutinesTest by coroutinesTest {
         // Then
         assertEquals(stats[0] - stats[1], diff1)
         assertEquals(stats[0] - stats[4], diff2)
+    }
+
+    @Test
+    fun `diff works correctly with recent stats`() = runBlockingTest {
+
+        // GIVEN
+        val now = DateTime.now()
+        val stats = listOf(
+            Stat(75, 40, 63, now - 6.hours),
+            Stat(72, 39, 53, now - 9.hours),
+            Stat(60, 22, 51, now - 12.hours),
+            Stat(54, 14, 20, now - 15.hours)
+        )
+
+        // WHEN
+        val diff1 = stats.diff(4.hours)
+        val diff2 = stats.diff(11.hours)
+
+        // Then
+        assertEquals(stats[0] - stats[0], diff1)
+        assertEquals(stats[0] - stats[2], diff2)
+    }
+
+    @Test
+    fun `diff works correctly with outdated stats`() = runBlockingTest {
+
+        // GIVEN
+        val now = DateTime.now()
+        val stats = listOf(
+            Stat(75, 40, 63, now - 12.hours),
+            Stat(72, 39, 53, now - 15.hours)
+        )
+
+        // WHEN
+        val diff1 = stats.diff(4.hours)
+        val diff2 = stats.diff(11.hours)
+
+        // Then
+        assertEquals(stats[0] - stats[0], diff1)
+        assertEquals(stats[0] - stats[0], diff2)
     }
 }

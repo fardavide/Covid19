@@ -8,5 +8,5 @@ import studio.forface.covid.domain.mapper.OneWayMapper
  */
 interface UiModelMapper<in BusinessModel, out UiModel> : OneWayMapper<BusinessModel, UiModel> {
 
-    fun BusinessModel.toUiModel(): UiModel
+    suspend fun BusinessModel.toUiModel(): UiModel
 }
