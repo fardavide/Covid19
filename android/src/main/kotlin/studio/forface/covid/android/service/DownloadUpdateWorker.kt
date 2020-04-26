@@ -14,10 +14,7 @@ import studio.forface.covid.android.R
 import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State
-import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
-import studio.forface.fluentnotifications.builder.channel
 import studio.forface.fluentnotifications.enum.NotificationImportance
-import studio.forface.fluentnotifications.setForeground
 import studio.forface.fluentnotifications.setForegroundAsync
 import studio.forface.fluentnotifications.showNotification
 import kotlin.time.Duration

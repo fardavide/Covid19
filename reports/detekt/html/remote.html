@@ -85,103 +85,33 @@ pre {
 
 <div>
   <ul>
-    <li>1,035 lines of code (loc)</li>
+    <li>1,028 lines of code (loc)</li>
     <li>812 source lines of code (sloc)</li>
     <li>561 logical lines of code (lloc)</li>
-    <li>77 comment lines of code (cloc)</li>
+    <li>70 comment lines of code (cloc)</li>
     <li>58 McCabe complexity (mcc)</li>
-    <li>8 number of total code smells</li>
-    <li>9% comment source ratio</li>
+    <li>1 number of total code smells</li>
+    <li>8% comment source ratio</li>
     <li>103 mcc per 1,000 lloc</li>
-    <li>14 code smells per 1,000 lloc</li>
+    <li>1 code smells per 1,000 lloc</li>
   </ul>
 </div>
 
 
 <h2>Findings</h2>
-<div>Total: 8
-  <h3>style: 8</h3>
+<div>Total: 1
+  <h3>style: 1</h3>
   <details id="ForbiddenComment" open="open">
-    <summary class="rule-container"><span class="rule">ForbiddenComment: 8 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 1 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
     <ul>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/CountryApiModelMapper.kt:68:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  65 </span>    }
-<span class="lineno">  66 </span>}
-<span class="lineno">  67 </span>
-<span class="lineno">  68 </span><span class="error">// TODO replace CountrySmallStatApiModel with CountryApiModel, which does not exist ATM</span>
-<span class="lineno">  69 </span>internal class CountryFromSmallStatApiModelMapper(
-<span class="lineno">  70 </span>    private val idMapper: CountryIdApiModelMapper,
-<span class="lineno">  71 </span>    private val nameMapper: NameApiModelMapper
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/CountryApiModelMapper.kt:77:33</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  74 </span>    override fun CountrySmallStatApiModel.toEntity() = Country(
-<span class="lineno">  75 </span>        id = idMapper { id.toEntity() },
-<span class="lineno">  76 </span>        name = nameMapper { name.toEntity() },
-<span class="lineno">  77 </span>        provinces = emptyList() <span class="error">// TODO not supported</span>
-<span class="lineno">  78 </span>    )
-<span class="lineno">  79 </span>}
-<span class="lineno">  80 </span>
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/CountryApiModelMapper.kt:81:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  78 </span>    )
-<span class="lineno">  79 </span>}
-<span class="lineno">  80 </span>
-<span class="lineno">  81 </span><span class="error">// TODO replace CountryStatApiModel with CountryApiModel, which does not exist ATM</span>
-<span class="lineno">  82 </span>internal class CountryFromStatApiModelMapper(
-<span class="lineno">  83 </span>    private val provinceMapper: ProvinceFromStatApiModelMapper,
-<span class="lineno">  84 </span>    private val idMapper: CountryIdApiModelMapper,
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/CountryApiModelMapper.kt:95:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  92 </span>    )
-<span class="lineno">  93 </span>}
-<span class="lineno">  94 </span>
-<span class="lineno">  95 </span><span class="error">// TODO replace CountryFullStatApiModel with CountryApiModel, which does not exist ATM</span>
-<span class="lineno">  96 </span>internal class CountryFromFullStatApiModelMapper(
-<span class="lineno">  97 </span>    private val provinceMapper: ProvinceFromFullStatApiModelMapper,
-<span class="lineno">  98 </span>    private val idMapper: CountryIdApiModelMapper,
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/ProvinceApiModelMapper.kt:39:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  36 </span>    }
-<span class="lineno">  37 </span>}
-<span class="lineno">  38 </span>
-<span class="lineno">  39 </span><span class="error">// TODO replace ProvinceStatApiModel with ProvinceApiModel, which does not exist ATM</span>
-<span class="lineno">  40 </span>internal class ProvinceFromStatApiModelMapper(
-<span class="lineno">  41 </span>    private val idMapper: ProvinceIdApiModelMapper,
-<span class="lineno">  42 </span>    private val nameMapper: NameApiModelMapper,
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/ProvinceApiModelMapper.kt:53:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  50 </span>    )
-<span class="lineno">  51 </span>}
-<span class="lineno">  52 </span>
-<span class="lineno">  53 </span><span class="error">// TODO replace ProvinceFullStatApiModel with ProvinceApiModel, which does not exist ATM</span>
-<span class="lineno">  54 </span>internal class ProvinceFromFullStatApiModelMapper(
-<span class="lineno">  55 </span>    private val idMapper: ProvinceIdApiModelMapper,
-<span class="lineno">  56 </span>    private val nameMapper: NameApiModelMapper,
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/WorldApiModelMapper.kt:55:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  52 </span>    }
-<span class="lineno">  53 </span>}
-<span class="lineno">  54 </span>
-<span class="lineno">  55 </span><span class="error">// TODO replace WorldStatApiModel with WorldApiModel, which does not exist ATM</span>
-<span class="lineno">  56 </span>internal class WorldFromStatApiModelMapper(
-<span class="lineno">  57 </span>    private val idMapper: WorldIdApiModelMapper,
-<span class="lineno">  58 </span>    private val nameMapper: NameApiModelMapper,
-</code></pre>
-      </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/WorldApiModelMapper.kt:69:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
-        <pre><code><span class="lineno">  66 </span>    )
-<span class="lineno">  67 </span>}
-<span class="lineno">  68 </span>
-<span class="lineno">  69 </span><span class="error">// TODO replace WorldFullStatApiModel with WorldApiModel, which does not exist ATM</span>
-<span class="lineno">  70 </span>internal class WorldFromFullStatApiModelMapper(
-<span class="lineno">  71 </span>    private val countyMapper: CountryFromStatApiModelMapper,
-<span class="lineno">  72 </span>    private val idMapper: WorldIdApiModelMapper,
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/data/remote/src/commonMain/kotlin/studio/forface/covid/data/remote/mapper/CountryApiModelMapper.kt:76:33</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  73 </span>    override fun CountrySmallStatApiModel.toEntity() = Country(
+<span class="lineno">  74 </span>        id = idMapper { id.toEntity() },
+<span class="lineno">  75 </span>        name = nameMapper { name.toEntity() },
+<span class="lineno">  76 </span>        provinces = emptyList() <span class="error">// TODO not supported</span>
+<span class="lineno">  77 </span>    )
+<span class="lineno">  78 </span>}
+<span class="lineno">  79 </span>
 </code></pre>
       </li>
     </ul>
@@ -189,7 +119,7 @@ pre {
 </div>
 
 
-generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 14:00:01 UTC.
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 16:18:56 UTC.
 
 </body>
 </html>

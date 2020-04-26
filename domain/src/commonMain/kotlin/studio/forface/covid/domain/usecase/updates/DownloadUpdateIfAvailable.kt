@@ -38,7 +38,6 @@ class DownloadUpdateIfAvailable(
     private val buildDownloadableUpdateFileName: BuildDownloadableUpdateFileName
 ) {
 
-    // TODO: convert to Channel
     suspend operator fun invoke() = callbackFlow {
         send(State.Checking)
         val versionToDownload = async { api.getLastUpdateVersion() }

@@ -8,11 +8,9 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ListenableWorker
 import androidx.work.ListenableWorker.Result
 import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
-import androidx.work.workDataOf
 import org.koin.core.KoinComponent
 import studio.forface.covid.domain.util.deserialize
 import studio.forface.covid.domain.util.serialize

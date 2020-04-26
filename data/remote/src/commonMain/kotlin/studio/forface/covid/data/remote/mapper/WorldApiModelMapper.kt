@@ -52,7 +52,6 @@ internal class WorldFullStatApiModelMapper(
     }
 }
 
-// TODO replace WorldStatApiModel with WorldApiModel, which does not exist ATM
 internal class WorldFromStatApiModelMapper(
     private val idMapper: WorldIdApiModelMapper,
     private val nameMapper: NameApiModelMapper,
@@ -66,7 +65,6 @@ internal class WorldFromStatApiModelMapper(
     )
 }
 
-// TODO replace WorldFullStatApiModel with WorldApiModel, which does not exist ATM
 internal class WorldFromFullStatApiModelMapper(
     private val countyMapper: CountryFromStatApiModelMapper,
     private val idMapper: WorldIdApiModelMapper,

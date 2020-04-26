@@ -65,7 +65,6 @@ internal class CountryFullStatApiModelMapper(
     }
 }
 
-// TODO replace CountrySmallStatApiModel with CountryApiModel, which does not exist ATM
 internal class CountryFromSmallStatApiModelMapper(
     private val idMapper: CountryIdApiModelMapper,
     private val nameMapper: NameApiModelMapper
@@ -78,7 +77,6 @@ internal class CountryFromSmallStatApiModelMapper(
     )
 }
 
-// TODO replace CountryStatApiModel with CountryApiModel, which does not exist ATM
 internal class CountryFromStatApiModelMapper(
     private val provinceMapper: ProvinceFromStatApiModelMapper,
     private val idMapper: CountryIdApiModelMapper,
@@ -92,7 +90,6 @@ internal class CountryFromStatApiModelMapper(
     )
 }
 
-// TODO replace CountryFullStatApiModel with CountryApiModel, which does not exist ATM
 internal class CountryFromFullStatApiModelMapper(
     private val provinceMapper: ProvinceFromFullStatApiModelMapper,
     private val idMapper: CountryIdApiModelMapper,

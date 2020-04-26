@@ -1,7 +1,6 @@
 package studio.forface.covid.domain.entity
 
 import com.soywiz.klock.DateTime
-import okio.BufferedSource
 
 interface Version {
     val code: Int
