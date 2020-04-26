@@ -41,8 +41,8 @@ class DownloadUpdateWorker(
                     State.Checking -> { /* noop */ }
                     is State.Downloading -> showProgress(state.progress)
                     State.UpToDate -> return@coroutineScope success()
-                    State.AlreadyDownloaded, State.Completed -> {
-                        promptInstall()
+                    is State.ReadyToInstall -> {
+                        promptInstall(state.version.name)
                         return@coroutineScope success()
                     }
                 }
@@ -77,7 +77,7 @@ class DownloadUpdateWorker(
     }
 
 
-    private fun promptInstall() {
+    private fun promptInstall(versionName: String) {
         applicationContext.showNotification(idRes = R.integer.notification_update_install) {
 
             behaviour {
@@ -91,7 +91,7 @@ class DownloadUpdateWorker(
             }
 
             notification {
-                titleRes = R.string.notification_update_install_title
+                title = applicationContext.getString(R.string.notification_update_install_title_args, versionName)
                 contentTextRes = R.string.notification_update_install_content
                 smallIconRes = R.drawable.ic_notification_virus
 
