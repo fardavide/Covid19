@@ -41,23 +41,26 @@ class DownloadUpdateIfAvailable(
     // TODO: convert to Channel
     suspend operator fun invoke() = callbackFlow {
         send(State.Checking)
-        val versionToDownload = async { api.getLastUpdateVersion() }
-        val downloadedVersion = async { getInstallableUpdate()?.updateVersion ?: Version.Empty }
+        val versionToDownloadAsync = async { api.getLastUpdateVersion() }
+        val downloadedVersionAsync = async { getInstallableUpdate()?.updateVersion ?: Version.Empty }
+
+        // This is required to be completed before proceed
+        val versionToDownload = versionToDownloadAsync.await()
 
         @Suppress("CascadeIf") // More readable than a when statement
-        if (versionToDownload.await() <= getAppVersion()) {
+        if (versionToDownload <= getAppVersion()) {
             send(State.UpToDate)
 
-        } else if (versionToDownload.getCompleted() <= downloadedVersion.await()) {
-            send(State.AlreadyDownloaded)
+        } else if (versionToDownload <= downloadedVersionAsync.await()) {
+            send(State.AlreadyDownloaded(versionToDownload))
 
         } else {
             send(State.Downloading(0f))
             // TODO: updated progress
-            val name = buildDownloadableUpdateFileName(versionToDownload.getCompleted())
+            val name = buildDownloadableUpdateFileName(versionToDownload)
             repository.storeUpdate(api.getUpdateFile(name), name)
 
-            send(State.Completed)
+            send(State.Completed(versionToDownload))
         }
         close()
     }
@@ -70,8 +73,11 @@ class DownloadUpdateIfAvailable(
         /** App is up to date: no need to download */
         object UpToDate : State()
 
-        /** The app is not up to date, but the latest version is already downloaded and ready to be installed */
-        object AlreadyDownloaded : State()
+        /**
+         * The app is not up to date, but the latest version is already downloaded and ready to be installed
+         * Implements [ReadyToInstall]
+         */
+        class AlreadyDownloaded(override val version: Version) : State(), ReadyToInstall
 
         /**
          * The update is being downloaded
@@ -79,7 +85,16 @@ class DownloadUpdateIfAvailable(
          */
         class Downloading(val progress: Float) : State()
 
-        /** The download is completed */
-        object Completed : State()
+        /**
+         * The download is completed
+         * Implements [ReadyToInstall]
+         */
+        class Completed(override val version: Version) : State(), ReadyToInstall
+
+
+        /** The updated is ready to be installed */
+        interface ReadyToInstall {
+            val version: Version
+        }
     }
 }
