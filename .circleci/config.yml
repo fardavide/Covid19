@@ -9,13 +9,15 @@ jobs:
         
     steps:
       - checkout
-      - run:
-          command: ./gradlew build
-  
-  test:
-    executor: android/android
 
-    steps:
-      - checkout
       - run:
+          name: Build
+          command: ./gradlew build
+
+      - run:
+          name: Domain tests
+          command: ./gradlew :domain:test
+
+      - run:
+          name: Android tests
           command: ./gradlew testDebugUnitTest
