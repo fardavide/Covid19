@@ -22,8 +22,17 @@ class CountryStatActivity : AbsCountryStatActivity() {
 
     /** Called when [CountryStatsUiModel] is available */
     override fun onStatsResult(result: CountryStatsUiModel) {
-        toolbar.title = result.countryName.s
-        stat_view.setStat(result.infectedCount, result.deathsCount, result.recoveredCount)
+        with(result) {
+            toolbar.title = countryName.s
+            stat_view.setStat(
+                infectedCount,
+                infectedDiff,
+                deathsCount,
+                deathsDiff,
+                recoveredCount,
+                recoveredDiff
+            )
+        }
     }
 
     /** Called when an Error is received while getting Stats */

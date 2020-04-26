@@ -16,7 +16,7 @@ import studio.forface.covid.domain.util.formatDate
  */
 class CountryStatUiModelMapper : UiModelMapper<CountryStat, CountryStatsUiModel> {
 
-    override suspend fun CountryStat.toUiModel(): CountryStatsUiModel {
+    override fun CountryStat.toUiModel(): CountryStatsUiModel {
         val lastStat = stats.first()
         val diff = stats % 1.days
         var temp = lastStat

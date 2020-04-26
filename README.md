@@ -3,7 +3,7 @@
 
 
 ## Status
-* Android Classic: **0.3** - _released on: Apr 25, 2020_
+* Android Classic: **0.4** - _released on: Apr 26, 2020_
 * Android Compose: TODO
 * Web: TODO
 * CLI: TODO
@@ -42,4 +42,3 @@ As I said, every contribution is appreciated, but particularly the following Pla
 * jvm
   * CLI
   * Android Compose
-  

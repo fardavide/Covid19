@@ -34,7 +34,7 @@ operator fun Stat.minus(other: Stat) = Stat(
  * @see diff
  * @return [Stat]
  */
-suspend operator fun <C : Collection<Stat>> C.rem(
+operator fun <C : Collection<Stat>> C.rem(
     span: TimeSpan
 ) = diff(span)
 
@@ -42,7 +42,7 @@ suspend operator fun <C : Collection<Stat>> C.rem(
  * @see diff
  * @return [Stat]
  */
-suspend fun <C : Collection<Stat>> C.diff(
+fun <C : Collection<Stat>> C.diff(
     span: TimeSpan
 ) = diff(DateTimeSpan(MonthSpan(0), span))
 
@@ -50,7 +50,7 @@ suspend fun <C : Collection<Stat>> C.diff(
  * @see diff
  * @return [Stat]
  */
-suspend operator fun <C : Collection<Stat>> C.rem(
+operator fun <C : Collection<Stat>> C.rem(
     span: DateTimeSpan
 ) = diff(span)
 
@@ -62,9 +62,9 @@ suspend operator fun <C : Collection<Stat>> C.rem(
  *
  * @return [Stat]
  */
-suspend fun <C : Collection<Stat>> C.diff(
+fun <C : Collection<Stat>> C.diff(
     span: DateTimeSpan
-): Stat = coroutineScope {
+): Stat {
     check(isNotEmpty()) { "The Collection is empty" }
 
     // Take most recent stat
@@ -79,7 +79,7 @@ suspend fun <C : Collection<Stat>> C.diff(
     }
 
     // Find item with timestamp closest to mostRecent's timestamp, minus the given duration
-    mostRecent - inRange.takeLast(2).minBy {
+    return mostRecent - inRange.takeLast(2).minBy {
         abs((mostRecent.timestamp - span - it.timestamp).seconds)
     }!!
 }
