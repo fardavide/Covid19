@@ -2,6 +2,7 @@ package studio.forface.covid.domain.util
 
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTime
+import com.soywiz.klock.DateTimeRange
 import kotlinx.coroutines.delay
 import kotlin.time.Duration
 
@@ -14,3 +15,9 @@ fun DateTime.formatDateTime() = format(DefaultDateTimeFormat)
 val DefaultDateFormat = DateFormat("EEE, dd MMM yyyy")
 val DefaultTimeFormat = DateFormat("HH:mm:ss z")
 val DefaultDateTimeFormat = DateFormat("${DefaultDateFormat.format} ${DefaultTimeFormat.format}")
+
+/**
+ * @return [com.soywiz.klock.DateTimeSpan] from given [duration]
+ * Precision is in seconds
+ */
+fun DateTimeSpan(duration: Duration) = com.soywiz.klock.DateTimeSpan(duration.inSeconds.toInt())
