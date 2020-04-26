@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Domain tests
-          command: ./gradlew :domain:test
+          command: ./gradlew :domain:allTest
 
       - run:
           name: Android tests
