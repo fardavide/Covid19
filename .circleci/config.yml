@@ -4,18 +4,59 @@ orbs:
  android: circleci/android@0.2.1
 
 jobs:
-  build:
+
+  analyze:
     executor: android/android
         
     steps:
       - checkout
+
+      # Analyze
       - run:
-          command: ./gradlew build
-  
+          name: Detekt analysis
+          command: ./gradlew detekt
+
   test:
     executor: android/android
 
     steps:
       - checkout
+
+      # Domain
       - run:
-          command: ./gradlew testDebugUnitTest
+          name: Domain tests
+          command: ./gradlew :domain:allTest
+
+      # Data
+      - run:
+          name: Data tests
+          command: ./gradlew :data:allTest
+
+      - run:
+          name: Data Local tests
+          command: ./gradlew :data:local:allTest
+
+      - run:
+          name: Data Remote tests
+          command: ./gradlew :data:remote:allTest
+
+      # Android
+      - run:
+          name: Android tests
+          command: ./gradlew :android:testDebugUnitTest
+
+      - run:
+          name: Android Classic tests
+          command: ./gradlew :android:classic:testDebugUnitTest
+
+      # Command Line
+      - run:
+          name: Command Line tests
+          command: ./gradlew :commandline:test
+
+
+workflows:
+  analyze_test:
+    jobs:
+      - analyze
+      - test
