@@ -72,6 +72,7 @@ val DependencyHandler.`clikt` get() = clikt("multiplatform")
 val DependencyHandler.`clikt-jvm` get() = clikt()
 val DependencyHandler.`koin` get() = koin("core") version `koin3 version`
 val DependencyHandler.`koin-android` get() = koin("android")
+val DependencyHandler.`koin-test` get() = koin("test")
 val DependencyHandler.`koin-viewModel` get() = koin("androidx-viewmodel")
 val DependencyHandler.`klock` get() = klock()
 val DependencyHandler.`klock-android` get() = klock("android")

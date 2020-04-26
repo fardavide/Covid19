@@ -85,8 +85,8 @@ pre {
 
 <div>
   <ul>
-    <li>91 lines of code (loc)</li>
-    <li>74 source lines of code (sloc)</li>
+    <li>92 lines of code (loc)</li>
+    <li>75 source lines of code (sloc)</li>
     <li>37 logical lines of code (lloc)</li>
     <li>0 comment lines of code (cloc)</li>
     <li>8 McCabe complexity (mcc)</li>
@@ -104,14 +104,14 @@ pre {
   <details id="UnusedPrivateMember" open="open">
     <summary class="rule-container"><span class="rule">UnusedPrivateMember: 1 </span><span class="description">Private member is unused.</span></summary>
     <ul>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/commandLine/src/main/kotlin/studio/forface/covid/main.kt:29:5</span><span class="message">Private property province is unused.</span>
-        <pre><code><span class="lineno">  26 </span>    private val refresh by option(help = &quot;Refresh every seconds&quot;).int().default(60)
-<span class="lineno">  27 </span>    private val countries by option(help = &quot;Get list of available Countries&quot;).flag()
-<span class="lineno">  28 </span>    private val country by option(help = &quot;Get stats for Country&quot;).convert { CountryId(it) }
-<span class="lineno">  29 </span>    <span class="error">private val province by option(help = &quot;Get stats for Province&quot;)</span>
-<span class="lineno">  30 </span>
-<span class="lineno">  31 </span>    override fun run() {
-<span class="lineno">  32 </span>        when {
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/commandLine/src/main/kotlin/studio/forface/covid/main.kt:30:5</span><span class="message">Private property province is unused.</span>
+        <pre><code><span class="lineno">  27 </span>    private val refresh by option(help = &quot;Refresh every seconds&quot;).int().default(60)
+<span class="lineno">  28 </span>    private val countries by option(help = &quot;Get list of available Countries&quot;).flag()
+<span class="lineno">  29 </span>    private val country by option(help = &quot;Get stats for Country&quot;).convert { CountryId(it) }
+<span class="lineno">  30 </span>    <span class="error">private val province by option(help = &quot;Get stats for Province&quot;)</span>
+<span class="lineno">  31 </span>
+<span class="lineno">  32 </span>    override fun run() {
+<span class="lineno">  33 </span>        when {
 </code></pre>
       </li>
     </ul>
@@ -119,7 +119,7 @@ pre {
 </div>
 
 
-generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 09:58:49 UTC.
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 13:58:29 UTC.
 
 </body>
 </html>

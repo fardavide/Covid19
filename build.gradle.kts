@@ -1,6 +1,7 @@
 import io.gitlab.arturbosch.detekt.DetektPlugin
 import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import studio.forface.easygradle.dsl.android.*
 import studio.forface.easygradle.dsl.version
 
 initVersions()
@@ -38,6 +39,8 @@ allprojects {
 }
 
 subprojects {
+    // Set default version
+    projectVersion = Version(0, 0)
 
     // Setup KDoc and archives
     if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {

@@ -11,6 +11,7 @@ import com.github.ajalt.clikt.parameters.types.int
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import org.koin.core.KoinComponent

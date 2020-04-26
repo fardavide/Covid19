@@ -64,7 +64,8 @@ kotlin {
                 dependencies {
                     api(
                         `kotlin-js`,
-                        `coroutines-core-js`
+                        `coroutines-core-js`,
+                        `serialization-js`
                     )
                 }
             }

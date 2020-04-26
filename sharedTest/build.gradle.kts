@@ -30,7 +30,8 @@ kotlin {
                     api(
                         `kotlin-test-common`,
                         `kotlin-test-annotations`,
-                        `coroutines-test`
+                        `coroutines-test`,
+                        `koin-test`
                     )
                 }
             }

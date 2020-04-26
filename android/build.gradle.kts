@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.testImplementation
 import studio.forface.easygradle.dsl.*
 import studio.forface.easygradle.dsl.android.*
 
