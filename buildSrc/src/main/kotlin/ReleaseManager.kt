@@ -36,6 +36,11 @@ class ReleaseManager internal constructor(project: Project) : Project by project
     }
 
     private fun move(folderName: String, archiveType: ArchiveType) {
+        if (projectVersion.versionCode <= 0) {
+            shouldGenerateKdoc = true
+            return
+        }
+
         // Setup folder
         val newDir = File(rootDir, folderName + File.separator + fullName)
         if (!newDir.exists()) newDir.mkdirs()
@@ -109,7 +114,7 @@ class ReleaseManager internal constructor(project: Project) : Project by project
         val Project.APK_DIRECTORY get() = File(buildDir, "outputs" + File.separator + "apk")
         val Project.README_FILE get() = File(rootDir, "README.md")
         val Project.README_VERSION_REGEX get() = readmeVersion(readableName, "(.+)", "(.+)").toRegex()
-        fun Project.RELEASES_FILE(parentDir: File) = File(parentDir, "releases.txt")?.also { if (!it.exists()) it.createNewFile() }
+        fun Project.RELEASES_FILE(parentDir: File) = File(parentDir, "releases.txt").also { if (!it.exists()) it.createNewFile() }
         val Project.RELEASE_VERSION_REGEX get() = releaseVersion(projectVersion, "(.+)").toRegex()
 
         @OptIn(ExperimentalStdlibApi::class) // String.capitalize(Locale)
