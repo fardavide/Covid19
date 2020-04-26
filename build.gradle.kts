@@ -1,13 +1,5 @@
-@file:Suppress("LocalVariableName", "VariableNaming")
-
 import io.gitlab.arturbosch.detekt.DetektPlugin
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.detekt
 import org.gradle.kotlin.dsl.kotlin
-import org.gradle.kotlin.dsl.maven
-import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.repositories
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import studio.forface.easygradle.dsl.version
 
@@ -46,7 +38,6 @@ allprojects {
 }
 
 subprojects {
-    projectVersion = studio.forface.easygradle.dsl.android.Version(0, 0)
 
     // Setup KDoc and archives
     if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {
@@ -108,12 +99,15 @@ subprojects {
             // observe findings in your browser with structure and code snippets
             html {
                 enabled = true
-                destination = File("$rootDir/reports/detekt.yml")
+                destination = File("$rootDir/reports/detekt/html/$name.html")
             }
             // checkstyle like format mainly for integrations like Jenkins
             xml.enabled = false
             // similar to the console output, contains issue signature to edit baseline files
-            txt.enabled = false
+            txt {
+                enabled = true
+                destination = File("$rootDir/reports/detekt/txt/$name.txt")
+            }
         }
     }
 

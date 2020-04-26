@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+  display: block;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+  display: block;
+  margin-top: 1pt;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+pre {
+  border: 1px solid #e0e0e0;
+  overflow: scroll;
+}
+.lineno {
+  color: #999999;
+  background-color: #f0f0f0;
+}
+.error {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+}
+.exception {
+  color: #b60808;
+  display: inline-block;
+  background-color: #ecdada;
+  border-color: #b60808;
+  border-radius: 10px;
+  border: solid 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<div>
+  <ul>
+    <li>17 number of kt files</li>
+    <li>9 number of packages</li>
+    <li>17 number of classes</li>
+    <li>37 number of functions</li>
+    <li>33 number of properties</li>
+  </ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul>
+    <li>779 lines of code (loc)</li>
+    <li>495 source lines of code (sloc)</li>
+    <li>266 logical lines of code (lloc)</li>
+    <li>143 comment lines of code (cloc)</li>
+    <li>57 McCabe complexity (mcc)</li>
+    <li>6 number of total code smells</li>
+    <li>28% comment source ratio</li>
+    <li>214 mcc per 1,000 lloc</li>
+    <li>22 code smells per 1,000 lloc</li>
+  </ul>
+</div>
+
+
+<h2>Findings</h2>
+<div>Total: 6
+  <h3>style: 6</h3>
+  <details id="ForbiddenComment" open="open">
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 1 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/error/searchErrorStates.kt:14:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  11 </span>/** [ViewState.Error] representing that no results are found for the given query */
+<span class="lineno">  12 </span>class NoResultError(query: Name) :
+<span class="lineno">  13 </span>    ViewState.Error(IllegalStateException(&quot;No results&quot;), R.string.error_no_results)
+<span class="lineno">  14 </span><span class="error">// FIXME:    ViewState.Error(IllegalStateException(&quot;No results&quot;), R.string.error_no_results_arg_name, query.s)</span>
+<span class="lineno">  15 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="NewLineAtEndOfFile" open="open">
+    <summary class="rule-container"><span class="rule">NewLineAtEndOfFile: 1 </span><span class="description">Checks whether files end with a line separator.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/receiver/PromptUpdateInstallReceiver.kt:52:1</span><span class="message">The file PromptUpdateInstallReceiver.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  49 </span>            context.startActivity(install)
+<span class="lineno">  50 </span>        }
+<span class="lineno">  51 </span>    }
+<span class="lineno">  52 </span><span class="error">}</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UnusedImports" open="open">
+    <summary class="rule-container"><span class="rule">UnusedImports: 3 </span><span class="description">Unused Imports are dead code and should be removed.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/BaseWorker.kt:11:1</span><span class="message">The import 'androidx.work.WorkInfo' is unused.</span>
+        <pre><code><span class="lineno">   8 </span>import androidx.work.ListenableWorker
+<span class="lineno">   9 </span>import androidx.work.ListenableWorker.Result
+<span class="lineno">  10 </span>import androidx.work.PeriodicWorkRequest
+<span class="lineno">  11 </span><span class="error">import androidx.work.WorkInfo</span>
+<span class="lineno">  12 </span>import androidx.work.WorkManager
+<span class="lineno">  13 </span>import androidx.work.WorkRequest
+<span class="lineno">  14 </span>import androidx.work.WorkerParameters
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:17:1</span><span class="message">The import 'studio.forface.covid.domain.usecase.updates.GetInstallableUpdate' is unused.</span>
+        <pre><code><span class="lineno">  14 </span>import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
+<span class="lineno">  15 </span>import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
+<span class="lineno">  16 </span>import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State
+<span class="lineno">  17 </span><span class="error">import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate</span>
+<span class="lineno">  18 </span>import studio.forface.fluentnotifications.builder.channel
+<span class="lineno">  19 </span>import studio.forface.fluentnotifications.enum.NotificationImportance
+<span class="lineno">  20 </span>import studio.forface.fluentnotifications.setForeground
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:20:1</span><span class="message">The import 'studio.forface.fluentnotifications.setForeground' is unused.</span>
+        <pre><code><span class="lineno">  17 </span>import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
+<span class="lineno">  18 </span>import studio.forface.fluentnotifications.builder.channel
+<span class="lineno">  19 </span>import studio.forface.fluentnotifications.enum.NotificationImportance
+<span class="lineno">  20 </span><span class="error">import studio.forface.fluentnotifications.setForeground</span>
+<span class="lineno">  21 </span>import studio.forface.fluentnotifications.setForegroundAsync
+<span class="lineno">  22 </span>import studio.forface.fluentnotifications.showNotification
+<span class="lineno">  23 </span>import kotlin.time.Duration
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UnusedPrivateMember" open="open">
+    <summary class="rule-container"><span class="rule">UnusedPrivateMember: 1 </span><span class="description">Private member is unused.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/error/searchErrorStates.kt:12:21</span><span class="message">Private property query is unused.</span>
+        <pre><code><span class="lineno">   9 </span>    ViewState.Error(IllegalArgumentException(&quot;No query&quot;), R.string.error_no_query)
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>/** [ViewState.Error] representing that no results are found for the given query */
+<span class="lineno">  12 </span>class NoResultError(<span class="error">query: Name</span>) :
+<span class="lineno">  13 </span>    ViewState.Error(IllegalStateException(&quot;No results&quot;), R.string.error_no_results)
+<span class="lineno">  14 </span>// FIXME:    ViewState.Error(IllegalStateException(&quot;No results&quot;), R.string.error_no_results_arg_name, query.s)
+<span class="lineno">  15 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+</div>
+
+
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 09:58:49 UTC.
+
+</body>
+</html>

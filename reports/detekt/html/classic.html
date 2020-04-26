@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+  display: block;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+  display: block;
+  margin-top: 1pt;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+pre {
+  border: 1px solid #e0e0e0;
+  overflow: scroll;
+}
+.lineno {
+  color: #999999;
+  background-color: #f0f0f0;
+}
+.error {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+}
+.exception {
+  color: #b60808;
+  display: inline-block;
+  background-color: #ecdada;
+  border-color: #b60808;
+  border-radius: 10px;
+  border: solid 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<div>
+  <ul>
+    <li>10 number of kt files</li>
+    <li>4 number of packages</li>
+    <li>11 number of classes</li>
+    <li>33 number of functions</li>
+    <li>6 number of properties</li>
+  </ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul>
+    <li>360 lines of code (loc)</li>
+    <li>253 source lines of code (sloc)</li>
+    <li>134 logical lines of code (lloc)</li>
+    <li>36 comment lines of code (cloc)</li>
+    <li>34 McCabe complexity (mcc)</li>
+    <li>2 number of total code smells</li>
+    <li>14% comment source ratio</li>
+    <li>253 mcc per 1,000 lloc</li>
+    <li>14 code smells per 1,000 lloc</li>
+  </ul>
+</div>
+
+
+<h2>Findings</h2>
+<div>Total: 2
+  <h3>style: 2</h3>
+  <details id="ForbiddenComment" open="open">
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 2 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/classic/src/main/kotlin/studio/forface/covid/android/classic/ui/CountriesAdapter.kt:48:21</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  45 </span>                onClick { clickListener(item.id) }
+<span class="lineno">  46 </span>
+<span class="lineno">  47 </span>                favorite.apply {
+<span class="lineno">  48 </span>                    <span class="error">// TODO: do not apply tint if not favorite</span>
+<span class="lineno">  49 </span>                    // TODO: show ic_star_32 if favorite
+<span class="lineno">  50 </span>                    theia.invoke {
+<span class="lineno">  51 </span>                        imageDrawableRes = R.drawable.ic_star_bw_32
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/classic/src/main/kotlin/studio/forface/covid/android/classic/ui/CountriesAdapter.kt:49:21</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  46 </span>
+<span class="lineno">  47 </span>                favorite.apply {
+<span class="lineno">  48 </span>                    // TODO: do not apply tint if not favorite
+<span class="lineno">  49 </span>                    <span class="error">// TODO: show ic_star_32 if favorite</span>
+<span class="lineno">  50 </span>                    theia.invoke {
+<span class="lineno">  51 </span>                        imageDrawableRes = R.drawable.ic_star_bw_32
+<span class="lineno">  52 </span>                    }
+</code></pre>
+      </li>
+    </ul>
+  </details>
+</div>
+
+
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 09:58:49 UTC.
+
+</body>
+</html>

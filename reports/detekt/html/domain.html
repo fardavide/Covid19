@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+  display: block;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+  display: block;
+  margin-top: 1pt;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+pre {
+  border: 1px solid #e0e0e0;
+  overflow: scroll;
+}
+.lineno {
+  color: #999999;
+  background-color: #f0f0f0;
+}
+.error {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+}
+.exception {
+  color: #b60808;
+  display: inline-block;
+  background-color: #ecdada;
+  border-color: #b60808;
+  border-radius: 10px;
+  border: solid 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<div>
+  <ul>
+    <li>43 number of kt files</li>
+    <li>7 number of packages</li>
+    <li>58 number of classes</li>
+    <li>114 number of functions</li>
+    <li>39 number of properties</li>
+  </ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul>
+    <li>1,533 lines of code (loc)</li>
+    <li>846 source lines of code (sloc)</li>
+    <li>506 logical lines of code (lloc)</li>
+    <li>400 comment lines of code (cloc)</li>
+    <li>137 McCabe complexity (mcc)</li>
+    <li>19 number of total code smells</li>
+    <li>47% comment source ratio</li>
+    <li>270 mcc per 1,000 lloc</li>
+    <li>37 code smells per 1,000 lloc</li>
+  </ul>
+</div>
+
+
+<h2>Findings</h2>
+<div>Total: 19
+  <h3>exceptions: 9</h3>
+  <details id="NotImplementedDeclaration" open="open">
+    <summary class="rule-container"><span class="rule">NotImplementedDeclaration: 9 </span><span class="description">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:8:17</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">   5 </span>actual open class File {
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    actual val name: String
+<span class="lineno">   8 </span>        get() = <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>    actual fun createIfNoExists(): File = TODO(&quot;not implemented&quot;)
+<span class="lineno">  11 </span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:10:43</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">   7 </span>    actual val name: String
+<span class="lineno">   8 </span>        get() = TODO(&quot;not implemented&quot;)
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>    actual fun createIfNoExists(): File = <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  11 </span>
+<span class="lineno">  12 </span>    actual fun create(): File = TODO(&quot;not implemented&quot;)
+<span class="lineno">  13 </span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:12:33</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">   9 </span>
+<span class="lineno">  10 </span>    actual fun createIfNoExists(): File = TODO(&quot;not implemented&quot;)
+<span class="lineno">  11 </span>
+<span class="lineno">  12 </span>    actual fun create(): File = <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  13 </span>
+<span class="lineno">  14 </span>    actual fun bufferedSource(): BufferedSource {
+<span class="lineno">  15 </span>        TODO(&quot;not implemented&quot;)
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:15:9</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  12 </span>    actual fun create(): File = TODO(&quot;not implemented&quot;)
+<span class="lineno">  13 </span>
+<span class="lineno">  14 </span>    actual fun bufferedSource(): BufferedSource {
+<span class="lineno">  15 </span>        <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  16 </span>    }
+<span class="lineno">  17 </span>
+<span class="lineno">  18 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:23:9</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  20 </span>actual class Directory : File() {
+<span class="lineno">  21 </span>    /** @return List of [File]s contained in this directory */
+<span class="lineno">  22 </span>    actual fun files(): List&lt;File&gt; {
+<span class="lineno">  23 </span>        <span class="error">TODO(&quot;Not yet implemented&quot;)</span>
+<span class="lineno">  24 </span>    }
+<span class="lineno">  25 </span>
+<span class="lineno">  26 </span>    /** Write given [file] in this directory */
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:28:9</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  25 </span>
+<span class="lineno">  26 </span>    /** Write given [file] in this directory */
+<span class="lineno">  27 </span>    actual fun saveFile(file: File) {
+<span class="lineno">  28 </span>        <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:33:9</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  32 </span>    actual fun saveFile(name: String, data: ByteArray) {
+<span class="lineno">  33 </span>        <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  34 </span>    }
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span>    /** Delete all the files contained in this directory */
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:38:9</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  35 </span>
+<span class="lineno">  36 </span>    /** Delete all the files contained in this directory */
+<span class="lineno">  37 </span>    actual fun deleteFiles() {
+<span class="lineno">  38 </span>        <span class="error">TODO(&quot;not implemented&quot;)</span>
+<span class="lineno">  39 </span>    }
+<span class="lineno">  40 </span>}
+<span class="lineno">  41 </span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:43:5</span><span class="message">The NotImplementedDeclaration should only be used when a method stub is necessary. This defers the development of the functionality of this function. Hence, the NotImplementedDeclaration should only serve as a temporary declaration. Before releasing, this type of declaration should be removed.</span>
+        <pre><code><span class="lineno">  40 </span>}
+<span class="lineno">  41 </span>
+<span class="lineno">  42 </span>actual operator fun Directory.plus(subDirectoryName: String): Directory {
+<span class="lineno">  43 </span>    <span class="error">TODO(&quot;Not yet implemented&quot;)</span>
+<span class="lineno">  44 </span>}
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>style: 10</h3>
+  <details id="ForbiddenComment" open="open">
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 2 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/usecase/updates/DownloadUpdateIfAvailable.kt:41:5</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  38 </span>    private val buildDownloadableUpdateFileName: BuildDownloadableUpdateFileName
+<span class="lineno">  39 </span>) {
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    <span class="error">// TODO: convert to Channel</span>
+<span class="lineno">  42 </span>    suspend operator fun invoke() = callbackFlow {
+<span class="lineno">  43 </span>        send(State.Checking)
+<span class="lineno">  44 </span>        val versionToDownload = async { api.getLastUpdateVersion() }
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/usecase/updates/DownloadUpdateIfAvailable.kt:56:13</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  53 </span>
+<span class="lineno">  54 </span>        } else {
+<span class="lineno">  55 </span>            send(State.Downloading(0f))
+<span class="lineno">  56 </span>            <span class="error">// TODO: updated progress</span>
+<span class="lineno">  57 </span>            val name = buildDownloadableUpdateFileName(versionToDownload.getCompleted())
+<span class="lineno">  58 </span>            repository.storeUpdate(api.getUpdateFile(name), name)
+<span class="lineno">  59 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="NewLineAtEndOfFile" open="open">
+    <summary class="rule-container"><span class="rule">NewLineAtEndOfFile: 1 </span><span class="description">Checks whether files end with a line separator.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:44:1</span><span class="message">The file File.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  41 </span>
+<span class="lineno">  42 </span>actual operator fun Directory.plus(subDirectoryName: String): Directory {
+<span class="lineno">  43 </span>    TODO(&quot;Not yet implemented&quot;)
+<span class="lineno">  44 </span><span class="error">}</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UnusedImports" open="open">
+    <summary class="rule-container"><span class="rule">UnusedImports: 1 </span><span class="description">Unused Imports are dead code and should be removed.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/entity/AppVersion.kt:4:1</span><span class="message">The import 'okio.BufferedSource' is unused.</span>
+        <pre><code><span class="lineno">   1 </span>package studio.forface.covid.domain.entity
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import com.soywiz.klock.DateTime
+<span class="lineno">   4 </span><span class="error">import okio.BufferedSource</span>
+<span class="lineno">   5 </span>
+<span class="lineno">   6 </span>interface Version {
+<span class="lineno">   7 </span>    val code: Int
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="UnusedPrivateMember" open="open">
+    <summary class="rule-container"><span class="rule">UnusedPrivateMember: 6 </span><span class="description">Private member is unused.</span></summary>
+    <ul>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/entity/File.kt:34:18</span><span class="message">Function parameter file is unused.</span>
+        <pre><code><span class="lineno">  31 </span>    fun files(): List&lt;File&gt;
+<span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    /** Write given [file] in this directory */
+<span class="lineno">  34 </span>    fun saveFile(<span class="error">file: File</span>)
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  37 </span>    fun saveFile(name: String, data: ByteArray)
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/entity/File.kt:37:18</span><span class="message">Function parameter name is unused.</span>
+        <pre><code><span class="lineno">  34 </span>    fun saveFile(file: File)
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  37 </span>    fun saveFile(<span class="error">name: String</span>, data: ByteArray)
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    /** Delete all the files contained in this directory */
+<span class="lineno">  40 </span>    fun deleteFiles()
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/commonMain/kotlin/studio/forface/covid/domain/entity/File.kt:37:32</span><span class="message">Function parameter data is unused.</span>
+        <pre><code><span class="lineno">  34 </span>    fun saveFile(file: File)
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  37 </span>    fun saveFile(name: String, <span class="error">data: ByteArray</span>)
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    /** Delete all the files contained in this directory */
+<span class="lineno">  40 </span>    fun deleteFiles()
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:27:25</span><span class="message">Function parameter file is unused.</span>
+        <pre><code><span class="lineno">  24 </span>    }
+<span class="lineno">  25 </span>
+<span class="lineno">  26 </span>    /** Write given [file] in this directory */
+<span class="lineno">  27 </span>    actual fun saveFile(<span class="error">file: File</span>) {
+<span class="lineno">  28 </span>        TODO(&quot;not implemented&quot;)
+<span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:32:25</span><span class="message">Function parameter name is unused.</span>
+        <pre><code><span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  32 </span>    actual fun saveFile(<span class="error">name: String</span>, data: ByteArray) {
+<span class="lineno">  33 </span>        TODO(&quot;not implemented&quot;)
+<span class="lineno">  34 </span>    }
+<span class="lineno">  35 </span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/domain/src/jsMain/kotlin/studio/forface/covid/domain/entity/File.kt:32:39</span><span class="message">Function parameter data is unused.</span>
+        <pre><code><span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    /** Create a File writing the [BufferedSource] with the given [name] */
+<span class="lineno">  32 </span>    actual fun saveFile(name: String, <span class="error">data: ByteArray</span>) {
+<span class="lineno">  33 </span>        TODO(&quot;not implemented&quot;)
+<span class="lineno">  34 </span>    }
+<span class="lineno">  35 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+</div>
+
+
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 09:58:49 UTC.
+
+</body>
+</html>

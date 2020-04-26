@@ -1,0 +1,1 @@
+UnusedPrivateMember - [province] at /Users/davide/Dev/Kotlin/Covid19/commandLine/src/main/kotlin/studio/forface/covid/main.kt:29:5 - Signature=main.kt$Covid$private val province by option(help = "Get stats for Province")
