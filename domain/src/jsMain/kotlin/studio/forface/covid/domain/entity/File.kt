@@ -5,10 +5,14 @@ import okio.BufferedSource
 actual open class File {
 
     actual val name: String
-        get() = TODO("Not yet implemented")
+        get() = TODO("not implemented")
+
+    actual fun createIfNoExists(): File = TODO("not implemented")
+
+    actual fun create(): File = TODO("not implemented")
 
     actual fun bufferedSource(): BufferedSource {
-        TODO("Not yet implemented")
+        TODO("not implemented")
     }
 
 }
@@ -33,4 +37,8 @@ actual class Directory : File() {
     actual fun deleteFiles() {
         TODO("not implemented")
     }
+}
+
+actual operator fun Directory.plus(subDirectoryName: String): Directory {
+    TODO("Not yet implemented")
 }

@@ -14,6 +14,10 @@ internal class UpdatesRepositoryImpl(
     override suspend fun getUpdate() = updatesDirectory.files().firstOrNull()
 
     override suspend fun storeUpdate(data: ByteArray, name: String) {
-        updatesDirectory.saveFile(name, data)
+        updatesDirectory.apply {
+            createIfNoExists()
+            deleteFiles()
+            saveFile(name, data)
+        }
     }
 }

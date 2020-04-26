@@ -8,6 +8,15 @@ actual open class File(val delegate: java.io.File) {
 
     actual val name: String get() = delegate.name
 
+    actual fun createIfNoExists() = apply {
+        if (!delegate.exists()) create()
+    }
+
+    actual fun create() = apply {
+        if (this is Directory) delegate.mkdir()
+        else delegate.createNewFile()
+    }
+
     actual fun bufferedSource() = delegate.source().buffer()
 }
 
@@ -30,3 +39,6 @@ actual class Directory(delegate: java.io.File) : File(delegate) {
         }
     }
 }
+
+actual operator fun Directory.plus(subDirectoryName: String) =
+    Directory(java.io.File(delegate, subDirectoryName))

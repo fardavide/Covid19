@@ -10,6 +10,18 @@ expect open class File {
 
     val name: String
 
+    /**
+     * Create this [File] on disk id doesn't exist
+     * @return this [File]
+     */
+    fun createIfNoExists(): File
+
+    /**
+     * Create this [File] on disk
+     * @return this [File]
+     */
+    fun create(): File
+
     fun bufferedSource(): BufferedSource
 }
 
@@ -27,3 +39,6 @@ expect class Directory : File {
     /** Delete all the files contained in this directory */
     fun deleteFiles()
 }
+
+/** @return [Directory] child of receiver [Directory] with name as [subDirectoryName] */
+expect operator fun Directory.plus(subDirectoryName: String): Directory

@@ -15,6 +15,7 @@ import studio.forface.covid.domain.UpdatesDirectoryQualifier
 import studio.forface.covid.domain.domainModule
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.Directory
+import studio.forface.covid.domain.entity.plus
 import studio.forface.covid.domain.util.DispatcherProvider
 import kotlin.time.hours
 
@@ -49,7 +50,7 @@ private val viewModelModule = module {
 val androidModule = module {
 
     factory(UpdatesDirectoryQualifier) {
-        Directory(get<Context>().cacheDir)
+        Directory(get<Context>().cacheDir) + "Updates"
     }
 
     single<DispatcherProvider> {
