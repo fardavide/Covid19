@@ -88,10 +88,11 @@
 
     <TextView
         android:id="@+id/infected_diff_text"
-        style="@style/Theme.App.TextAppearance.Stat.Data"
+        style="@style/Theme.App.TextAppearance.Stat.Diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/infected_title_text"
+        app:layout_constraintBottom_toBottomOf="@+id/infected_data_text"
+        app:layout_constraintTop_toTopOf="@+id/infected_data_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/data_end_barrier"
@@ -99,10 +100,11 @@
 
     <TextView
         android:id="@+id/deaths_diff_text"
-        style="@style/Theme.App.TextAppearance.Stat.Data"
+        style="@style/Theme.App.TextAppearance.Stat.Diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/deaths_title_text"
+        app:layout_constraintBottom_toBottomOf="@+id/deaths_data_text"
+        app:layout_constraintTop_toTopOf="@+id/deaths_data_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/data_end_barrier"
@@ -110,10 +112,11 @@
 
     <TextView
         android:id="@+id/recovered_diff_text"
-        style="@style/Theme.App.TextAppearance.Stat.Data"
+        style="@style/Theme.App.TextAppearance.Stat.Diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/recovered_title_text"
+        app:layout_constraintBottom_toBottomOf="@id/recovered_data_text"
+        app:layout_constraintTop_toTopOf="@id/recovered_data_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/data_end_barrier"
