@@ -55,7 +55,7 @@ internal class StatTest : CoroutinesTest by coroutinesTest {
 
         // Then
         assertEquals(stats[0] - stats[1], diff1)
-        assertEquals(stats[0] - stats[4], diff2)
+        assertEquals(stats[0] - stats[3], diff2)
     }
 
     @Test
