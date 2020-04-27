@@ -29,8 +29,8 @@ internal class StatTest : CoroutinesTest by coroutinesTest {
         )
 
         // WHEN
-        val diff1 = stats.diff(4.hours)
-        val diff2 = stats.diff(11.hours)
+        val diff1 = stats % 4.hours
+        val diff2 = stats % 11.hours
 
         // Then
         assertEquals(stats[0] - stats[1], diff1)
@@ -50,12 +50,12 @@ internal class StatTest : CoroutinesTest by coroutinesTest {
         )
 
         // WHEN
-        val diff1 = stats.diff(4.hours)
-        val diff2 = stats.diff(11.hours)
+        val diff1 = stats % 4.hours
+        val diff2 = stats % 11.hours
 
         // Then
-        assertEquals(stats[0] - stats[0], diff1)
-        assertEquals(stats[0] - stats[2], diff2)
+        assertEquals(stats[0] - stats[1], diff1)
+        assertEquals(stats[0] - stats[4], diff2)
     }
 
     @Test
@@ -69,11 +69,11 @@ internal class StatTest : CoroutinesTest by coroutinesTest {
         )
 
         // WHEN
-        val diff1 = stats.diff(4.hours)
-        val diff2 = stats.diff(11.hours)
+        val diff1 = stats % 4.hours
+        val diff2 = stats % 11.hours
 
         // Then
-        assertEquals(stats[0] - stats[0], diff1)
-        assertEquals(stats[0] - stats[0], diff2)
+        assertEquals(stats[0] - stats[1], diff1)
+        assertEquals(stats[0] - stats[1], diff2)
     }
 }

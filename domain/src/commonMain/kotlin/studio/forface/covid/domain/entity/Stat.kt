@@ -70,12 +70,11 @@ fun <C : Collection<Stat>> C.diff(
     // Take most recent stat
     val mostRecent = first()
 
-    // Take item until the last one's timestamp is older from now, minus the given duration
-    val now = DateTime.now()
+    // Take item until the last one's timestamp is older from mostRecent, minus the given duration
     var shouldTake = true
     val inRange = takeWhile { stat ->
         shouldTake
-            .also { shouldTake = stat.timestamp + span > now }
+            .also { shouldTake = stat.timestamp + span > mostRecent.timestamp }
     }
 
     // Find item with timestamp closest to mostRecent's timestamp, minus the given duration
