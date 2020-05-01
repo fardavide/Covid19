@@ -6,7 +6,7 @@ import studio.forface.covid.android.classic.R
 import studio.forface.covid.android.classic.Router
 import studio.forface.covid.android.classic.utils.showSnackbar
 import studio.forface.covid.android.classic.utils.startActivity
-import studio.forface.covid.android.model.CountryStatsUiModel
+import studio.forface.covid.android.model.CountryStatUiModel
 import studio.forface.covid.android.ui.AbsCountryStatActivity
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.viewstatestore.ViewState
@@ -20,19 +20,10 @@ class CountryStatActivity : AbsCountryStatActivity() {
         setContentView(R.layout.activity_country_stat)
     }
 
-    /** Called when [CountryStatsUiModel] is available */
-    override fun onStatsResult(result: CountryStatsUiModel) {
-        with(result) {
-            toolbar.title = countryName.s
-            stat_view.setStat(
-                infectedCount,
-                infectedDiff,
-                deathsCount,
-                deathsDiff,
-                recoveredCount,
-                recoveredDiff
-            )
-        }
+    /** Called when [CountryStatUiModel] is available */
+    override fun onStatsResult(result: CountryStatUiModel) {
+        toolbar.title = result.countryName.s
+        stat_view.setStat(result)
     }
 
     /** Called when an Error is received while getting Stats */

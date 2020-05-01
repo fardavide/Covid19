@@ -1,7 +1,9 @@
 package studio.forface.covid.android.ui
 
 import android.os.Bundle
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import studio.forface.covid.android.service.DownloadUpdateWorker
 import studio.forface.covid.android.viewmodel.SearchViewModel
 import studio.forface.covid.domain.entity.Country
 import studio.forface.covid.domain.entity.CountryId
@@ -17,6 +19,7 @@ import studio.forface.viewstatestore.ViewState
 abstract class AbsSearchActivity : BaseActivity() {
 
     private val searchViewModel by viewModel<SearchViewModel>()
+    private val downloadUpdateWorker by inject<DownloadUpdateWorker.Enqueuer>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,11 @@ abstract class AbsSearchActivity : BaseActivity() {
             doOnError(::onSearchError)
             doOnLoadingChange(::onLoadingChange)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        downloadUpdateWorker.invoke(replace = true)
     }
 
     /** Start the search for Countries matching the given [countryName] */

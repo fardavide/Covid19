@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="content_desc_favorite_channel">Aggiungi questo canale ai preferiti</string>
+
+    <string name="error_feature_not_available">Questa opzione non è ancora disponibile</string>
+    <string name="error_no_query">Inserisci il nome della nazione</string>
+    <string name="error_no_results">Nessun risultato</string>
+    <string name="error_no_results_arg_name">Nessun risultato per %s</string>
+
+    <string name="hint_search">@string/error_no_query</string>
+
+    <string name="notification_update_download_channel_name">Scarica aggiorrnamenti</string>
+    <string name="notification_update_download_channel_desc">Mosta una notifica quando è in corso il donwload di un aggiornamento</string>
+    <string name="notification_update_downloading_title">Scaricando un aggiornamento</string>
+    <string name="notification_update_downloading_title_arg">Scaricando versione %s</string>
+
+    <string name="notification_update_install_channel_name">Installa aggiornamenti</string>
+    <string name="notification_update_install_channel_desc">Mostra una notifica quando un aggiornamento è pronto per essere installato</string>
+    <string name="notification_update_install_title">Aggiornamento pronto per essere intallato</string>
+    <string name="notification_update_install_title_args">Aggiornamento %s pronto per essere installato</string>
+    <string name="notification_update_install_content">Premi per installare</string>
+
+    <string name="title_infected">Infetti:</string>
+    <string name="title_deaths">Morti:</string>
+    <string name="title_recovered">Guariti:</string>
+
+    <!-- region Time -->
+    <string name="updated_arg">Aggiornato %s</string>
+    <string name="today_at_arg">Oggi alle %s</string>
+    <string name="yesterday_at_arg">Ieri alle %s</string>
+    <string name="days_ago_arg">%d giorni fa</string>
+    <string name="midnight">mezzanotte</string>
+    <!-- endregion -->
+
+</resources>

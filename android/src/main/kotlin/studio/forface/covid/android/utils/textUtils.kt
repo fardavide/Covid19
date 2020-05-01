@@ -8,7 +8,7 @@ import android.text.style.StyleSpan
  * @return [CharSequence] representation of the receiver [Int] where the chars before the last 3
  * are Bold
  */
-fun Int.toStyledText(): CharSequence {
+fun Int.toThousandsEmphasizedText(): CharSequence {
     val charsToStyle = 3
     return SpannableString(this.toString()).apply {
         val (start, end) = (0 to length - charsToStyle).takeIf { it.second > 0 } ?: return@apply

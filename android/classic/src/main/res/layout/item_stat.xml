@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_medium">
+    android:paddingHorizontal="@dimen/margin_medium"
+    android:paddingTop="@dimen/margin_medium">
 
+    <!-- region Titles -->
     <TextView
         android:id="@+id/infected_title_text"
         style="@style/Theme.App.TextAppearance.Stat.Title"
@@ -33,9 +35,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_recovered"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/timestamp_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deaths_title_text" />
+    <!-- endregion -->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/titles_end_barrier"
@@ -45,6 +48,7 @@
         app:constraint_referenced_ids="infected_title_text, deaths_title_text, recovered_title_text"
         app:barrierDirection="end" />
 
+    <!-- region Datas -->
     <TextView
         android:id="@+id/infected_data_text"
         style="@style/Theme.App.TextAppearance.Stat.Data"
@@ -77,6 +81,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/titles_end_barrier"
         tools:text="99" />
+    <!-- endregion -->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/data_end_barrier"
@@ -86,6 +91,7 @@
         app:constraint_referenced_ids="infected_data_text, deaths_data_text, recovered_data_text"
         app:barrierDirection="end" />
 
+    <!-- region Diffs -->
     <TextView
         android:id="@+id/infected_diff_text"
         style="@style/Theme.App.TextAppearance.Stat.Diff"
@@ -121,5 +127,20 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/data_end_barrier"
         tools:text="+99" />
+    <!-- endregion -->
+
+    <TextView
+        android:id="@+id/timestamp_text"
+        style="@style/Theme.App.TextAppearance.Stat.Timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_small"
+        tools:text="Updated Today at 12:00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recovered_title_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

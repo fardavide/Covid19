@@ -3,7 +3,7 @@ package studio.forface.covid.android.ui
 import android.os.Bundle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import studio.forface.covid.android.model.CountryStatsUiModel
+import studio.forface.covid.android.model.CountryStatUiModel
 import studio.forface.covid.android.viewmodel.CountryStatViewModel
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.viewstatestore.ViewState
@@ -30,8 +30,8 @@ abstract class AbsCountryStatActivity : BaseActivity() {
         }
     }
 
-    /** Called when [CountryStatsUiModel] is available */
-    protected abstract fun onStatsResult(result: CountryStatsUiModel)
+    /** Called when [CountryStatUiModel] is available */
+    protected abstract fun onStatsResult(result: CountryStatUiModel)
 
     /** Called when an Error is received while getting Stats */
     protected abstract fun onStatsError(error: ViewState.Error)

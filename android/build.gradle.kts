@@ -35,4 +35,5 @@ dependencies {
     )
 
     testImplementation(project(Module.sharedTest))
+    testImplementation(`robolectric`)
 }

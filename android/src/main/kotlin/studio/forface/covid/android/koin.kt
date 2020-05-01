@@ -32,7 +32,7 @@ private val serviceModule = module {
 }
 
 private val mapperModule = module {
-    factory { CountryStatUiModelMapper() }
+    factory { CountryStatUiModelMapper(context = get()) }
 }
 
 private val viewModelModule = module {

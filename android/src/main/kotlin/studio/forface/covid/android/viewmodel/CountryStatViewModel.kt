@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import studio.forface.covid.android.mapper.CountryStatUiModelMapper
-import studio.forface.covid.android.model.CountryStatsUiModel
+import studio.forface.covid.android.model.CountryStatUiModel
 import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.mapper.map
 import studio.forface.covid.domain.usecase.GetCountryStat
@@ -33,7 +33,7 @@ class CountryStatViewModel(
 ) : BaseViewModel(dispatcherProvider) {
 
     /** Delivers [ViewState] with Country Stats */
-    val stats = ViewStateStore<CountryStatsUiModel>(Loading)
+    val stats = ViewStateStore<CountryStatUiModel>(Loading)
 
     init {
         viewModelScope.launch(Io) {

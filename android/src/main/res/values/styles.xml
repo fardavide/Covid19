@@ -31,6 +31,7 @@
     <style name="Theme.App.TextAppearance.Stat.Title" parent="TextAppearance.MaterialComponents.Headline6" />
     <style name="Theme.App.TextAppearance.Stat.Data" parent="TextAppearance.MaterialComponents.Body1"/>
     <style name="Theme.App.TextAppearance.Stat.Diff" parent="TextAppearance.MaterialComponents.Caption"/>
+    <style name="Theme.App.TextAppearance.Stat.Timestamp" parent="TextAppearance.MaterialComponents.Overline"/>
 
     <!-- endregion -->
 

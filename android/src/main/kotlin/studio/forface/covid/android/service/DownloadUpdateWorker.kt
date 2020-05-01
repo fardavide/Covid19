@@ -72,6 +72,8 @@ class DownloadUpdateWorker(
             notification {
                 titleRes = R.string.notification_update_downloading_title
                 smallIconRes = R.drawable.ic_notification_virus
+                setProgress((progress * 100).toInt(), 100)
+                cleanable = false
             }
         }
     }

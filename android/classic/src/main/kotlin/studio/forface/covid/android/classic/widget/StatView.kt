@@ -1,6 +1,5 @@
 package studio.forface.covid.android.classic.widget
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
@@ -9,7 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.item_stat.view.*
 import studio.forface.covid.android.classic.R
 import studio.forface.covid.android.classic.utils.inflate
-import studio.forface.covid.android.utils.toStyledText
+import studio.forface.covid.android.model.StatUiModel
+import studio.forface.covid.android.utils.toThousandsEmphasizedText
 import studio.forface.covid.domain.util.takeIfGreaterThanZero
 
 /**
@@ -29,29 +29,27 @@ class StatView @JvmOverloads constructor(
         inflate(R.layout.item_stat, attachToRoot = true)
     }
 
-    fun setStat(
-        infected: Int,
-        infectedDiff: Int,
-        deaths: Int,
-        deathsDiff: Int,
-        recovered: Int,
-        recoveredDiff: Int
-    ) {
-        // Data
-        infected_data_text.text = infected.toStyledText()
-        deaths_data_text.text = deaths.toStyledText()
-        recovered_data_text.text = recovered.toStyledText()
+    fun setStat(stat: StatUiModel) {
+        with(stat) {
+            // Data
+            infected_data_text.text = infectedCount.toThousandsEmphasizedText()
+            deaths_data_text.text = deathsCount.toThousandsEmphasizedText()
+            recovered_data_text.text = recoveredCount.toThousandsEmphasizedText()
 
-        // Diff
-        deaths_diff_text.text = deathsDiff.toDiffStyledText()
-        infected_diff_text.text = infectedDiff.toDiffStyledText()
-        recovered_diff_text.text = recoveredDiff.toDiffStyledText()
+            // Diff
+            deaths_diff_text.text = deathsDiff.toDiffThousandsEmphasizedText()
+            infected_diff_text.text = infectedDiff.toDiffThousandsEmphasizedText()
+            recovered_diff_text.text = recoveredDiff.toDiffThousandsEmphasizedText()
+
+            // Timestamp
+            timestamp_text.text = lastUpdatedTime
+        }
     }
 
-    private fun Int.toDiffStyledText() = with(SpannableStringBuilder()) {
-            takeIfGreaterThanZero()?.let {
-                append("+ ")
-                append(toStyledText())
-            }
+    private fun Int.toDiffThousandsEmphasizedText() = with(SpannableStringBuilder()) {
+        takeIfGreaterThanZero()?.let {
+            append("+ ")
+            append(toThousandsEmphasizedText())
         }
+    }
 }

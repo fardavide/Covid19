@@ -10,17 +10,29 @@
 
     <string name="hint_search">@string/error_no_query</string>
 
-    <string name="notification_update_download_channel_id">notification_download_channel_id</string>
+    <string name="notification_update_download_channel_id" translatable="false">notification_download_channel_id</string>
     <string name="notification_update_download_channel_name">Download updates</string>
     <string name="notification_update_download_channel_desc">Show a notification for ongoing updates download</string>
     <string name="notification_update_downloading_title">Downloading update</string>
     <string name="notification_update_downloading_title_arg">Downloading version %s</string>
 
-    <string name="notification_update_install_channel_id">notification_install_channel_id</string>
+    <string name="notification_update_install_channel_id" translatable="false">notification_install_channel_id</string>
     <string name="notification_update_install_channel_name">Install updated</string>
     <string name="notification_update_install_channel_desc">Show a notification for updates ready to be installed</string>
     <string name="notification_update_install_title">Update ready to be installed</string>
-    <string name="notification_update_install_title_args">Updated %s ready to be installed</string>
+    <string name="notification_update_install_title_args">Update %s ready to be installed</string>
     <string name="notification_update_install_content">Press to install</string>
+
+    <string name="title_infected">Infected:</string>
+    <string name="title_deaths">Deaths:</string>
+    <string name="title_recovered">Recovered:</string>
+
+    <!-- region Time -->
+    <string name="updated_arg">Updated %s</string>
+    <string name="today_at_arg">Today at %s</string>
+    <string name="yesterday_at_arg">Yesterday at %s</string>
+    <string name="days_ago_arg">%d days ago</string>
+    <string name="midnight">midnight</string>
+    <!-- endregion -->
 
 </resources>

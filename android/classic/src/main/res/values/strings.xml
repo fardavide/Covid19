@@ -3,8 +3,4 @@
 
     <string name="covid_app_name">Covid \'19 classic</string>
 
-    <string name="title_infected">Infected:</string>
-    <string name="title_deaths">Deaths:</string>
-    <string name="title_recovered">Recovered:</string>
-
 </resources>

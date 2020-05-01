@@ -31,7 +31,8 @@ kotlin {
                         `kotlin-test-common`,
                         `kotlin-test-annotations`,
                         `coroutines-test`,
-                        `koin-test`
+                        `koin-test`,
+                        `mockk`
                     )
                 }
             }
