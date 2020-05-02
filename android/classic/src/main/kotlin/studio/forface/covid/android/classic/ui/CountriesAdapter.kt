@@ -2,6 +2,8 @@ package studio.forface.covid.android.classic.ui
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.withStyledAttributes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -45,13 +47,26 @@ class CountriesAdapter(
                 onClick { clickListener(item.id) }
 
                 favorite.apply {
-                    // TODO: do not apply tint if not favorite
-                    // TODO: show ic_star_32 if favorite
-                    theia.invoke {
-                        imageDrawableRes = if (item.favorite) R.drawable.ic_star_32 else R.drawable.ic_star_bw_32
-                    }
+                    setIcon(item.favorite)
                     onClick { favoriteListener(item) }
                 }
+            }
+        }
+
+        private fun ImageView.setIcon(favorite: Boolean) {
+            theia.invoke {
+
+                imageDrawableRes = if (favorite) {
+                    imageTintList = null
+                    R.drawable.ic_star_32
+
+                } else {
+                    context.withStyledAttributes(R.style.Theme_App, intArrayOf(R.attr.colorOnBackground)) {
+                        imageTintList = getColorStateList(0)
+                    }
+                    R.drawable.ic_star_bw_32
+                }
+
             }
         }
     }

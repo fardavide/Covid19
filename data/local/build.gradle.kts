@@ -1,5 +1,3 @@
-@file:Suppress("LocalVariableName", "RemoveRedundantBackticks")
-
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import studio.forface.easygradle.dsl.*
 
