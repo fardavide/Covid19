@@ -48,6 +48,7 @@ private val WorldAdapterQualifier = qualifier("WorldAdapter")
 private val CountryAdapterQualifier = qualifier("CountryAdapter")
 private val ProvinceAdapterQualifier = qualifier("ProvinceAdapter")
 private val StatAdapterQualifier = qualifier("StatAdapter")
+private val FavoriteAdapterQualifier = qualifier("FavoriteAdapter")
 
 private val adapterModule = module {
     // Fields
@@ -80,6 +81,7 @@ private val adapterModule = module {
         )
     }
     factory(StatAdapterQualifier) { Stat.Adapter(parent_idAdapter = get(IdAdapterQualifier)) }
+    factory(FavoriteAdapterQualifier) { Favorite.Adapter(idAdapter = get(IdAdapterQualifier)) }
 }
 
 private val mapperModule = module {
@@ -147,7 +149,8 @@ private val databaseModule = module {
             worldAdapter = get(WorldAdapterQualifier),
             countryAdapter = get(CountryAdapterQualifier),
             provinceAdapter = get(ProvinceAdapterQualifier),
-            statAdapter = get(StatAdapterQualifier)
+            statAdapter = get(StatAdapterQualifier),
+            favoriteAdapter = get(FavoriteAdapterQualifier)
         )
     }
 
@@ -155,6 +158,7 @@ private val databaseModule = module {
     factory { get<Database>().countryQueries }
     factory { get<Database>().provinceQueries }
     factory { get<Database>().statQueries }
+    factory { get<Database>().favoriteQueries }
 } + adapterModule + mapperModule
 
 val localDataModule = module {
@@ -165,6 +169,7 @@ val localDataModule = module {
             countryQueries = get(),
             provinceQueries = get(),
             statQueries = get(),
+            favoriteQueries = get(),
             worldStatMapper = get(),
             worldFullStatMapper = get(),
             singleCountryMapper = get(),

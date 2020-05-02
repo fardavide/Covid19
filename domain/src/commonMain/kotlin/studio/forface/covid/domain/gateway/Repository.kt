@@ -34,6 +34,9 @@ interface Repository {
     /** Save [Country]s and relative [Province]s to local cache */
     suspend fun storeCountries(countries: List<Country>)
 
+    /** Update Favorite state for Contry with given [id] */
+    suspend fun updateFavorite(id: CountryId, favorite: Boolean)
+
     // * * * STATS * * * //
 
     fun getWorldStat(): Flow<WorldStat>

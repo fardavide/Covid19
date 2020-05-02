@@ -44,7 +44,13 @@ private val viewModelModule = module {
             dispatcherProvider = get()
         )
     }
-    viewModel { SearchViewModel(searchCountry = get(), dispatcherProvider = get()) }
+    viewModel {
+        SearchViewModel(
+            searchCountry = get(),
+            updateCountryFavorite = get(),
+            dispatcherProvider = get()
+        )
+    }
 } + domainModule + mapperModule
 
 val androidModule = module {

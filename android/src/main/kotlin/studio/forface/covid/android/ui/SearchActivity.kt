@@ -52,7 +52,9 @@ abstract class AbsSearchActivity : BaseActivity() {
     protected abstract fun onLoadingChange(loading: Boolean)
 
     /** This must toggle the favorite state for the given Country */
-    protected abstract fun onFavorite(country: Country)
+    protected open fun onFavorite(country: Country) {
+        searchViewModel.toggleFavorite(country)
+    }
 
     /** Navigate to Country Stat for Country with given [id] */
     protected fun goToCountryStat(id: CountryId) {

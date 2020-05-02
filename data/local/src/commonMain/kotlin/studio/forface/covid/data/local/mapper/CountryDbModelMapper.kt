@@ -32,6 +32,7 @@ internal class SingleCountryDbModelMapper(
     override fun List<CountryWithProvinceDbModel>.toEntity() = Country(
         id = first().id,
         name = first().name,
+        favorite = first().favorite,
         provinces = map { provinceMapper { it.toEntity() } }
     )
 }
@@ -105,6 +106,7 @@ internal abstract class AbsCountryStatDbModelMapper<DbModel, CountryStatType, Pr
         CountryStatPlainDbModelImpl(
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             provinceId = it.provinceId,
             provinceName = it.provinceName,
             provinceLat = it.provinceLat,
@@ -196,8 +198,12 @@ internal class SingleCountryPlainDbModelMapper(
 ) : DatabaseModelMapper<List<CountryStatPlainDbModel>, Country> {
 
     override fun List<CountryStatPlainDbModel>.toEntity(): Country {
-        val (id, name) = with(first()) { countryId to countryName }
-        return Country(id, name, toProvinces().map(provincePlainMapper) { it.toEntity() })
+        val first = first()
+        return Country(
+            first.countryId,
+            first.countryName,
+            first.countryFavorite,
+            toProvinces().map(provincePlainMapper) { it.toEntity() })
     }
 
     private fun List<CountryStatPlainDbModel>.toProvinces() = map {

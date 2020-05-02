@@ -10,6 +10,7 @@ import studio.forface.covid.android.error.NoResultError
 import studio.forface.covid.domain.entity.Country
 import studio.forface.covid.domain.entity.Name
 import studio.forface.covid.domain.usecase.SearchCountry
+import studio.forface.covid.domain.usecase.UpdateCountryFavorite
 import studio.forface.covid.domain.util.DispatcherProvider
 import studio.forface.viewstatestore.ViewState
 import studio.forface.viewstatestore.ViewState.Loading
@@ -29,6 +30,7 @@ import studio.forface.viewstatestore.ViewStateStore
  */
 class SearchViewModel(
     private val searchCountry: SearchCountry,
+    private val updateCountryFavorite: UpdateCountryFavorite,
     dispatcherProvider: DispatcherProvider
 ) : BaseViewModel(dispatcherProvider) {
 
@@ -66,6 +68,12 @@ class SearchViewModel(
                     countries.post(NoResultError(lastQuery))
                 }
             }
+        }
+    }
+
+    fun toggleFavorite(country: Country) {
+        viewModelScope.launch(Io) {
+            updateCountryFavorite(country, !country.favorite)
         }
     }
 }

@@ -3,6 +3,7 @@ package studio.forface.covid.domain.entity
 data class Country(
     val id: CountryId,
     val name: Name,
+    val favorite: Boolean = false,
     val provinces: List<Province> = emptyList()
 )
 

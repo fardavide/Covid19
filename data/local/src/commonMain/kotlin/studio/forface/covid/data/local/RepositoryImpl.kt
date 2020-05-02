@@ -47,6 +47,7 @@ internal class RepositoryImpl(
     private val countryQueries: CountryQueries,
     private val provinceQueries: ProvinceQueries,
     private val statQueries: StatQueries,
+    private val favoriteQueries: FavoriteQueries,
     private val worldStatMapper: WorldStatDbModelMapper,
     private val worldFullStatMapper: WorldFullStatDbModelMapper,
     private val singleCountryMapper: SingleCountryDbModelMapper,
@@ -64,7 +65,7 @@ internal class RepositoryImpl(
             .map(multiCountryMapper) { it.toEntity() }
 
     override fun getCountries(query: Name): Flow<List<Country>> {
-        return countryQueries.selectAllCountryWithProvincesByName(query.s).asListFlow()
+        return countryQueries.selectAllByName(query.s).asListFlow()
             .map(multiCountryMapper) { it.toEntity() }
     }
 
@@ -76,6 +77,10 @@ internal class RepositoryImpl(
         transaction {
             for (country in countries) blockingStore(country)
         }
+    }
+
+    override suspend fun updateFavorite(id: CountryId, favorite: Boolean) {
+        favoriteQueries.insertOrReplace(id, favorite)
     }
 
     override fun getWorldStat(): Flow<WorldStat> = worldQueries.selectAllWorldStat().asListFlow()
@@ -169,6 +174,7 @@ internal class RepositoryImpl(
 
     private fun blockingStore(country: Country) {
         countryQueries.insert(country.id, country.name)
+        favoriteQueries.insertOrIgnore(country.id)
         for (province in country.provinces) blockingStore(country.id, province)
     }
 

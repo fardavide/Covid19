@@ -54,6 +54,7 @@ internal class WorldStatDbModelMapper(
             worldTimestamp = it.worldTimestamp,
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             countryConfirmed = it.countryConfirmed,
             countryDeaths = it.countryDeaths,
             countryRecovered = it.countryRecovered,
@@ -69,6 +70,7 @@ internal class WorldStatDbModelMapper(
         CountryStatPlainDbModelImpl(
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             confirmed = it.countryConfirmed,
             deaths = it.countryDeaths,
             recovered = it.countryRecovered,
@@ -119,6 +121,7 @@ internal class WorldFullStatDbModelMapper(
             worldTimestamp = it.worldTimestamp,
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             countryConfirmed = it.countryConfirmed,
             countryDeaths = it.countryDeaths,
             countryRecovered = it.countryRecovered,
@@ -134,6 +137,7 @@ internal class WorldFullStatDbModelMapper(
         CountryWithProvincesStatPlainDbModelImpl(
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             countryConfirmed = it.countryConfirmed,
             countryDeaths = it.countryDeaths,
             countryRecovered = it.countryRecovered,
@@ -167,6 +171,7 @@ internal class WorldPlainDbModelMapper(
         CountryStatPlainDbModelImpl(
             countryId = it.countryId,
             countryName = it.countryName,
+            countryFavorite = it.countryFavorite,
             confirmed = it.countryConfirmed,
             deaths = it.countryDeaths,
             recovered = it.countryRecovered,

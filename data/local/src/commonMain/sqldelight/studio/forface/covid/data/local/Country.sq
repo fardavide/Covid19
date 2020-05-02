@@ -9,113 +9,101 @@ CREATE TABLE country (
 -- Indexes
 CREATE INDEX country_name ON country(name);
 
--- Select
-selectAll:
-  SELECT * FROM country
-  ORDER BY name;
 
-selectAllByName:
-  SELECT * FROM country
-  WHERE name LIKE ('%' || :query || '%')
-  ORDER BY name;
-
-selectById:
-  SELECT * FROM country
-  WHERE id = ?;
-
--- Insert
-insert:
-  INSERT OR REPLACE
-  INTO country(id, name)
-  VALUES (?, ?);
-
--- Delete
-deleteAll:
-  DELETE FROM country;
-
-deleteById:
-  DELETE FROM country
-  WHERE id = ?;
-
--- CountryWithProvinces
-CREATE VIEW countryWithProvinces AS
+-- Views
+CREATE VIEW countryWithFavorite AS
 SELECT
   country.id,
   country.name,
+  favorite.favorite
+FROM country
+JOIN favorite ON favorite.id = country.id;
+
+CREATE VIEW countryWithProvinces AS
+SELECT
+  countryWithFavorite.id,
+  countryWithFavorite.name,
+  countryWithFavorite.favorite,
   province.id provinceId,
   province.name provinceName,
   province.lat provinceLat,
   province.lng provinceLng
-FROM country
-JOIN province ON province.country_id = country.id;
+FROM countryWithFavorite
+JOIN province ON province.country_id = countryWithFavorite.id;
 
-selectAllCountriesWithProvinces:
-  SELECT *
-  FROM countryWithProvinces
-  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
-
-selectAllCountryWithProvincesById:
-  SELECT *
-  FROM countryWithProvinces
-  WHERE countryWithProvinces.id = ?
-  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
-
-selectAllCountryWithProvincesByName:
-  SELECT *
-  FROM countryWithProvinces
-  WHERE name LIKE ('%' || :query || '%')
-  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
-
--- CountryStat
 CREATE VIEW countryStat AS
 SELECT
-  country.id countryId,
-  country.name countryName,
-  province.id provinceId,
-  province.name provinceName,
-  province.lat provinceLat,
-  province.lng provinceLng,
+  countryWithProvinces.id countryId,
+  countryWithProvinces.name countryName,
+  countryWithProvinces.favorite countryFavorite,
+  countryWithProvinces.provinceId provinceId,
+  countryWithProvinces.provinceName provinceName,
+  countryWithProvinces.provinceLat provinceLat,
+  countryWithProvinces.provinceLng provinceLng,
   stat.confirmed,
   stat.deaths,
   stat.recovered,
   stat.timestamp
-FROM country
-JOIN province ON province.country_id = country.id
-JOIN stat ON stat.parent_id = country.id;
+FROM countryWithProvinces
+JOIN stat ON stat.parent_id = countryWithProvinces.id;
 
-selectAllCountryStats:
-  SELECT *
-  FROM countryStat
-  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
-
-selectAllCountryStatsById:
-  SELECT *
-  FROM countryStat
-  WHERE countryStat.countryId = ?
-  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
-
--- CountryWithProvinceStat
 CREATE VIEW countryWithProvinceStat AS
 SELECT
-  country.id countryId,
-  country.name countryName,
+  countryWithProvinces.id countryId,
+  countryWithProvinces.name countryName,
+  countryWithProvinces.favorite countryFavorite,
   cStat.confirmed countryConfirmed,
   cStat.deaths countryDeaths,
   cStat.recovered countryRecovered,
   cStat.timestamp countryTimestamp,
 
-  province.id provinceId,
-  province.name provinceName,
-  province.lat provinceLat,
-  province.lng provinceLng,
+  countryWithProvinces.provinceId provinceId,
+  countryWithProvinces.provinceName provinceName,
+  countryWithProvinces.provinceLat provinceLat,
+  countryWithProvinces.provinceLng provinceLng,
   pStat.confirmed provinceConfirmed,
   pStat.deaths provinceDeaths,
   pStat.recovered provinceRecovered,
   pStat.timestamp provinceTimestamp
-FROM country
-JOIN stat cStat ON cStat.parent_id = country.id
-JOIN province ON province.country_id = country.id
-JOIN stat pStat ON pStat.parent_id = province.id;
+FROM countryWithProvinces
+JOIN stat cStat ON cStat.parent_id = countryWithProvinces.id
+JOIN stat pStat ON pStat.parent_id = countryWithProvinces.provinceId;
+
+
+-- Select
+selectAllByName:
+SELECT *
+FROM countryWithProvinces
+WHERE name LIKE ('%' || :query || '%')
+ORDER BY favorite DESC, name;
+
+selectAllCountriesWithProvinces:
+SELECT *
+FROM countryWithProvinces
+ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
+selectAllCountryWithProvincesById:
+SELECT *
+FROM countryWithProvinces
+WHERE countryWithProvinces.id = ?
+ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
+selectAllCountryWithProvincesByName:
+SELECT *
+FROM countryWithProvinces
+WHERE name LIKE ('%' || :query || '%')
+ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
+selectAllCountryStats:
+SELECT *
+FROM countryStat
+ORDER BY countryStat.countryName, countryStat.timestamp DESC;
+
+selectAllCountryStatsById:
+SELECT *
+FROM countryStat
+WHERE countryStat.countryId = ?
+ORDER BY countryStat.countryName, countryStat.timestamp DESC;
 
 selectAllCountryWithProvinceStats:
   SELECT *
@@ -135,3 +123,17 @@ selectAllCountryWithProvinceStatsById:
     countryWithProvinceStat.countryTimestamp DESC,
     countryWithProvinceStat.provinceName,
     countryWithProvinceStat.provinceTimestamp DESC;
+
+-- Insert
+insert:
+  INSERT OR REPLACE
+  INTO country(id, name)
+  VALUES (?, ?);
+
+-- Delete
+deleteAll:
+  DELETE FROM country;
+
+deleteById:
+  DELETE FROM country
+  WHERE id = ?;

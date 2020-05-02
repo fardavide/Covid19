@@ -27,15 +27,15 @@ CREATE VIEW worldWithCountriesAndProvinces AS
 SELECT
   world.id,
   world.name,
-  country.id countryId,
-  country.name countryName,
-  province.id provinceId,
-  province.name provinceName,
-  province.lat provinceLat,
-  province.lng provinceLng
+  countryWithProvinces.id countryId,
+  countryWithProvinces.name countryName,
+  countryWithProvinces.favorite countryFavorite,
+  countryWithProvinces.provinceId provinceId,
+  countryWithProvinces.provinceName provinceName,
+  countryWithProvinces.provinceLat provinceLat,
+  countryWithProvinces.provinceLng provinceLng
 FROM world
-JOIN country ON country.id != NULL
-JOIN province ON province.country_id = country.id;
+JOIN countryWithProvinces ON countryWithProvinces.id != NULL;
 
 selectAllWorldWithCountriesAndProvinces:
   SELECT *
@@ -45,29 +45,28 @@ selectAllWorldWithCountriesAndProvinces:
 -- WorldStat
 CREATE VIEW worldStat AS
 SELECT
-  world.id worldId,
-  world.name worldName,
+  worldWithCountriesAndProvinces.id worldId,
+  worldWithCountriesAndProvinces.name worldName,
   wStat.confirmed worldConfirmed,
   wStat.deaths worldDeaths,
   wStat.recovered worldRecovered,
   wStat.timestamp worldTimestamp,
 
-  country.id countryId,
-  country.name countryName,
+  worldWithCountriesAndProvinces.countryId countryId,
+  worldWithCountriesAndProvinces.countryName countryName,
+  worldWithCountriesAndProvinces.countryFavorite countryFavorite,
   countryStat.confirmed countryConfirmed,
   countryStat.deaths countryDeaths,
   countryStat.recovered countryRecovered,
   countryStat.timestamp countryTimestamp,
 
-  province.id provinceId,
-  province.name provinceName,
-  province.lat provinceLat,
-  province.lng provinceLng
-FROM world
-JOIN stat wStat ON wStat.parent_id = world.id
-JOIN country ON country.id != NULL
-JOIN stat countryStat ON countryStat.parent_id = country.id
-JOIN province ON province.country_id = country.id;
+  worldWithCountriesAndProvinces.provinceId provinceId,
+  worldWithCountriesAndProvinces.provinceName provinceName,
+  worldWithCountriesAndProvinces.provinceLat provinceLat,
+  worldWithCountriesAndProvinces.provinceLng provinceLng
+FROM worldWithCountriesAndProvinces
+JOIN stat wStat ON wStat.parent_id = worldWithCountriesAndProvinces.id
+JOIN stat countryStat ON countryStat.parent_id = worldWithCountriesAndProvinces.countryId;
 
 selectAllWorldStat:
   SELECT *
@@ -77,34 +76,31 @@ selectAllWorldStat:
 -- WorldWithProvinceStat
 CREATE VIEW worldWithProvinceStat AS
 SELECT
-  world.id worldId,
-  world.name worldName,
-  wStat.confirmed worldConfirmed,
-  wStat.deaths worldDeaths,
-  wStat.recovered worldRecovered,
-  wStat.timestamp worldTimestamp,
+  worldStat.worldId worldId,
+  worldStat.worldName worldName,
+  worldStat.worldConfirmed worldConfirmed,
+  worldStat.worldDeaths worldDeaths,
+  worldStat.worldRecovered worldRecovered,
+  worldStat.worldTimestamp worldTimestamp,
 
-  country.id countryId,
-  country.name countryName,
-  countryStat.confirmed countryConfirmed,
-  countryStat.deaths countryDeaths,
-  countryStat.recovered countryRecovered,
-  countryStat.timestamp countryTimestamp,
+  worldStat.countryId countryId,
+  worldStat.countryName countryName,
+  worldStat.countryFavorite countryFavorite,
+  worldStat.countryConfirmed countryConfirmed,
+  worldStat.countryDeaths countryDeaths,
+  worldStat.countryRecovered countryRecovered,
+  worldStat.countryTimestamp countryTimestamp,
 
-  province.id provinceId,
-  province.name provinceName,
-  province.lat provinceLat,
-  province.lng provinceLng,
+  worldStat.provinceId provinceId,
+  worldStat.provinceName provinceName,
+  worldStat.provinceLat provinceLat,
+  worldStat.provinceLng provinceLng,
   provinceStat.confirmed provinceConfirmed,
   provinceStat.deaths provinceDeaths,
   provinceStat.recovered provinceRecovered,
   provinceStat.timestamp provinceTimestamp
-FROM world
-JOIN stat wStat ON wStat.parent_id = world.id
-JOIN country ON country.id != NULL
-JOIN stat countryStat ON countryStat.parent_id = country.id
-JOIN province ON province.country_id = country.id
-JOIN stat provinceStat ON provinceStat.parent_id = province.id;
+FROM worldStat
+JOIN stat provinceStat ON provinceStat.parent_id = worldStat.provinceId;
 
 selectAllWorldWithProvinceStat:
   SELECT *

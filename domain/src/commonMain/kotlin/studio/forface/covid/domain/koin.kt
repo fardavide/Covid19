@@ -16,6 +16,7 @@ import studio.forface.covid.domain.usecase.SyncCountryStat
 import studio.forface.covid.domain.usecase.SyncProvinces
 import studio.forface.covid.domain.usecase.SyncWorldFullStat
 import studio.forface.covid.domain.usecase.SyncWorldStat
+import studio.forface.covid.domain.usecase.UpdateCountryFavorite
 import studio.forface.covid.domain.usecase.updates.DownloadUpdate
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
 import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
@@ -70,6 +71,10 @@ private val useCaseModule = module {
 
     // Search
     factory { SearchCountry(repository = get(), syncCountries = get()) }
+
+    // Actons
+    factory { UpdateCountryFavorite(repository = get()) }
+
 } + updatesModule
 
 val domainModule = module {

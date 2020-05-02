@@ -48,7 +48,7 @@ class CountriesAdapter(
                     // TODO: do not apply tint if not favorite
                     // TODO: show ic_star_32 if favorite
                     theia.invoke {
-                        imageDrawableRes = R.drawable.ic_star_bw_32
+                        imageDrawableRes = if (item.favorite) R.drawable.ic_star_32 else R.drawable.ic_star_bw_32
                     }
                     onClick { favoriteListener(item) }
                 }

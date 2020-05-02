@@ -52,7 +52,8 @@ class SearchActivity : AbsSearchActivity() {
 
     /** This must toggle the favorite state for the given Country */
     override fun onFavorite(country: Country) {
-        showSnackbar(R.string.error_feature_not_available)
+        super.onFavorite(country)
+        // showSnackbar(R.string.error_feature_not_available)
     }
 
     companion object {

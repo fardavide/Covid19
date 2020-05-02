@@ -1,0 +1,22 @@
+import studio.forface.covid.domain.entity.CountryId;
+
+CREATE TABLE favorite (
+  id TEXT as CountryId PRIMARY KEY,
+  favorite INTEGER as Boolean NOT NULL DEFAULT 0
+);
+
+-- Indexes
+CREATE INDEX favorite_id ON favorite(id);
+
+INSERT INTO favorite(id, favorite) VALUES ("", 0);
+
+-- Insert
+insertOrReplace:
+  INSERT OR REPLACE
+  INTO favorite(id, favorite)
+  VALUES (?, ?);
+
+insertOrIgnore:
+  INSERT OR IGNORE
+  INTO favorite(id, favorite)
+  VALUES (?, 0);

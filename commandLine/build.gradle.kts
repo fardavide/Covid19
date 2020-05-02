@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
+import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin(PluginsDeps.jvm)
@@ -40,3 +41,5 @@ fun KotlinDependencyHandler.implementation(vararg dependencyNotations: Any) {
 fun KotlinDependencyHandler.api(vararg dependencyNotations: Any) {
     for (dep in dependencyNotations) api(dep)
 }
+
+dokka()
