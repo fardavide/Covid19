@@ -11,10 +11,12 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
+import co.touchlab.kermit.Kermit
 import org.koin.core.KoinComponent
+import org.koin.core.inject
 import studio.forface.covid.domain.util.deserialize
+import studio.forface.covid.domain.util.e
 import studio.forface.covid.domain.util.serialize
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration
 
@@ -30,9 +32,12 @@ import kotlin.time.Duration
 abstract class BaseWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params), KoinComponent {
 
+    /** An instance of the Logger for sub-classes */
+    protected val kermit by inject<Kermit>()
+
     protected fun success() = Result.success()
-    protected fun failure(t: Throwable) = Result.failure().also { Timber.e(t) }
-    protected fun retry(t: Throwable) = Result.retry().also { Timber.e(t) }
+    protected fun failure(t: Throwable) = Result.failure().also { kermit.e(t) }
+    protected fun retry(t: Throwable) = Result.retry().also { kermit.e(t) }
 
     /** @return [Result] with a [Data] of [T] */
     protected inline fun <reified T : Any> success(data: T) =

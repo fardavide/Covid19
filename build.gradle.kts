@@ -4,9 +4,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import studio.forface.easygradle.dsl.android.*
 import studio.forface.easygradle.dsl.version
 
-initVersions()
-
 buildscript {
+    initVersions()
+
     val `kotlin version` = studio.forface.easygradle.dsl.`kotlin version`
     val `sqlDelight version` = studio.forface.easygradle.dsl.`sqlDelight version`
     val `agp version` = studio.forface.easygradle.dsl.android.`android-gradle-plugin version`

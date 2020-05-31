@@ -9,8 +9,8 @@ import studio.forface.covid.android.classic.utils.startActivity
 import studio.forface.covid.android.model.CountryStatUiModel
 import studio.forface.covid.android.ui.AbsCountryStatActivity
 import studio.forface.covid.domain.entity.CountryId
+import studio.forface.covid.domain.util.e
 import studio.forface.viewstatestore.ViewState
-import timber.log.Timber
 
 class CountryStatActivity : AbsCountryStatActivity() {
 
@@ -28,7 +28,7 @@ class CountryStatActivity : AbsCountryStatActivity() {
 
     /** Called when an Error is received while getting Stats */
     override fun onStatsError(error: ViewState.Error) {
-        Timber.e(error.throwable)
+        kermit.e(error.throwable)
         showSnackbar(error)
     }
 

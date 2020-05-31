@@ -1,5 +1,6 @@
 package studio.forface.covid.domain
 
+import co.touchlab.kermit.Kermit
 import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module

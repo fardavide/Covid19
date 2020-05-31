@@ -41,8 +41,6 @@ val DependencyHandler.`sqlDelight-paging` get() = sqlDelight("android-paging-ext
 // endregion
 
 // region Android
-val DependencyHandler.`activity` get() = androidx("activity", moduleSuffix = "ktx") version `activity version`
-val DependencyHandler.`fragment` get() = androidx("fragment", moduleSuffix = "ktx") version `fragment version`
 
 // region Compose
 val DependencyHandler.`androidUi-android-text` get() = androidUi("android-text")
@@ -70,6 +68,7 @@ val DependencyHandler.`androidUi-vector` get() = androidUi("vector")
 // region Others
 val DependencyHandler.`clikt` get() = clikt("multiplatform")
 val DependencyHandler.`clikt-jvm` get() = clikt()
+val DependencyHandler.`kermit` get() = touchLab("kermit") version `kermit version`
 val DependencyHandler.`koin` get() = koin("core") version `koin3 version`
 val DependencyHandler.`koin-android` get() = koin("android")
 val DependencyHandler.`koin-test` get() = koin("test")

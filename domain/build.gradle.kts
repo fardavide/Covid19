@@ -28,6 +28,7 @@ kotlin {
                         `kotlin-common`,
                         `coroutines-core-common`,
                         `okIo`,
+                        `kermit`,
                         `koin`,
                         `klock`,
                         `serialization-common`

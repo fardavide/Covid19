@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    val androidGradlePlugin =   "4.1.0-alpha08" // Released: Apr 28, 2020
+    val androidGradlePlugin =   "4.1.0-alpha10" // Released: May 23, 2020
     val dokka =                 "0.10.1"        // Released: Feb 04, 2020
-    val easyGradle =            "1.2.3-beta-4"  // Released: Mar 01, 2020
+    val easyGradle =            "1.3.2"         // Released: May 21, 2020
 
     implementation("com.android.tools.build:gradle:$androidGradlePlugin")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokka")

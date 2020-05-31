@@ -2,6 +2,8 @@ package studio.forface.covid.android
 
 import android.content.Context
 import androidx.work.WorkManager
+import co.touchlab.kermit.Kermit
+import co.touchlab.kermit.LogcatLogger
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -58,6 +60,8 @@ val androidModule = module {
     factory(UpdatesDirectoryQualifier) {
         Directory(get<Context>().cacheDir) + "Updates"
     }
+
+    single { Kermit(LogcatLogger()) }
 
     single<DispatcherProvider> {
         object : DispatcherProvider {

@@ -27,7 +27,7 @@ dependencies {
         `koin-android`,
         `koin-viewModel`,
         `theia`,
-        `timber`
+        `kermit`
     )
 
     implementation(
