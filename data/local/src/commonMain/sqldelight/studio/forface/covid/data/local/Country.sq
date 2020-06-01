@@ -72,38 +72,32 @@ JOIN stat pStat ON pStat.parent_id = countryWithProvinces.provinceId;
 
 -- Select
 selectAllByName:
-SELECT *
-FROM countryWithProvinces
-WHERE name LIKE ('%' || :query || '%')
-ORDER BY favorite DESC, name;
+  SELECT *
+  FROM countryWithProvinces
+  WHERE name LIKE ('%' || :query || '%')
+  ORDER BY favorite DESC, name;
 
 selectAllCountriesWithProvinces:
-SELECT *
-FROM countryWithProvinces
-ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+  SELECT *
+  FROM countryWithProvinces
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
 
 selectAllCountryWithProvincesById:
-SELECT *
-FROM countryWithProvinces
-WHERE countryWithProvinces.id = ?
-ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
-
-selectAllCountryWithProvincesByName:
-SELECT *
-FROM countryWithProvinces
-WHERE name LIKE ('%' || :query || '%')
-ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+  SELECT *
+  FROM countryWithProvinces
+  WHERE countryWithProvinces.id = ?
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
 
 selectAllCountryStats:
-SELECT *
-FROM countryStat
-ORDER BY countryStat.countryName, countryStat.timestamp DESC;
+  SELECT *
+  FROM countryStat
+  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
 
 selectAllCountryStatsById:
-SELECT *
-FROM countryStat
-WHERE countryStat.countryId = ?
-ORDER BY countryStat.countryName, countryStat.timestamp DESC;
+  SELECT *
+  FROM countryStat
+  WHERE countryStat.countryId = ?
+  ORDER BY countryStat.countryName, countryStat.timestamp DESC;
 
 selectAllCountryWithProvinceStats:
   SELECT *

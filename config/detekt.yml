@@ -99,7 +99,7 @@ complexity:
   LongParameterList:
     active: true
     functionThreshold: 6
-    constructorThreshold: 16
+    constructorThreshold: 26
     ignoreDefaultParameters: true
     ignoreDataClasses: false
     # no annotated elements are ignored
