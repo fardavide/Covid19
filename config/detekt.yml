@@ -1,4 +1,4 @@
-# Default excluded files are `` ['**/test/**, '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**'] ``
+# Default excluded files are `` ['**/test/**, '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**'] ``
 build:
   maxIssues: 20 # TODO 10
   excludeCorrectable: false
@@ -34,7 +34,7 @@ console-reports:
 
 comments:
   active: true
-  excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+  excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
   # do not report private function with comments
   CommentOverPrivateFunction:
     active: false
@@ -112,7 +112,7 @@ complexity:
     threshold: 4
   StringLiteralDuplication:
     active: false
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     threshold: 2
     # do not ignore strings in annotations
     ignoreAnnotation: false
@@ -120,7 +120,7 @@ complexity:
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**', '**/*Repository.kt']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**', '**/*Repository.kt']
     thresholdInFiles: 31
     thresholdInClasses: 11
     thresholdInInterfaces: 16
@@ -182,7 +182,7 @@ exceptions:
   # reports catch blocks which check for the type of an exception via is checks or casts
   InstanceOfCheckForException:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
   # reports all exceptions of the type NotImplementedError and `TO\\DO(..)`
   NotImplementedDeclaration:
     active: true
@@ -215,7 +215,7 @@ exceptions:
     active: false
   TooGenericExceptionCaught:
     active: false # TODO true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     exceptionNames:
      - ArrayIndexOutOfBoundsException
      - Error
@@ -351,11 +351,11 @@ naming:
   active: true
   ClassNaming:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     classPattern: '[A-Z$][a-zA-Z0-9$]*'
   ConstructorParameterNaming:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
@@ -368,7 +368,7 @@ naming:
     forbiddenName: ''
   FunctionMaxLength:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     maximumFunctionNameLength: 30
   FunctionMinLength:
     active: false
@@ -523,7 +523,7 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', '**/buildSrc/**']
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     ignoreNumbers: ['-1', '0', '1', '2', '100', '1000']
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: true

@@ -238,5 +238,4 @@ internal class RepositoryImpl(
     private fun Double.toEntity() = timeMapper { toEntity() }
 }
 
-// TODO: find better place
 internal val WorldId = WorldId("world")

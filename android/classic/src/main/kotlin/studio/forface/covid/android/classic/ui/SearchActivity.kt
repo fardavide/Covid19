@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_search.*
 import studio.forface.covid.android.classic.R
 import studio.forface.covid.android.classic.Router
-import studio.forface.covid.android.classic.utils.showSnackbar
 import studio.forface.covid.android.classic.utils.startActivity
 import studio.forface.covid.android.error.NoQueryError
 import studio.forface.covid.android.error.NoResultError

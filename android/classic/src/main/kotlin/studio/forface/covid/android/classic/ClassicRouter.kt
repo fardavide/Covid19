@@ -1,6 +1,5 @@
 package studio.forface.covid.android.classic
 
-import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import studio.forface.covid.android.Router
 import studio.forface.covid.android.classic.ui.CountryStatActivity

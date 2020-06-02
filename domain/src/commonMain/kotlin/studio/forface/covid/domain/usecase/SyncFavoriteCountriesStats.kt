@@ -1,6 +1,6 @@
 package studio.forface.covid.domain.usecase
 
-import studio.forface.covid.domain.entity.CountryId
+import kotlinx.coroutines.flow.first
 import studio.forface.covid.domain.gateway.Api
 import studio.forface.covid.domain.gateway.Repository
 import studio.forface.covid.domain.util.mapAsync

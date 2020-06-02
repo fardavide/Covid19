@@ -4,13 +4,8 @@ import android.content.Context
 import android.text.SpannableStringBuilder
 import androidx.annotation.StringRes
 import androidx.core.text.buildSpannedString
-import androidx.work.BackoffPolicy
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
+import androidx.work.*
 import kotlinx.coroutines.coroutineScope
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 import studio.forface.covid.android.R
 import studio.forface.covid.android.Router

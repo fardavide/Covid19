@@ -1,3 +1,5 @@
+@file:Suppress("UnusedPrivateMember", "NotImplementedDeclaration") // Not supported yet
+
 package studio.forface.covid.domain.entity
 
 import okio.BufferedSource

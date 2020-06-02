@@ -27,7 +27,7 @@ val DefaultStringFormat: StringFormat = Json
  *
  * Note: this function uses reflection if no [deserializer] [DeserializationStrategy] is passed explicitly
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
+@OptIn(ImplicitReflectionSerializer::class)
 inline fun <reified T : Any> String.deserialize(
     deserializer: DeserializationStrategy<T>? = null
 ): T = Serializer.parse(deserializer ?: T::class.serializer(), this)
@@ -36,14 +36,14 @@ inline fun <reified T : Any> String.deserialize(
  * @return [List] of [T] object from the receiver [String]
  * This uses reflection: TODO improve for avoid it
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
+@OptIn(ImplicitReflectionSerializer::class)
 inline fun <reified T : Any> String.deserializeList(): List<T> = Serializer.parseList(this)
 
 /**
  * @return [Map] of [T], [V] object from the receiver [String]
  * This uses reflection: TODO improve for avoid it
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
+@OptIn(ImplicitReflectionSerializer::class)
 inline fun <reified T : Any, reified V : Any> String.deserializeMap(): Map<T, V> =
     Serializer.parseMap(this)
 
@@ -53,7 +53,7 @@ inline fun <reified T : Any, reified V : Any> String.deserializeMap(): Map<T, V>
  *
  * Note: this function uses reflection if no [serializer] [SerializationStrategy] is passed explicitly
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
+@OptIn(ImplicitReflectionSerializer::class)
 inline fun <reified T : Any> T.serialize(
     serializer: SerializationStrategy<T>? = null
 ) = Serializer.stringify(serializer ?: T::class.serializer(), this)
@@ -63,7 +63,7 @@ inline fun <reified T : Any> T.serialize(
  *
  * Note: this function uses reflection if no [serializer] [SerializationStrategy] is passed explicitly
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
+@OptIn(ImplicitReflectionSerializer::class)
 inline fun <reified T : Any> List<T>.serialize(
     serializer: SerializationStrategy<List<T>>? = null
 ) = Serializer.stringify(serializer ?: T::class.serializer().list, this)
@@ -74,7 +74,7 @@ inline fun <reified T : Any> List<T>.serialize(
  * Note: this function uses reflection if no [serializer] [SerializationStrategy] is passed explicitly
  */
 // TODO
-//@UseExperimental(ImplicitReflectionSerializer::class)
+//@OptIn(ImplicitReflectionSerializer::class)
 //inline fun <reified T : Any, reified V : Any> Map<T, V>.serialize(
 //    serializer: MapSerializer<T, V>? = null
 //) = Serializer.stringify(serializer ?: (T::class.serializer() to V::class.serializer()).map, this)

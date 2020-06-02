@@ -8,7 +8,6 @@ import studio.forface.covid.android.model.UiModelMapper
 import studio.forface.covid.android.utils.formatRelative
 import studio.forface.covid.domain.entity.CountryStat
 import studio.forface.covid.domain.entity.rem
-import studio.forface.covid.domain.util.formatDate
 
 /**
  * Map [CountryStat] to [CountryStatUiModel]

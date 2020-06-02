@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import studio.forface.covid.domain.DEFAULT_ERROR_INTERVAL
 import studio.forface.covid.domain.DEFAULT_REFRESH_INTERVAL
-import studio.forface.covid.domain.entity.CountryId
 import studio.forface.covid.domain.entity.CountryStat
 import studio.forface.covid.domain.gateway.Repository
 import studio.forface.covid.domain.util.repeatCatching
