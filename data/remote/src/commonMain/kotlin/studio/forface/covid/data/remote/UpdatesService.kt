@@ -21,7 +21,7 @@ internal class UpdatesService(
         .substringBefore("\n")
         .parseToUpdateVersion()
 
-    // https://github.com/4face-studi0/Covid19/blob/master/releases/android-classic/release/Covid-android-classic_0.2-release-unsigned.apk
+    // https://github.com/4face-studi0/Covid19/raw/master/releases/android-classic/Covid-android-classic_0.9-debug.apk
     suspend fun geUpdateFile(fileName: String) = client.get<ByteArray>(
         scheme = "https",
         host = regularHost,

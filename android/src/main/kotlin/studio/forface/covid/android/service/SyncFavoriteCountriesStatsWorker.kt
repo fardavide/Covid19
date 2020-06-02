@@ -4,8 +4,11 @@ import android.content.Context
 import android.text.SpannableStringBuilder
 import androidx.annotation.StringRes
 import androidx.core.text.buildSpannedString
-import androidx.work.*
-import kotlinx.coroutines.coroutineScope
+import androidx.work.BackoffPolicy
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
 import org.koin.core.inject
 import studio.forface.covid.android.R
 import studio.forface.covid.android.Router
@@ -33,15 +36,13 @@ class SyncFavoriteCountriesStatsWorker(
     private val getNewFavoriteCountriesStatsDiff by inject<GetNewFavoriteCountriesStatsDiff>()
     private val router by inject<Router>()
 
-    override suspend fun doWork() = coroutineScope {
-        try {
+    override suspend fun doWork(): Result {
+        return try {
             getNewFavoriteCountriesStatsDiff().takeIfNotEmpty()?.let(::showNotifications)
-
+            success()
         } catch (t: Throwable) {
-            return@coroutineScope failure(t)
+            failure(t)
         }
-
-        throw AssertionError("This should never happen")
     }
 
 

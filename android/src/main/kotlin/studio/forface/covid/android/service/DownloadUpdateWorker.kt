@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.produceIn
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import studio.forface.covid.android.R
-import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
+import studio.forface.covid.android.ui.PromptUpdateInstallActivity
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
 import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State
 import studio.forface.fluentnotifications.enum.NotificationImportance
@@ -97,7 +97,7 @@ class DownloadUpdateWorker(
                 contentTextRes = R.string.notification_update_install_content
                 smallIconRes = R.drawable.ic_notification_virus
 
-                onContentAction { start<PromptUpdateInstallReceiver>() }
+                onContentAction { start<PromptUpdateInstallActivity>() }
             }
         }
     }

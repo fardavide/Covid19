@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <application>
 
-        <receiver android:name=".receiver.PromptUpdateInstallReceiver"/>
+        <activity android:name=".ui.PromptUpdateInstallActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -189,7 +189,7 @@ private val serviceModule = module {
 } + mapperModule
 
 private val updatesServiceModule = module {
-    factory(UpdatesRegularHostQualifier) { "github.com/4face-studi0/Covid19/blob/master/releases" }
+    factory(UpdatesRegularHostQualifier) { "github.com/4face-studi0/Covid19/raw/master/releases" }
     factory(UpdatesRawHostQualifier) { "raw.githubusercontent.com/4face-studi0/Covid19/master/releases" }
     factory {
         UpdatesService(
