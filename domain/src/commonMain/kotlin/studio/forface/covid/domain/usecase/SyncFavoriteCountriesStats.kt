@@ -12,8 +12,8 @@ import studio.forface.covid.domain.util.mapAsync
 class SyncFavoriteCountriesStats(private val api: Api, private val repository: Repository) {
 
     suspend operator fun invoke() {
-//        val stats = repository.getFavoriteCountries().first()
-//            .mapAsync { api.getCountryStat(it.id) }
-//        repository.store(stats)
+        val stats = repository.getFavoriteCountries().first()
+            .mapAsync { api.getCountryStat(it.id) }
+        repository.store(stats)
     }
 }
