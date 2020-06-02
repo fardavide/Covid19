@@ -7,9 +7,12 @@ import co.touchlab.kermit.LogcatLogger
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 import studio.forface.covid.android.mapper.CountryStatUiModelMapper
 import studio.forface.covid.android.service.DownloadUpdateWorker
+import studio.forface.covid.android.service.SyncFavoriteCountriesStatsWorker
 import studio.forface.covid.android.viewmodel.CountryStatViewModel
 import studio.forface.covid.android.viewmodel.SearchViewModel
 import studio.forface.covid.data.dataModule
@@ -20,15 +23,21 @@ import studio.forface.covid.domain.entity.Directory
 import studio.forface.covid.domain.entity.plus
 import studio.forface.covid.domain.util.DispatcherProvider
 import kotlin.time.hours
+import kotlin.time.minutes
 
 private val serviceModule = module {
     factory { WorkManager.getInstance(get()) }
 
-    factory {
+    factory(qualifier<DownloadUpdateWorker>()) {
         DownloadUpdateWorker.Enqueuer(
             workManager = get(),
-            repeatInterval = 3.hours,
-            flexTimeInterval = 3.hours
+            repeatInterval = 2.hours
+        )
+    }
+    factory(qualifier<SyncFavoriteCountriesStatsWorker>()) {
+        SyncFavoriteCountriesStatsWorker.Enqueuer(
+            workManager = get(),
+            repeatInterval = 30.minutes
         )
     }
 }

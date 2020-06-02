@@ -4,22 +4,23 @@ import com.squareup.sqldelight.ColumnAdapter
 import com.squareup.sqldelight.db.SqlDriver
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
-import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryStatDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_CountryFullStat
+import studio.forface.covid.data.local.mapper.CountryStatPlainList_CountrySmallStat
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_CountryStat
 import studio.forface.covid.data.local.mapper.CountryStatFromCountryWithProvinceStatPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.CountryStatPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.CountryWithProvinceDbModelMapper
 import studio.forface.covid.data.local.mapper.LocationDbModelMapper
-import studio.forface.covid.data.local.mapper.MultiCountryDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceList_MultiCountry
 import studio.forface.covid.data.local.mapper.ProvinceDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvincePlainDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatPlainDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceWrapperMapper
-import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
-import studio.forface.covid.data.local.mapper.SingleCountryPlainDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceList_Country
+import studio.forface.covid.data.local.mapper.CountryStatPlainList_Country
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_MultiCountryStat
 import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldPlainDbModelMapper
@@ -105,24 +106,25 @@ private val mapperModule = module {
     factory { WorldStatFromWorldWithProvincesStatPlainDModelMapper(timeMapper = get()) }
 
     // Country
-    factory { SingleCountryDbModelMapper(provinceMapper = get()) }
-    factory { MultiCountryDbModelMapper(singleCountyMapper = get(), provinceMapper = get()) }
-    factory { CountrySmallStatDbModelMapper(countryPlainMapper = get(), countyStatPlainMapper = get()) }
+    factory { CountryWithProvinceList_Country(provinceMapper = get()) }
+    factory { CountryWithProvinceList_MultiCountry(singleCountyMapper = get(), provinceMapper = get()) }
+    factory { CountryStatPlainList_CountrySmallStat(countryPlainMapper = get(), countyStatPlainMapper = get()) }
     factory {
-        CountryStatDbModelMapper(
+        CountryWithProvinceStatPlainList_CountryStat(
             countryPlainMapper = get(),
             countyStatPlainMapper = get(),
             provinceStatMapper = get()
         )
     }
     factory {
-        CountryFullStatDbModelMapper(
+        CountryWithProvinceStatPlainList_CountryFullStat(
             countryPlainMapper = get(),
             countyStatPlainMapper = get(),
             provinceStatMapper = get()
         )
     }
-    factory { SingleCountryPlainDbModelMapper(provincePlainMapper = get()) }
+    factory { CountryWithProvinceStatPlainList_MultiCountryStat(singleCountryStatMapper = get()) }
+    factory { CountryStatPlainList_Country(provincePlainMapper = get()) }
 
     // Province
     factory { ProvinceWrapperMapper(provinceMapper = get(), countryWithProvinceMapper = get()) }
@@ -177,6 +179,7 @@ val localDataModule = module {
             countrySmallStatMapper = get(),
             countryStatMapper = get(),
             countryFullStatMapper = get(),
+            multiCountryStatMapper = get(),
             provinceStatMapper = get(),
             provinceFullStatMapper = get(),
             timeMapper = get()

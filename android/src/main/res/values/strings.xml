@@ -10,6 +10,14 @@
 
     <string name="hint_search">@string/error_no_query</string>
 
+    <string name="notification_new_stats_channel_id" translatable="false">notification_new_stats_channel_id</string>
+    <string name="notification_new_stats_channel_name">New statistics available</string>
+    <string name="notification_new_stats_channel_desc">Show a notification and display new statistics available for favorite countries</string>
+    <string name="notification_new_stats_title_args">New data for %s</string>
+    <string name="notification_new_stats_content_confirmed">New confirmed: </string>
+    <string name="notification_new_stats_content_deaths">New deaths: </string>
+    <string name="notification_new_stats_content_recovered">New recovered: </string>
+
     <string name="notification_update_download_channel_id" translatable="false">notification_download_channel_id</string>
     <string name="notification_update_download_channel_name">Download updates</string>
     <string name="notification_update_download_channel_desc">Show a notification for ongoing updates download</string>

@@ -3,6 +3,7 @@ package studio.forface.covid.android.ui
 import android.os.Bundle
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.qualifier
 import studio.forface.covid.android.service.DownloadUpdateWorker
 import studio.forface.covid.android.viewmodel.SearchViewModel
 import studio.forface.covid.domain.entity.Country
@@ -19,7 +20,7 @@ import studio.forface.viewstatestore.ViewState
 abstract class AbsSearchActivity : BaseActivity() {
 
     private val searchViewModel by viewModel<SearchViewModel>()
-    private val downloadUpdateWorker by inject<DownloadUpdateWorker.Enqueuer>()
+    private val downloadUpdateWorker by inject<DownloadUpdateWorker.Enqueuer>(qualifier<DownloadUpdateWorker>())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

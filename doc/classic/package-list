@@ -2,10 +2,12 @@ $dokka.format:html
 $dokka.linkExtension:html
 $dokka.location:studio.forface.covid.android.classic$Router(androidx.fragment.app.FragmentActivity)studio.forface.covid.android.classic/androidx.fragment.app.-fragment-activity/-router.html
 $dokka.location:studio.forface.covid.android.classic.utils$inflate(android.view.ViewGroup, kotlin.Int, kotlin.Boolean)studio.forface.covid.android.classic.utils/android.view.-view-group/inflate.html
-$dokka.location:studio.forface.covid.android.classic.utils$intentFor(android.content.Context)studio.forface.covid.android.classic.utils/android.content.-context/intent-for.html
+$dokka.location:studio.forface.covid.android.classic.utils$intentFor(android.content.Context, android.os.Bundle)studio.forface.covid.android.classic.utils/android.content.-context/intent-for.html
+$dokka.location:studio.forface.covid.android.classic.utils$intentFor(android.content.Context, kotlin.Array((kotlin.Pair((kotlin.String, kotlin.Any)))))studio.forface.covid.android.classic.utils/android.content.-context/intent-for.html
 $dokka.location:studio.forface.covid.android.classic.utils$showSnackbar(studio.forface.covid.android.ui.BaseActivity, kotlin.CharSequence, studio.forface.covid.android.classic.utils.SnackbarDuration, kotlin.Function1((com.google.android.material.snackbar.Snackbar, kotlin.Unit)))studio.forface.covid.android.classic.utils/studio.forface.covid.android.ui.-base-activity/show-snackbar.html
 $dokka.location:studio.forface.covid.android.classic.utils$showSnackbar(studio.forface.covid.android.ui.BaseActivity, kotlin.Int, studio.forface.covid.android.classic.utils.SnackbarDuration, kotlin.Function1((com.google.android.material.snackbar.Snackbar, kotlin.Unit)))studio.forface.covid.android.classic.utils/studio.forface.covid.android.ui.-base-activity/show-snackbar.html
 $dokka.location:studio.forface.covid.android.classic.utils$showSnackbar(studio.forface.covid.android.ui.BaseActivity, studio.forface.viewstatestore.ViewState.Error, studio.forface.covid.android.classic.utils.SnackbarDuration, kotlin.Function1((com.google.android.material.snackbar.Snackbar, kotlin.Unit)))studio.forface.covid.android.classic.utils/studio.forface.covid.android.ui.-base-activity/show-snackbar.html
+$dokka.location:studio.forface.covid.android.classic.utils$startActivity(android.content.Context, android.os.Bundle)studio.forface.covid.android.classic.utils/android.content.-context/start-activity.html
 $dokka.location:studio.forface.covid.android.classic.utils$startActivity(android.content.Context, kotlin.Array((kotlin.Pair((kotlin.String, kotlin.Any)))))studio.forface.covid.android.classic.utils/android.content.-context/start-activity.html
 studio.forface.covid.android.classic
 studio.forface.covid.android.classic.ui

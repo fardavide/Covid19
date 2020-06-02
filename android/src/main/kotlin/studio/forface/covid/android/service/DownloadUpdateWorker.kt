@@ -106,7 +106,7 @@ class DownloadUpdateWorker(
     class Enqueuer(
         override val workManager: WorkManager,
         private val repeatInterval: Duration,
-        private val flexTimeInterval: Duration
+        private val flexTimeInterval: Duration = repeatInterval
     ) : BaseWorker.Enqueuer {
 
         override fun invoke(replace: Boolean /* default is `true` */) {

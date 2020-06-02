@@ -19,7 +19,7 @@ import studio.forface.covid.domain.mapper.map
 internal class WorldStatDbModelMapper(
     private val worldPlainMapper: WorldPlainDbModelMapper,
     private val worldStatPlainMapper: WorldStatPlainDModelMapper,
-    private val countryStatMapper: CountrySmallStatDbModelMapper
+    private val countryStatMapper: CountryStatPlainList_CountrySmallStat
 ) : DatabaseModelMapper<List<WorldStatPlainDbModel>, WorldStat> {
 
     override fun List<WorldStatPlainDbModel>.toEntity(): WorldStat {
@@ -86,7 +86,7 @@ internal class WorldStatDbModelMapper(
 internal class WorldFullStatDbModelMapper(
     private val worldPlainMapper: WorldPlainDbModelMapper,
     private val worldStatPlainMapper: WorldStatFromWorldWithProvincesStatPlainDModelMapper,
-    private val countryStatMapper: CountryStatDbModelMapper
+    private val countryStatMapper: CountryWithProvinceStatPlainList_CountryStat
 ) : DatabaseModelMapper<List<WorldWithProvinceStatPlainDbModel>, WorldFullStat> {
 
     override fun List<WorldWithProvinceStatPlainDbModel>.toEntity(): WorldFullStat {
@@ -157,7 +157,7 @@ internal class WorldFullStatDbModelMapper(
 
 // region Plain mappers
 internal class WorldPlainDbModelMapper(
-    private val singleCountryPlainMapper: SingleCountryPlainDbModelMapper
+    private val singleCountryPlainMapper: CountryStatPlainList_Country
 ) : DatabaseModelMapper<List<WorldStatPlainDbModel>, World> {
 
     override fun List<WorldStatPlainDbModel>.toEntity(): World {

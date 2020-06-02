@@ -82,6 +82,12 @@ selectAllCountriesWithProvinces:
   FROM countryWithProvinces
   ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
 
+selectAllFavoriteCountriesWithProvinces:
+  SELECT *
+  FROM countryWithProvinces
+  WHERE favorite = 1
+  ORDER BY countryWithProvinces.name, countryWithProvinces.provinceName;
+
 selectAllCountryWithProvincesById:
   SELECT *
   FROM countryWithProvinces
@@ -112,6 +118,16 @@ selectAllCountryWithProvinceStatsById:
   SELECT *
   FROM countryWithProvinceStat
   WHERE countryWithProvinceStat.countryId = ?
+  ORDER BY
+    countryWithProvinceStat.countryName,
+    countryWithProvinceStat.countryTimestamp DESC,
+    countryWithProvinceStat.provinceName,
+    countryWithProvinceStat.provinceTimestamp DESC;
+
+selectAllFavoritesCountryWithProvinceStats:
+  SELECT *
+  FROM countryWithProvinceStat
+  WHERE countryFavorite = 1
   ORDER BY
     countryWithProvinceStat.countryName,
     countryWithProvinceStat.countryTimestamp DESC,

@@ -1,9 +1,11 @@
 package studio.forface.covid.android.classic.ui
 
 import android.content.Context
+import android.content.Intent
 import kotlinx.android.synthetic.main.activity_country_stat.*
 import studio.forface.covid.android.classic.R
 import studio.forface.covid.android.classic.Router
+import studio.forface.covid.android.classic.utils.intentFor
 import studio.forface.covid.android.classic.utils.showSnackbar
 import studio.forface.covid.android.classic.utils.startActivity
 import studio.forface.covid.android.model.CountryStatUiModel
@@ -41,5 +43,9 @@ class CountryStatActivity : AbsCountryStatActivity() {
         fun launch(context: Context, countryId: CountryId) {
             context.startActivity<CountryStatActivity>(ARG_COUNTRY_ID to countryId.s)
         }
+
+        /** @return [Intent] for [CountryStatActivity] */
+        fun intent(context: Context, countryId: CountryId): Intent =
+            context.intentFor<CountryStatActivity>(ARG_COUNTRY_ID to countryId.s)
     }
 }

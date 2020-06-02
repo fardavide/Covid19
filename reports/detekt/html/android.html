@@ -72,11 +72,11 @@ pre {
 
 <div>
   <ul>
-    <li>17 number of kt files</li>
+    <li>19 number of kt files</li>
     <li>9 number of packages</li>
-    <li>17 number of classes</li>
-    <li>37 number of functions</li>
-    <li>33 number of properties</li>
+    <li>20 number of classes</li>
+    <li>46 number of functions</li>
+    <li>47 number of properties</li>
   </ul>
 </div>
 
@@ -85,24 +85,24 @@ pre {
 
 <div>
   <ul>
-    <li>779 lines of code (loc)</li>
-    <li>495 source lines of code (sloc)</li>
-    <li>266 logical lines of code (lloc)</li>
-    <li>143 comment lines of code (cloc)</li>
-    <li>57 McCabe complexity (mcc)</li>
-    <li>6 number of total code smells</li>
-    <li>28% comment source ratio</li>
-    <li>214 mcc per 1,000 lloc</li>
-    <li>22 code smells per 1,000 lloc</li>
+    <li>991 lines of code (loc)</li>
+    <li>650 source lines of code (sloc)</li>
+    <li>360 logical lines of code (lloc)</li>
+    <li>164 comment lines of code (cloc)</li>
+    <li>69 McCabe complexity (mcc)</li>
+    <li>13 number of total code smells</li>
+    <li>25% comment source ratio</li>
+    <li>191 mcc per 1,000 lloc</li>
+    <li>36 code smells per 1,000 lloc</li>
   </ul>
 </div>
 
 
 <h2>Findings</h2>
-<div>Total: 6
-  <h3>style: 6</h3>
+<div>Total: 13
+  <h3>style: 13</h3>
   <details id="ForbiddenComment" open="open">
-    <summary class="rule-container"><span class="rule">ForbiddenComment: 1 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
+    <summary class="rule-container"><span class="rule">ForbiddenComment: 2 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
     <ul>
       <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/error/searchErrorStates.kt:14:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
         <pre><code><span class="lineno">  11 </span>/** [ViewState.Error] representing that no results are found for the given query */
@@ -112,57 +112,110 @@ pre {
 <span class="lineno">  15 </span>
 </code></pre>
       </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/utils/timeUtils.kt:21:1</span><span class="message">This comment contains text that has been defined as forbidden in detekt.</span>
+        <pre><code><span class="lineno">  18 </span> */
+<span class="lineno">  19 </span>fun DateTime.formatRelative(context: Context) = formatRelative(DateTime.now(), context)
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span><span class="error">// TODO: temporary solution given by problems with mocking DateTime.now()</span>
+<span class="lineno">  22 </span>@VisibleForTesting
+<span class="lineno">  23 </span>fun DateTime.formatRelative(now: DateTime, context: Context): CharSequence {
+<span class="lineno">  24 </span>    return when (val dayDiff = (now.startOfDay - startOfDay).days.toInt()) {
+</code></pre>
+      </li>
     </ul>
   </details>
-  <details id="NewLineAtEndOfFile" open="open">
-    <summary class="rule-container"><span class="rule">NewLineAtEndOfFile: 1 </span><span class="description">Checks whether files end with a line separator.</span></summary>
+  <details id="MagicNumber" open="open">
+    <summary class="rule-container"><span class="rule">MagicNumber: 4 </span><span class="description">Report magic numbers. Magic number is a numeric literal that is not defined as a constant and hence it's unclear what the purpose of this number is. It's better to declare such numbers as constants and give them a proper name. By default, -1, 0, 1, and 2 are not considered to be magic numbers.</span></summary>
     <ul>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/receiver/PromptUpdateInstallReceiver.kt:52:1</span><span class="message">The file PromptUpdateInstallReceiver.kt is not ending with a new line.</span>
-        <pre><code><span class="lineno">  49 </span>            context.startActivity(install)
-<span class="lineno">  50 </span>        }
-<span class="lineno">  51 </span>    }
-<span class="lineno">  52 </span><span class="error">}</span>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:75:41</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  72 </span>            notification {
+<span class="lineno">  73 </span>                titleRes = R.string.notification_update_downloading_title
+<span class="lineno">  74 </span>                smallIconRes = R.drawable.ic_notification_virus
+<span class="lineno">  75 </span>                setProgress((progress * <span class="error">100</span>).toInt(), 100)
+<span class="lineno">  76 </span>                cleanable = false
+<span class="lineno">  77 </span>            }
+<span class="lineno">  78 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:75:55</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  72 </span>            notification {
+<span class="lineno">  73 </span>                titleRes = R.string.notification_update_downloading_title
+<span class="lineno">  74 </span>                smallIconRes = R.drawable.ic_notification_virus
+<span class="lineno">  75 </span>                setProgress((progress * 100).toInt(), <span class="error">100</span>)
+<span class="lineno">  76 </span>                cleanable = false
+<span class="lineno">  77 </span>            }
+<span class="lineno">  78 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:67:41</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  64 </span>            notification {
+<span class="lineno">  65 </span>                titleRes = R.string.notification_update_downloading_title
+<span class="lineno">  66 </span>                smallIconRes = R.drawable.ic_notification_virus
+<span class="lineno">  67 </span>                setProgress((progress * <span class="error">100</span>).toInt(), 100)
+<span class="lineno">  68 </span>                cleanable = false
+<span class="lineno">  69 </span>            }
+<span class="lineno">  70 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:67:55</span><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  64 </span>            notification {
+<span class="lineno">  65 </span>                titleRes = R.string.notification_update_downloading_title
+<span class="lineno">  66 </span>                smallIconRes = R.drawable.ic_notification_virus
+<span class="lineno">  67 </span>                setProgress((progress * 100).toInt(), <span class="error">100</span>)
+<span class="lineno">  68 </span>                cleanable = false
+<span class="lineno">  69 </span>            }
+<span class="lineno">  70 </span>        }
 </code></pre>
       </li>
     </ul>
   </details>
   <details id="UnusedImports" open="open">
-    <summary class="rule-container"><span class="rule">UnusedImports: 3 </span><span class="description">Unused Imports are dead code and should be removed.</span></summary>
+    <summary class="rule-container"><span class="rule">UnusedImports: 4 </span><span class="description">Unused Imports are dead code and should be removed.</span></summary>
     <ul>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/BaseWorker.kt:11:1</span><span class="message">The import 'androidx.work.WorkInfo' is unused.</span>
-        <pre><code><span class="lineno">   8 </span>import androidx.work.ListenableWorker
-<span class="lineno">   9 </span>import androidx.work.ListenableWorker.Result
-<span class="lineno">  10 </span>import androidx.work.PeriodicWorkRequest
-<span class="lineno">  11 </span><span class="error">import androidx.work.WorkInfo</span>
-<span class="lineno">  12 </span>import androidx.work.WorkManager
-<span class="lineno">  13 </span>import androidx.work.WorkRequest
-<span class="lineno">  14 </span>import androidx.work.WorkerParameters
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/mapper/CountryStatUiModelMapper.kt:10:1</span><span class="message">The import 'studio.forface.covid.domain.entity.rem' is unused.</span>
+        <pre><code><span class="lineno">   7 </span>import studio.forface.covid.android.model.UiModelMapper
+<span class="lineno">   8 </span>import studio.forface.covid.android.utils.formatRelative
+<span class="lineno">   9 </span>import studio.forface.covid.domain.entity.CountryStat
+<span class="lineno">  10 </span><span class="error">import studio.forface.covid.domain.entity.rem</span>
+<span class="lineno">  11 </span>import studio.forface.covid.domain.util.formatDate
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>/**
 </code></pre>
       </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:17:1</span><span class="message">The import 'studio.forface.covid.domain.usecase.updates.GetInstallableUpdate' is unused.</span>
-        <pre><code><span class="lineno">  14 </span>import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
-<span class="lineno">  15 </span>import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable
-<span class="lineno">  16 </span>import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State
-<span class="lineno">  17 </span><span class="error">import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate</span>
-<span class="lineno">  18 </span>import studio.forface.fluentnotifications.builder.channel
-<span class="lineno">  19 </span>import studio.forface.fluentnotifications.enum.NotificationImportance
-<span class="lineno">  20 </span>import studio.forface.fluentnotifications.setForeground
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/mapper/CountryStatUiModelMapper.kt:11:1</span><span class="message">The import 'studio.forface.covid.domain.util.formatDate' is unused.</span>
+        <pre><code><span class="lineno">   8 </span>import studio.forface.covid.android.utils.formatRelative
+<span class="lineno">   9 </span>import studio.forface.covid.domain.entity.CountryStat
+<span class="lineno">  10 </span>import studio.forface.covid.domain.entity.rem
+<span class="lineno">  11 </span><span class="error">import studio.forface.covid.domain.util.formatDate</span>
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>/**
+<span class="lineno">  14 </span> * Map [CountryStat] to [CountryStatUiModel]
 </code></pre>
       </li>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/DownloadUpdateWorker.kt:20:1</span><span class="message">The import 'studio.forface.fluentnotifications.setForeground' is unused.</span>
-        <pre><code><span class="lineno">  17 </span>import studio.forface.covid.domain.usecase.updates.GetInstallableUpdate
-<span class="lineno">  18 </span>import studio.forface.fluentnotifications.builder.channel
-<span class="lineno">  19 </span>import studio.forface.fluentnotifications.enum.NotificationImportance
-<span class="lineno">  20 </span><span class="error">import studio.forface.fluentnotifications.setForeground</span>
-<span class="lineno">  21 </span>import studio.forface.fluentnotifications.setForegroundAsync
-<span class="lineno">  22 </span>import studio.forface.fluentnotifications.showNotification
-<span class="lineno">  23 </span>import kotlin.time.Duration
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:10:1</span><span class="message">The import 'kotlinx.coroutines.flow.produceIn' is unused.</span>
+        <pre><code><span class="lineno">   7 </span>import androidx.work.WorkManager
+<span class="lineno">   8 </span>import androidx.work.WorkerParameters
+<span class="lineno">   9 </span>import kotlinx.coroutines.coroutineScope
+<span class="lineno">  10 </span><span class="error">import kotlinx.coroutines.flow.produceIn</span>
+<span class="lineno">  11 </span>import org.koin.core.KoinComponent
+<span class="lineno">  12 </span>import org.koin.core.inject
+<span class="lineno">  13 </span>import studio.forface.covid.android.R
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:16:1</span><span class="message">The import 'studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State' is unused.</span>
+        <pre><code><span class="lineno">  13 </span>import studio.forface.covid.android.R
+<span class="lineno">  14 </span>import studio.forface.covid.android.receiver.PromptUpdateInstallReceiver
+<span class="lineno">  15 </span>import studio.forface.covid.domain.usecase.SyncFavoriteCountriesStats
+<span class="lineno">  16 </span><span class="error">import studio.forface.covid.domain.usecase.updates.DownloadUpdateIfAvailable.State</span>
+<span class="lineno">  17 </span>import studio.forface.fluentnotifications.enum.NotificationImportance
+<span class="lineno">  18 </span>import studio.forface.fluentnotifications.setForegroundAsync
+<span class="lineno">  19 </span>import studio.forface.fluentnotifications.showNotification
 </code></pre>
       </li>
     </ul>
   </details>
   <details id="UnusedPrivateMember" open="open">
-    <summary class="rule-container"><span class="rule">UnusedPrivateMember: 1 </span><span class="description">Private member is unused.</span></summary>
+    <summary class="rule-container"><span class="rule">UnusedPrivateMember: 3 </span><span class="description">Private member is unused.</span></summary>
     <ul>
       <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/error/searchErrorStates.kt:12:21</span><span class="message">Private property query is unused.</span>
         <pre><code><span class="lineno">   9 </span>    ViewState.Error(IllegalArgumentException(&quot;No query&quot;), R.string.error_no_query)
@@ -174,12 +227,32 @@ pre {
 <span class="lineno">  15 </span>
 </code></pre>
       </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:49:5</span><span class="message">Private function showProgress is unused.</span>
+        <pre><code><span class="lineno">  46 </span>        throw AssertionError(&quot;This should never happen&quot;)
+<span class="lineno">  47 </span>    }
+<span class="lineno">  48 </span>
+<span class="lineno">  49 </span>    <span class="error">private fun showProgress(progress: Float) {</span>
+<span class="lineno">  50 </span><span class="error">        setProgressAsync(progress)</span>
+<span class="lineno">  51 </span><span class="error"></span>
+<span class="lineno">  52 </span><span class="error">        setForegroundAsync(idRes = R.integer.notification_update_download) {</span>
+</code></pre>
+      </li>
+      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoiteCountriesStatsWorker.kt:74:5</span><span class="message">Private function promptInstall is unused.</span>
+        <pre><code><span class="lineno">  71 </span>    }
+<span class="lineno">  72 </span>
+<span class="lineno">  73 </span>
+<span class="lineno">  74 </span>    <span class="error">private fun promptInstall(versionName: String) {</span>
+<span class="lineno">  75 </span><span class="error">        applicationContext.showNotification(idRes = R.integer.notification_update_install) {</span>
+<span class="lineno">  76 </span><span class="error"></span>
+<span class="lineno">  77 </span><span class="error">            behaviour {</span>
+</code></pre>
+      </li>
     </ul>
   </details>
 </div>
 
 
-generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-04-26 16:17:19 UTC.
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.8.0</a> on 2020-06-01 19:53:31 UTC.
 
 </body>
 </html>

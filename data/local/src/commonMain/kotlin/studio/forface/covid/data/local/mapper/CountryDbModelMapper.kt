@@ -1,5 +1,8 @@
+@file:Suppress("ClassNaming", "ClassName")
+
 package studio.forface.covid.data.local.mapper
 
+import studio.forface.covid.data.local.CountryWithProvinceStat
 import studio.forface.covid.data.local.model.CountryStatPlainDbModel
 import studio.forface.covid.data.local.model.CountryStatPlainDbModelImpl
 import studio.forface.covid.data.local.model.CountryWithProvinceDbModel
@@ -25,7 +28,7 @@ import studio.forface.covid.domain.mapper.map
  *
  * @author Davide Farella
  */
-internal class SingleCountryDbModelMapper(
+internal class CountryWithProvinceList_Country(
     private val provinceMapper: CountryWithProvinceDbModelMapper
 ) : DatabaseModelMapper<List<CountryWithProvinceDbModel>, Country> {
 
@@ -42,8 +45,8 @@ internal class SingleCountryDbModelMapper(
  *
  * @author Davide Farella
  */
-internal class MultiCountryDbModelMapper(
-    private val singleCountyMapper: SingleCountryDbModelMapper,
+internal class CountryWithProvinceList_MultiCountry(
+    private val singleCountyMapper: CountryWithProvinceList_Country,
     private val provinceMapper: ProvinceWrapperMapper
 ) : DatabaseModelMapper<List<CountryWithProvinceDbModel>, List<Country>> {
 
@@ -55,15 +58,15 @@ internal class MultiCountryDbModelMapper(
 }
 // endregion
 
-// region CountryStat mappers
+// region Single CountryStat mappers
 /**
  * Map a [List] of [CountryStatPlainDbModel] to a [CountrySmallStat]
  * NOTE: [CountryStatPlainDbModel]s are supposed to refer all to the same County!!
  *
  * @author Davide Farella
  */
-internal class CountrySmallStatDbModelMapper(
-    private val countryPlainMapper: SingleCountryPlainDbModelMapper,
+internal class CountryStatPlainList_CountrySmallStat(
+    private val countryPlainMapper: CountryStatPlainList_Country,
     private val countyStatPlainMapper: CountryStatPlainDbModelMapper
 ) : DatabaseModelMapper<List<CountryStatPlainDbModel>, CountrySmallStat> {
 
@@ -73,11 +76,12 @@ internal class CountrySmallStatDbModelMapper(
     )
 }
 
-internal abstract class AbsCountryStatDbModelMapper<DbModel, CountryStatType, ProvinceStatType>(
-    private val countryPlainMapper: SingleCountryPlainDbModelMapper,
+internal abstract class Abs_CountryWithProvinceStatPlainList_CountryStat<DbModel, CountryStatType, ProvinceStatType>(
+    private val countryPlainMapper: CountryStatPlainList_Country,
     private val countyStatPlainMapper: CountryStatFromCountryWithProvinceStatPlainDbModelMapper,
     protected val provinceStatPlainMapper: DatabaseModelMapper<DbModel, ProvinceStatType>,
-    private val buildProvinceStats: AbsCountryStatDbModelMapper<DbModel, CountryStatType, ProvinceStatType>.(
+    private val buildProvinceStats:
+    Abs_CountryWithProvinceStatPlainList_CountryStat<DbModel, CountryStatType, ProvinceStatType>.(
         List<CountryWithProvincesStatPlainDbModel>
     ) -> Map<ProvinceId, ProvinceStatType>,
     private val toCountryStatType: Params<ProvinceStatType>.() -> CountryStatType
@@ -144,11 +148,11 @@ internal abstract class AbsCountryStatDbModelMapper<DbModel, CountryStatType, Pr
  *
  * @author Davide Farella
  */
-internal class CountryStatDbModelMapper(
-    countryPlainMapper: SingleCountryPlainDbModelMapper,
+internal class CountryWithProvinceStatPlainList_CountryStat(
+    countryPlainMapper: CountryStatPlainList_Country,
     countyStatPlainMapper: CountryStatFromCountryWithProvinceStatPlainDbModelMapper,
     provinceStatMapper: ProvinceStatDbModelMapper
-) : AbsCountryStatDbModelMapper<ProvinceStatPlainDbModel, CountryStat, ProvinceStat>(
+) : Abs_CountryWithProvinceStatPlainList_CountryStat<ProvinceStatPlainDbModel, CountryStat, ProvinceStat>(
     countryPlainMapper,
     countyStatPlainMapper,
     provinceStatMapper,
@@ -169,11 +173,11 @@ internal class CountryStatDbModelMapper(
  *
  * @author Davide Farella
  */
-internal class CountryFullStatDbModelMapper(
-    countryPlainMapper: SingleCountryPlainDbModelMapper,
+internal class CountryWithProvinceStatPlainList_CountryFullStat(
+    countryPlainMapper: CountryStatPlainList_Country,
     countyStatPlainMapper: CountryStatFromCountryWithProvinceStatPlainDbModelMapper,
     provinceStatMapper: ProvinceFullStatDbModelMapper
-) : AbsCountryStatDbModelMapper<List<ProvinceStatPlainDbModel>, CountryFullStat, ProvinceFullStat>(
+) : Abs_CountryWithProvinceStatPlainList_CountryStat<List<ProvinceStatPlainDbModel>, CountryFullStat, ProvinceFullStat>(
     countryPlainMapper,
     countyStatPlainMapper,
     provinceStatMapper,
@@ -186,6 +190,16 @@ internal class CountryFullStatDbModelMapper(
 )
 // endregion
 
+// region Multi CountryStat mappers
+internal class CountryWithProvinceStatPlainList_MultiCountryStat(
+    private val singleCountryStatMapper: CountryWithProvinceStatPlainList_CountryStat
+) : DatabaseModelMapper<List<CountryWithProvinceStat>, List<CountryStat>> {
+    override fun List<CountryWithProvinceStat>.toEntity() = groupBy { it.countryId }
+        .mapValues { (_, statsPlainList) -> singleCountryStatMapper { statsPlainList.toEntity() } }
+        .values.toList()
+}
+// endregion
+
 // region Plain mappers
 /**
  * Map a [List] of [CountryStatPlainDbModel] to a [Country]
@@ -193,7 +207,7 @@ internal class CountryFullStatDbModelMapper(
  *
  * @author Davide Farella
  */
-internal class SingleCountryPlainDbModelMapper(
+internal class CountryStatPlainList_Country(
     private val provincePlainMapper: ProvincePlainDbModelMapper
 ) : DatabaseModelMapper<List<CountryStatPlainDbModel>, Country> {
 

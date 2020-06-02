@@ -1,5 +1,6 @@
 package studio.forface.covid.android
 
+import android.content.Intent
 import studio.forface.covid.domain.entity.CountryId
 
 /**
@@ -19,4 +20,7 @@ interface Router {
 
     /** Navigate to CountryStat page for Country with given [id] */
     fun toCountryStat(id: CountryId)
+
+    /** @return [Intent] to navigate to CountryStat page for Country with given [id] */
+    fun countryStatIntent(id: CountryId): Intent
 }

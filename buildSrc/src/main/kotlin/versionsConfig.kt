@@ -4,10 +4,10 @@ import studio.forface.easygradle.dsl.android.*
 fun initVersions() {
 
     // Kotlin
-    `kotlin version` =                      "1.3.61"        // Released: Mar 03, 2020 // TODO 1.3.70 is not compatible with Ktor 1.3.1
+    `kotlin version` =                      "1.3.72"        // Released: Apr 14, 2020
     `coroutines version` =                  "1.3.4"         // Released: Mar 06, 2020
-    `serialization version` =               "0.14.0"        // Released: Mar 04, 2020 // TODO 0.20.0 is not compatible with Ktor 1.3.1
-    `ktor version` =                        "1.3.1"         // Released: Feb 26, 2020
+    `serialization version` =               "0.20.0"        // Released: Mar 04, 2020
+    `ktor version` =                        "1.3.2"         // Released: Mar 12, 2020
 
     // Android
     `activity version` =                    "1.2.0-alpha03" // Released: Apr 05, 2020
@@ -23,7 +23,7 @@ fun initVersions() {
 
     // Others
     `detekt version` =                      "1.8.0"         // Released: Apr 20, 2020
-    `fluentNotifications version` =         "0.2-alpha-3"   // Released: May 01, 2020
+    `fluentNotifications version` =         "0.2-alpha-4"   // Released: Jun 02, 2020
     `mockK version` =                       "1.10.0"        // Released: Apr 19, 2020
     `sqlDelight version` =                  "1.2.2"         // Released: Jan 23, 2020
     `theia version` =                       "1.0-alpha-4"   // Released: Jun 15, 2019

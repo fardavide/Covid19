@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    val androidGradlePlugin =   "4.1.0-alpha10" // Released: May 23, 2020
+    val androidGradlePlugin =   "4.0.0" // Released: May 23, 2020
     val dokka =                 "0.10.1"        // Released: Feb 04, 2020
     val easyGradle =            "1.3.2"         // Released: May 21, 2020
 

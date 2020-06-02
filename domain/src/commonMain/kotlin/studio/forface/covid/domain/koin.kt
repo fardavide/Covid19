@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import studio.forface.covid.domain.usecase.GetCountries
 import studio.forface.covid.domain.usecase.GetCountryFullStat
 import studio.forface.covid.domain.usecase.GetCountryStat
+import studio.forface.covid.domain.usecase.GetNewFavoriteCountriesStatsDiff
 import studio.forface.covid.domain.usecase.GetProvinces
 import studio.forface.covid.domain.usecase.GetWorldFullStat
 import studio.forface.covid.domain.usecase.GetWorldStat
@@ -13,6 +14,7 @@ import studio.forface.covid.domain.usecase.SearchCountry
 import studio.forface.covid.domain.usecase.SyncCountries
 import studio.forface.covid.domain.usecase.SyncCountryFullStat
 import studio.forface.covid.domain.usecase.SyncCountryStat
+import studio.forface.covid.domain.usecase.SyncFavoriteCountriesStats
 import studio.forface.covid.domain.usecase.SyncProvinces
 import studio.forface.covid.domain.usecase.SyncWorldFullStat
 import studio.forface.covid.domain.usecase.SyncWorldStat
@@ -69,11 +71,13 @@ private val useCaseModule = module {
     factory { SyncWorldStat(api = get(), repository = get()) }
     factory { SyncWorldFullStat(api = get(), repository = get()) }
 
+    // Favorites
+    factory { GetNewFavoriteCountriesStatsDiff(repository = get(), syncFavoriteCountriesStats = get()) }
+    factory { SyncFavoriteCountriesStats(api = get(), repository = get()) }
+    factory { UpdateCountryFavorite(repository = get()) }
+
     // Search
     factory { SearchCountry(repository = get(), syncCountries = get()) }
-
-    // Actons
-    factory { UpdateCountryFavorite(repository = get()) }
 
 } + updatesModule
 

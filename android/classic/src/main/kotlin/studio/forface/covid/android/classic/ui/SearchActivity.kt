@@ -19,7 +19,7 @@ class SearchActivity : AbsSearchActivity() {
     override val router = Router()
 
     private val countriesAdapter =
-        CountriesAdapter(onClick = router::toCountryStat, onFavorite = ::onFavorite)
+        CountriesAdapter(onClick = ::goToCountryStat, onFavorite = ::onFavorite)
 
     override fun initUi() {
         setContentView(R.layout.activity_search)
@@ -49,12 +49,6 @@ class SearchActivity : AbsSearchActivity() {
 
     /** Called when Loading state is changed */
     override fun onLoadingChange(loading: Boolean) {}
-
-    /** This must toggle the favorite state for the given Country */
-    override fun onFavorite(country: Country) {
-        super.onFavorite(country)
-        // showSnackbar(R.string.error_feature_not_available)
-    }
 
     companion object {
 

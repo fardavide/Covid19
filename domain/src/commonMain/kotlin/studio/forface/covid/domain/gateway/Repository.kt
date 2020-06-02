@@ -20,12 +20,16 @@ import studio.forface.covid.domain.entity.WorldStat
  *
  * @author Davide Farella
  */
+@Suppress("ComplexInterface") // Repository - No logical way to spit it
 interface Repository {
 
     /** @return List of all the available [Country]s */
     fun getCountries(): Flow<List<Country>>
 
-    /** @return List of all the available [Country]s for given [uery] */
+    /** @return List of the favorite [Country]s */
+    fun getFavoriteCountries(): Flow<List<Country>>
+
+    /** @return List of all the available [Country]s for given [query] */
     fun getCountries(query: Name): Flow<List<Country>>
 
     /** @return List of all the [Province]s for the given [CountryId] */
@@ -34,7 +38,7 @@ interface Repository {
     /** Save [Country]s and relative [Province]s to local cache */
     suspend fun storeCountries(countries: List<Country>)
 
-    /** Update Favorite state for Contry with given [id] */
+    /** Update Favorite state for Country with given [id] */
     suspend fun updateFavorite(id: CountryId, favorite: Boolean)
 
     // * * * STATS * * * //
@@ -42,6 +46,7 @@ interface Repository {
     fun getWorldStat(): Flow<WorldStat>
     fun getWorldFullStat(): Flow<WorldFullStat>
     fun getCountrySmallStat(id: CountryId): Flow<CountrySmallStat>
+    fun getFavoriteCountriesStats(): Flow<List<CountryStat>>
     fun getCountryStat(id: CountryId): Flow<CountryStat>
     fun getCountryFullStat(id: CountryId): Flow<CountryFullStat>
     fun getProvinceStat(id: ProvinceId): Flow<ProvinceStat>
@@ -56,6 +61,9 @@ interface Repository {
 
     /** Save [CountrySmallStat] to local cache */
     suspend fun store(stat: CountrySmallStat)
+
+    /** Save [CountryStat]s to local cache */
+    suspend fun store(stats: Iterable<CountryStat>)
 
     /** Save [CountryStat] to local cache */
     suspend fun store(stat: CountryStat)

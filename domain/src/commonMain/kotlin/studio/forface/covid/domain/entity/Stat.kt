@@ -4,10 +4,9 @@ import com.soywiz.klock.DateTime
 import com.soywiz.klock.DateTimeSpan
 import com.soywiz.klock.MonthSpan
 import com.soywiz.klock.TimeSpan
-import kotlinx.coroutines.coroutineScope
 import studio.forface.covid.domain.util.DateTimeSpan
+import studio.forface.covid.domain.util.all
 import kotlin.math.abs
-import kotlin.time.Duration
 
 data class Stat(
     val confirmed: Int,
@@ -82,3 +81,9 @@ fun <C : Collection<Stat>> C.diff(
         abs((mostRecent.timestamp - span - it.timestamp).seconds)
     }!!
 }
+
+/**
+ * @return `true` if all of [Stat.confirmed], [Stat.deaths] and [Stat.recovered] of the receiver [Stat] are 0
+ * This might be used on a Diff
+ */
+fun Stat.isEmpty() = all(confirmed, deaths, recovered) { it == 0 }

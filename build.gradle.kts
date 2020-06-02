@@ -2,6 +2,7 @@ import io.gitlab.arturbosch.detekt.DetektPlugin
 import org.gradle.kotlin.dsl.kotlin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import studio.forface.easygradle.dsl.android.*
+import studio.forface.easygradle.dsl.dokka
 import studio.forface.easygradle.dsl.version
 
 buildscript {
@@ -44,6 +45,8 @@ subprojects {
 
     // Setup KDoc and archives
     if (!name.contains("test", ignoreCase = true) && name != "buildSrc") {
+
+        dokka()
 
         val generateReleases = {
             with(ReleaseManager) {

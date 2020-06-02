@@ -3,13 +3,14 @@ package studio.forface.covid.data.local
 import com.soywiz.klock.DateTime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import studio.forface.covid.data.local.mapper.CountryFullStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountrySmallStatDbModelMapper
-import studio.forface.covid.data.local.mapper.CountryStatDbModelMapper
-import studio.forface.covid.data.local.mapper.MultiCountryDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_CountryFullStat
+import studio.forface.covid.data.local.mapper.CountryStatPlainList_CountrySmallStat
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_CountryStat
+import studio.forface.covid.data.local.mapper.CountryWithProvinceList_MultiCountry
 import studio.forface.covid.data.local.mapper.ProvinceFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.ProvinceStatDbModelMapper
-import studio.forface.covid.data.local.mapper.SingleCountryDbModelMapper
+import studio.forface.covid.data.local.mapper.CountryWithProvinceList_Country
+import studio.forface.covid.data.local.mapper.CountryWithProvinceStatPlainList_MultiCountryStat
 import studio.forface.covid.data.local.mapper.UnixTimeDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldFullStatDbModelMapper
 import studio.forface.covid.data.local.mapper.WorldStatDbModelMapper
@@ -50,11 +51,12 @@ internal class RepositoryImpl(
     private val favoriteQueries: FavoriteQueries,
     private val worldStatMapper: WorldStatDbModelMapper,
     private val worldFullStatMapper: WorldFullStatDbModelMapper,
-    private val singleCountryMapper: SingleCountryDbModelMapper,
-    private val multiCountryMapper: MultiCountryDbModelMapper,
-    private val countrySmallStatMapper: CountrySmallStatDbModelMapper,
-    private val countryStatMapper: CountryStatDbModelMapper,
-    private val countryFullStatMapper: CountryFullStatDbModelMapper,
+    private val singleCountryMapper: CountryWithProvinceList_Country,
+    private val multiCountryMapper: CountryWithProvinceList_MultiCountry,
+    private val countrySmallStatMapper: CountryStatPlainList_CountrySmallStat,
+    private val countryStatMapper: CountryWithProvinceStatPlainList_CountryStat,
+    private val countryFullStatMapper: CountryWithProvinceStatPlainList_CountryFullStat,
+    private val multiCountryStatMapper: CountryWithProvinceStatPlainList_MultiCountryStat,
     private val provinceStatMapper: ProvinceStatDbModelMapper,
     private val provinceFullStatMapper: ProvinceFullStatDbModelMapper,
     private val timeMapper: UnixTimeDbModelMapper
@@ -62,6 +64,10 @@ internal class RepositoryImpl(
 
     override fun getCountries(): Flow<List<Country>> =
         countryQueries.selectAllCountriesWithProvinces().asListFlow()
+            .map(multiCountryMapper) { it.toEntity() }
+
+    override fun getFavoriteCountries(): Flow<List<Country>> =
+        countryQueries.selectAllFavoriteCountriesWithProvinces().asListFlow()
             .map(multiCountryMapper) { it.toEntity() }
 
     override fun getCountries(query: Name): Flow<List<Country>> {
@@ -96,6 +102,10 @@ internal class RepositoryImpl(
     override fun getCountryStat(id: CountryId): Flow<CountryStat> =
         countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhileEmpty()
             .map(countryStatMapper) { it.toEntity() }
+
+    override fun getFavoriteCountriesStats(): Flow<List<CountryStat>> =
+        countryQueries.selectAllFavoritesCountryWithProvinceStats().asListFlow().dropWhileEmpty()
+            .map(multiCountryStatMapper) { it.toEntity() }
 
     override fun getCountryFullStat(id: CountryId): Flow<CountryFullStat> =
         countryQueries.selectAllCountryWithProvinceStatsById(id).asListFlow().dropWhileEmpty()
@@ -132,6 +142,17 @@ internal class RepositoryImpl(
             val (country, s) = stat
             blockingStore(country)
             blockingStore(country.id, s)
+        }
+    }
+
+    override suspend fun store(stats: Iterable<CountryStat>) {
+        transaction {
+            for (stat in stats) {
+                val (country, countryStats, provinceStats) = stat
+                blockingStore(country)
+                for (countryStat in countryStats) blockingStore(country.id, countryStat)
+                for ((_, provinceStat) in provinceStats) blockingStore(provinceStat)
+            }
         }
     }
 

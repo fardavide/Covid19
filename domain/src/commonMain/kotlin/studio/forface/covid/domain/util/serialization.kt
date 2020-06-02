@@ -5,7 +5,7 @@ import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.map
 import kotlinx.serialization.parse
 import kotlinx.serialization.parseList
@@ -73,10 +73,11 @@ inline fun <reified T : Any> List<T>.serialize(
  *
  * Note: this function uses reflection if no [serializer] [SerializationStrategy] is passed explicitly
  */
-@UseExperimental(ImplicitReflectionSerializer::class)
-inline fun <reified T : Any, reified V : Any> Map<T, V>.serialize(
-    serializer: SerializationStrategy<Map<T, V>>? = null
-) = Serializer.stringify(serializer ?: (T::class.serializer() to V::class.serializer()).map, this)
+// TODO
+//@UseExperimental(ImplicitReflectionSerializer::class)
+//inline fun <reified T : Any, reified V : Any> Map<T, V>.serialize(
+//    serializer: MapSerializer<T, V>? = null
+//) = Serializer.stringify(serializer ?: (T::class.serializer() to V::class.serializer()).map, this)
 
 
 @PublishedApi

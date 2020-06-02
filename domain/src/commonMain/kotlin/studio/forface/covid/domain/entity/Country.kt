@@ -28,6 +28,9 @@ data class CountryStat(
     val provinceStats: Map<ProvinceId, ProvinceStat> = emptyMap()
 )
 
+fun CountryStat.diff(other: CountryStat) = CountrySmallStat(country, stats.first() - other.stats.first())
+operator fun CountryStat.minus(other: CountryStat) = this.diff(other)
+
 /**
  * Full stat for a [Country].
  * It has the same structure of [CountryStat], but the list [provinceStats] represents a List of [ProvinceFullStat]

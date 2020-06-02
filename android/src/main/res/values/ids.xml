@@ -3,5 +3,7 @@
 
     <integer name="notification_update_download">100</integer>
     <integer name="notification_update_install">101</integer>
+    <!-- Uses range 200-299 -->
+    <integer name="notification_new_stats">200</integer>
 
 </resources>
