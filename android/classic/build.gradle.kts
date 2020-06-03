@@ -11,7 +11,7 @@ plugins {
     id(PluginsDeps.kotlinAndroidExtensions)
 }
 
-projectVersion = Version(0, 10)
+projectVersion = Version(0, 11)
 android("classic")
 
 dependencies {

@@ -22,12 +22,12 @@ class GetNewFavoriteCountriesStatsDiff(
     suspend operator fun invoke(): List<CountrySmallStat> {
         // Get Favorites stats
         val previousStats = repository.getFavoriteCountriesStats().first()
-            .map { it.country to it }.toMap()
+            .map { it.country.id to it }.toMap()
         // Sync Favorites stats
         syncFavoriteCountriesStats()
         // Make diff between new stats and old ones
         return repository.getFavoriteCountriesStats().first()
-            .map { it - previousStats.getValue(it.country) }
+            .map { it - previousStats.getValue(it.country.id) }
             .filterNot { it.stat.isEmpty() }
     }
 }
