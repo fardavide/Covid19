@@ -73,10 +73,10 @@ pre {
 <div>
   <ul>
     <li>19 number of kt files</li>
-    <li>9 number of packages</li>
+    <li>8 number of packages</li>
     <li>20 number of classes</li>
-    <li>48 number of functions</li>
-    <li>52 number of properties</li>
+    <li>49 number of functions</li>
+    <li>53 number of properties</li>
   </ul>
 </div>
 
@@ -85,22 +85,22 @@ pre {
 
 <div>
   <ul>
-    <li>1,017 lines of code (loc)</li>
-    <li>674 source lines of code (sloc)</li>
-    <li>375 logical lines of code (lloc)</li>
-    <li>167 comment lines of code (cloc)</li>
-    <li>74 McCabe complexity (mcc)</li>
-    <li>5 number of total code smells</li>
+    <li>1,037 lines of code (loc)</li>
+    <li>693 source lines of code (sloc)</li>
+    <li>386 logical lines of code (lloc)</li>
+    <li>168 comment lines of code (cloc)</li>
+    <li>77 McCabe complexity (mcc)</li>
+    <li>4 number of total code smells</li>
     <li>24% comment source ratio</li>
-    <li>197 mcc per 1,000 lloc</li>
-    <li>13 code smells per 1,000 lloc</li>
+    <li>199 mcc per 1,000 lloc</li>
+    <li>10 code smells per 1,000 lloc</li>
   </ul>
 </div>
 
 
 <h2>Findings</h2>
-<div>Total: 5
-  <h3>style: 5</h3>
+<div>Total: 4
+  <h3>style: 4</h3>
   <details id="ForbiddenComment" open="open">
     <summary class="rule-container"><span class="rule">ForbiddenComment: 2 </span><span class="description">Flags a forbidden comment. Defaults values are TODO:, FIXME: or STOPSHIP:</span></summary>
     <ul>
@@ -154,25 +154,10 @@ pre {
       </li>
     </ul>
   </details>
-  <details id="WildcardImport" open="open">
-    <summary class="rule-container"><span class="rule">WildcardImport: 1 </span><span class="description">Wildcard imports should be replaced with imports using fully qualified class names. Wildcard imports can lead to naming conflicts. A library update can introduce naming clashes with your classes which results in compilation errors.</span></summary>
-    <ul>
-      <li><span class="location">/Users/davide/Dev/Kotlin/Covid19/android/src/main/kotlin/studio/forface/covid/android/service/SyncFavoriteCountriesStatsWorker.kt:7:1</span><span class="message">androidx.work.* is a wildcard import. Replace it with fully qualified imports.</span>
-        <pre><code><span class="lineno">   4 </span>import android.text.SpannableStringBuilder
-<span class="lineno">   5 </span>import androidx.annotation.StringRes
-<span class="lineno">   6 </span>import androidx.core.text.buildSpannedString
-<span class="lineno">   7 </span><span class="error">import androidx.work.*</span>
-<span class="lineno">   8 </span>import kotlinx.coroutines.coroutineScope
-<span class="lineno">   9 </span>import org.koin.core.inject
-<span class="lineno">  10 </span>import studio.forface.covid.android.R
-</code></pre>
-      </li>
-    </ul>
-  </details>
 </div>
 
 
-generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.9.1</a> on 2020-06-02 16:34:39 UTC.
+generated with <a href="https://arturbosch.github.io/detekt">detekt version 1.9.1</a> on 2020-06-06 15:53:12 UTC.
 
 </body>
 </html>

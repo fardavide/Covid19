@@ -95,6 +95,7 @@ complexity:
     threshold: 400
   LongMethod:
     active: true
+    excludes: ['**/test/**', '**/jvmTest/**', '**/androidTest/**', 'buildSrc/**']
     threshold: 60
   LongParameterList:
     active: true
@@ -629,4 +630,4 @@ style:
     active: true
   WildcardImport:
     active: true
-    excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*', 'studio.forface.easygradle.dsl.*', 'studio.forface.easygradle.dsl.android.*']
+    excludeImports: ['kotlin.test.*', 'kotlinx.android.synthetic.*', 'studio.forface.easygradle.dsl.*', 'studio.forface.easygradle.dsl.android.*']

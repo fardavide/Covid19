@@ -25,9 +25,16 @@ class GetNewFavoriteCountriesStatsDiff(
             .map { it.country.id to it }.toMap()
         // Sync Favorites stats
         syncFavoriteCountriesStats()
+
         // Make diff between new stats and old ones
         return repository.getFavoriteCountriesStats().first()
-            .map { it - previousStats.getValue(it.country.id) }
-            .filterNot { it.stat.isEmpty() }
+            .mapNotNull { new ->
+                // Compare with old value
+                previousStats[new.country.id]
+                        // make diff
+                    ?.let { old -> new - old }
+                        // Skip if diff is empty
+                    ?.takeIf { !it.stat.isEmpty() }
+            }
     }
 }
